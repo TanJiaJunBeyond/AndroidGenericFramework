@@ -1,3 +1,12 @@
 <resources>
+
     <string name="app_name">DaDaRecycle</string>
+
+    <!-- 公共 -->
+    <string name="base_url_format">%1$s://%2$s/</string>
+
+    <!-- 用户 -->
+    <string name="phone_number">手机号码</string>
+    <string name="login">登录</string>
+
 </resources>
