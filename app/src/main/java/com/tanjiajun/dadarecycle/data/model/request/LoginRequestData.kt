@@ -1,4 +1,4 @@
-package com.tanjiajun.dadarecycle.user.data.model.request
+package com.tanjiajun.dadarecycle.data.model.request
 
 import com.google.gson.annotations.SerializedName
 

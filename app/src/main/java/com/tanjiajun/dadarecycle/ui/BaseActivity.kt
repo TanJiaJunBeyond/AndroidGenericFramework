@@ -1,4 +1,4 @@
-package com.tanjiajun.dadarecycle
+package com.tanjiajun.dadarecycle.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -86,10 +86,10 @@ abstract class BaseActivity : AppCompatActivity() {
         operateFragmentTransaction(fragment, ACTION_ADD, false, true)
 
     private fun operateFragmentTransaction(
-        fragment: BaseFragment,
-        action: Int,
-        isExecutePending: Boolean,
-        isAddToBackStack: Boolean
+            fragment: BaseFragment,
+            action: Int,
+            isExecutePending: Boolean,
+            isAddToBackStack: Boolean
     ) =
         manager.run {
             val containId = getContainId()

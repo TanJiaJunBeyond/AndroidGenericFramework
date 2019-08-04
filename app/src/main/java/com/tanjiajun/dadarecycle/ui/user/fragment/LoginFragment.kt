@@ -1,15 +1,17 @@
-package com.tanjiajun.dadarecycle.user.ui.user.fragment
+package com.tanjiajun.dadarecycle.ui.user.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.tanjiajun.dadarecycle.BaseFragment
+import androidx.lifecycle.ViewModelProviders
 import com.tanjiajun.dadarecycle.FRAGMENT_TAG_LOGIN
 import com.tanjiajun.dadarecycle.R
 import com.tanjiajun.dadarecycle.databinding.FragmentLoginBinding
-import com.tanjiajun.dadarecycle.user.ui.user.viewModel.LoginViewModel
+import com.tanjiajun.dadarecycle.ui.BaseFragment
+import com.tanjiajun.dadarecycle.ui.user.viewModel.LoginViewModel
+import com.tanjiajun.dadarecycle.utils.InjectorUtils
 
 /**
  * Created by TanJiaJun on 2019-07-29.
@@ -18,15 +20,24 @@ class LoginFragment
     : BaseFragment(),
         LoginViewModel.Handlers {
 
+    private val viewModel by lazy {
+        ViewModelProviders.of(this, InjectorUtils.getUserViewModelFactory()).get(LoginViewModel::class.java)
+    }
+
     override fun getLayoutResource(): Int = R.layout.fragment_login
 
     override fun getTransactionTag(): String = FRAGMENT_TAG_LOGIN
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            DataBindingUtil.inflate<FragmentLoginBinding>(inflater, getLayoutResource(), container, false).root
+            DataBindingUtil.inflate<FragmentLoginBinding>(inflater, getLayoutResource(), container, false)
+                    .apply {
+                        viewModel = this@LoginFragment.viewModel
+                        handlers = this@LoginFragment
+                    }
+                    .root
 
     override fun onLoginClick(view: View) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        viewModel.login()
     }
 
     companion object {

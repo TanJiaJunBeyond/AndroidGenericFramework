@@ -1,6 +1,6 @@
-package com.tanjiajun.dadarecycle.user.data.network.retrofit
+package com.tanjiajun.dadarecycle.data.network.retrofit
 
-import com.tanjiajun.dadarecycle.user.data.network.DaDaRecycleConfiguration
+import com.tanjiajun.dadarecycle.DaDaRecycleConfiguration
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
@@ -43,8 +43,6 @@ abstract class BaseRetrofit {
         builder.apply {
             addHeader("X-TOKEN", "123")
         }
-
-    abstract fun initService()
 
     private companion object {
         const val SCHEMA_HTTP = "http"

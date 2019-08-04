@@ -1,4 +1,4 @@
-package com.tanjiajun.dadarecycle.user.data.model.response
+package com.tanjiajun.dadarecycle.data.model.response
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

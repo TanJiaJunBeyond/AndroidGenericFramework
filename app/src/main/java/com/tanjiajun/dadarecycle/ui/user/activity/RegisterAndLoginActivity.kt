@@ -1,11 +1,11 @@
-package com.tanjiajun.dadarecycle.user.ui.user.activity
+package com.tanjiajun.dadarecycle.ui.user.activity
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import com.tanjiajun.dadarecycle.BaseActivity
 import com.tanjiajun.dadarecycle.R
 import com.tanjiajun.dadarecycle.databinding.ActivityRegisterAndLoginBinding
-import com.tanjiajun.dadarecycle.user.ui.user.fragment.LoginFragment
+import com.tanjiajun.dadarecycle.ui.BaseActivity
+import com.tanjiajun.dadarecycle.ui.user.fragment.LoginFragment
 
 /**
  * Created by TanJiaJun on 2019-07-28.

@@ -1,12 +1,12 @@
-package com.tanjiajun.dadarecycle.user.ui.user.viewModel
+package com.tanjiajun.dadarecycle.ui.user.viewModel
 
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tanjiajun.dadarecycle.DaDaRecycleApplication
-import com.tanjiajun.dadarecycle.user.data.model.BaseViewModel
-import com.tanjiajun.dadarecycle.user.data.repository.UserRepository
+import com.tanjiajun.dadarecycle.data.model.BaseViewModel
+import com.tanjiajun.dadarecycle.data.repository.UserRepository
 
 /**
  * Created by TanJiaJun on 2019-08-02.
