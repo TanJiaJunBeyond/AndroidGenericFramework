@@ -1,7 +1,8 @@
-package com.tanjiajun.dadarecycle
+package com.tanjiajun.dadarecycle.ui.main.activity
 
 import android.content.Intent
 import android.os.Bundle
+import com.tanjiajun.dadarecycle.R
 import com.tanjiajun.dadarecycle.ui.BaseActivity
 import com.tanjiajun.dadarecycle.ui.user.activity.RegisterAndLoginActivity
 

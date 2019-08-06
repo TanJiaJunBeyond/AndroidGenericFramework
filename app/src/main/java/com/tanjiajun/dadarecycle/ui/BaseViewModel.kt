@@ -1,4 +1,4 @@
-package com.tanjiajun.dadarecycle.data.model
+package com.tanjiajun.dadarecycle.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

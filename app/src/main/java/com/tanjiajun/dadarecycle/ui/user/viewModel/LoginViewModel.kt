@@ -5,8 +5,8 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tanjiajun.dadarecycle.DaDaRecycleApplication
-import com.tanjiajun.dadarecycle.data.model.BaseViewModel
 import com.tanjiajun.dadarecycle.data.repository.UserRepository
+import com.tanjiajun.dadarecycle.ui.BaseViewModel
 
 /**
  * Created by TanJiaJun on 2019-08-02.
@@ -23,16 +23,16 @@ class LoginViewModel(private val repository: UserRepository) : BaseViewModel() {
     }
 
     fun login() =
-            launch({
-                val phoneNumber = phoneNumber.value
-                val password = password.value
+        launch({
+            val phoneNumber = phoneNumber.value
+            val password = password.value
 
-                if (!phoneNumber.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                    repository.login(phoneNumber, password)
-                }
-            }, {
-                Toast.makeText(DaDaRecycleApplication.context, it.message, Toast.LENGTH_SHORT).show()
-            })
+            if (!phoneNumber.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                repository.login(phoneNumber, password)
+            }
+        }, {
+            Toast.makeText(DaDaRecycleApplication.context, it.message, Toast.LENGTH_SHORT).show()
+        })
 
     interface Handlers {
 
