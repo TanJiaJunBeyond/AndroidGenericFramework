@@ -1,10 +1,11 @@
 package com.tanjiajun.dadarecycle.ui.user.viewModel
 
+import android.text.Editable
 import android.view.View
-import android.widget.Toast
+import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tanjiajun.dadarecycle.DaDaRecycleApplication
+import com.tanjiajun.dadarecycle.BR
 import com.tanjiajun.dadarecycle.data.repository.UserRepository
 import com.tanjiajun.dadarecycle.ui.BaseViewModel
 
@@ -15,26 +16,39 @@ class LoginViewModel(private val repository: UserRepository) : BaseViewModel() {
 
     val phoneNumber = MutableLiveData<String>()
     val password = MutableLiveData<String>()
-    private val _isLoginClickable = MutableLiveData<Boolean>()
-    val isLoginClickable: LiveData<Boolean> = _isLoginClickable
+
+    private val _loginEnable = MutableLiveData<Boolean>()
+    @get:Bindable
+    val loginEnable: LiveData<Boolean> = _loginEnable
+
+    val loginSuccess = MutableLiveData<Boolean>()
+    val errorMessage = MutableLiveData<String>()
 
     fun checkLoginEnable() {
-        _isLoginClickable.value = !phoneNumber.value.isNullOrEmpty() && !password.value.isNullOrEmpty()
+        _loginEnable.value = !phoneNumber.value.isNullOrEmpty() && !password.value.isNullOrEmpty()
+        notifyPropertyChanged(BR.loginEnable)
     }
 
     fun login() =
-        launch({
-            val phoneNumber = phoneNumber.value
-            val password = password.value
+            launch({
+                val phoneNumber = phoneNumber.value
+                val password = password.value
 
-            if (!phoneNumber.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                repository.login(phoneNumber, password)
-            }
-        }, {
-            Toast.makeText(DaDaRecycleApplication.context, it.message, Toast.LENGTH_SHORT).show()
-        })
+                if (!phoneNumber.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                    repository.login(phoneNumber, password).let {
+                        loginSuccess.value = true
+                    }
+                }
+            }, {
+                loginSuccess.value = false
+                errorMessage.value = it.message
+            })
 
     interface Handlers {
+
+        fun onPhoneNumberAfterTextChanged(editable: Editable)
+
+        fun onPasswordAfterTextChanged(editable: Editable)
 
         fun onLoginClick(view: View)
 

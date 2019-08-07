@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="green">#00ce73</color>
+
+    <color name="common_button_background_color_unable">#cfd6e0</color>
+    <color name="common_button_background_color_enable">#00ce73</color>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.tanjiajun.dadarecycle.data.repository
 
+import com.tanjiajun.dadarecycle.data.dao.UserDao
 import com.tanjiajun.dadarecycle.data.network.UserNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -7,22 +8,30 @@ import kotlinx.coroutines.withContext
 /**
  * Created by TanJiaJun on 2019-07-31.
  */
-class UserRepository private constructor(private val network: UserNetwork) {
+class UserRepository private constructor(
+        private val network: UserNetwork,
+        private val dao: UserDao
+) {
 
     suspend fun login(phoneNumber: String,
                       password: String) =
             withContext(Dispatchers.IO) {
-                network.login(phoneNumber, password)
+                val userInfoData = network.login(phoneNumber, password)
+                dao.cacheUserInfo(userInfoData)
+                userInfoData
             }
 
     companion object {
         @Volatile
         private var instance: UserRepository? = null
 
-        fun getInstance(network: UserNetwork): UserRepository =
+        fun getInstance(
+                network: UserNetwork,
+                dao: UserDao
+        ): UserRepository =
                 instance ?: synchronized(this) {
                     instance
-                            ?: UserRepository(network).also { instance = it }
+                            ?: UserRepository(network, dao).also { instance = it }
                 }
     }
 
