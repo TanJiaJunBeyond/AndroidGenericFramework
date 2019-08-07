@@ -5,6 +5,8 @@
 
     <dist:module dist:instant="true" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".DaDaRecycleApplication"
         android:allowBackup="true"
@@ -15,10 +17,10 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnspecified|adjustPan">
+                android:name=".ui.main.activity.MainActivity"
+                android:launchMode="standard"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateUnspecified|adjustPan">
 
             <intent-filter>
 
@@ -32,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".user.ui.user.activity.RegisterAndLoginActivity"
+            android:name=".ui.user.activity.RegisterAndLoginActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnspecified|adjustPan" />

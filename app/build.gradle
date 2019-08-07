@@ -52,6 +52,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofitConverterScalarsVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "org.litepal.android:kotlin:$litepalKotlinVersion"
 
     testImplementation "junit:junit:$junitVersion"
