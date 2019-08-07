@@ -54,7 +54,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    implementation "org.litepal.android:kotlin:$litepalKotlinVersion"
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation 'androidx.test:runner:1.2.0'
