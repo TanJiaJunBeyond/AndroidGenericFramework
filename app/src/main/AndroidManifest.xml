@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-                android:name=".ui.main.activity.MainActivity"
+            android:name=".ui.main.activity.SplashActivity"
                 android:launchMode="standard"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateUnspecified|adjustPan">
@@ -35,6 +35,12 @@
 
         <activity
             android:name=".ui.user.activity.RegisterAndLoginActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnspecified|adjustPan" />
+
+        <activity
+            android:name=".ui.main.activity.MainActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnspecified|adjustPan" />

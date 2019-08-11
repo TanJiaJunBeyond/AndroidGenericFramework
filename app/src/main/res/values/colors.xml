@@ -7,5 +7,6 @@
 
     <color name="common_button_background_color_unable">#cfd6e0</color>
     <color name="common_button_background_color_enable">#00ce73</color>
+    <color name="common_button_shadow_color">#8000ce73</color>
 
 </resources>
