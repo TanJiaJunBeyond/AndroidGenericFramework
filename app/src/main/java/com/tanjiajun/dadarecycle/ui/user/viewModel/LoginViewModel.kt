@@ -12,7 +12,9 @@ import com.tanjiajun.dadarecycle.ui.BaseViewModel
 /**
  * Created by TanJiaJun on 2019-08-02.
  */
-class LoginViewModel(private val repository: UserRepository) : BaseViewModel() {
+class LoginViewModel(
+        private val repository: UserRepository
+) : BaseViewModel() {
 
     val phoneNumber = MutableLiveData<String>()
     val password = MutableLiveData<String>()

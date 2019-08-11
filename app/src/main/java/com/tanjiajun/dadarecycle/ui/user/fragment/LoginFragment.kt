@@ -14,8 +14,10 @@ import com.tanjiajun.dadarecycle.FRAGMENT_TAG_LOGIN
 import com.tanjiajun.dadarecycle.R
 import com.tanjiajun.dadarecycle.databinding.FragmentLoginBinding
 import com.tanjiajun.dadarecycle.ui.BaseFragment
+import com.tanjiajun.dadarecycle.ui.main.activity.MainActivity
 import com.tanjiajun.dadarecycle.ui.user.viewModel.LoginViewModel
 import com.tanjiajun.dadarecycle.utils.getViewModelFactory
+import com.tanjiajun.dadarecycle.utils.startActivity
 
 /**
  * Created by TanJiaJun on 2019-07-29.
@@ -47,7 +49,7 @@ class LoginFragment
             viewModel.run {
                 loginSuccess.observe(this@LoginFragment, Observer {
                     if (it) {
-                        Toast.makeText(DaDaRecycleApplication.context, "登录成功", Toast.LENGTH_SHORT).show()
+                        startActivity<MainActivity>()
                     }
                 })
 

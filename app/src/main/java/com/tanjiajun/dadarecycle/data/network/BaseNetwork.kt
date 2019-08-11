@@ -26,7 +26,7 @@ abstract class BaseNetwork {
                                             continuation.resume(Gson().fromJson(get("data"), clazz))
                                         }
                                         ?: continuation.resumeWithException(RuntimeException(get("data")?.asString))
-                            } ?: Unit
+                            } ?: continuation.resumeWithException(RuntimeException("服务器异常"))
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) =
                             continuation.resumeWithException(t)

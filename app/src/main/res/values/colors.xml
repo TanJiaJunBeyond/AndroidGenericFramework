@@ -3,7 +3,19 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="green">#00ce73</color>
+
+    <color name="main_color">#00ce73</color>
+    <color name="deputy_color">#008cff</color>
+
+    <color name="background_color">#f8f9fb</color>
+
+    <color name="divider_line_color">#f2f3f5</color>
+
+    <color name="error_status_color">#ff492c</color>
+
+    <color name="text_black">#000913</color>
+    <color name="text_light_grey">#a8acbf</color>
+    <color name="text_dark_grey">#5e616d</color>
 
     <color name="common_button_background_color_unable">#cfd6e0</color>
     <color name="common_button_background_color_enable">#00ce73</color>

@@ -28,4 +28,8 @@ abstract class BaseFragment : Fragment() {
 
     fun enableAnimation(): Boolean = true
 
+    open fun onHandleGoBack() {
+        // no implementation
+    }
+
 }

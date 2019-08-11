@@ -11,7 +11,7 @@ import retrofit2.http.POST
  */
 interface UserService {
 
-    @POST("/v1/user/sign")
+    @POST("/user/v1/user/sign")
     fun login(@Body loginRequestData: LoginRequestData): Call<JsonObject>
 
 }

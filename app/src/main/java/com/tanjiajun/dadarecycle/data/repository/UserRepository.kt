@@ -13,6 +13,9 @@ class UserRepository private constructor(
         private val dao: UserDao
 ) {
 
+    fun isUserInfoCached(): Boolean =
+            dao.getCachedUserInfo() != null
+
     suspend fun login(phoneNumber: String,
                       password: String) =
             withContext(Dispatchers.IO) {
