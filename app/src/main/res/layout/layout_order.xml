@@ -1,13 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:background="@color/white">
+
+        <include
+            android:id="@+id/divider_line"
+            layout="@layout/layout_divider_line" />
+
+        <ImageView
+            android:id="@+id/iv_address"
+            android:layout_width="15dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/ic_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_line" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_address"
+            app:layout_constraintStart_toEndOf="@id/iv_address"
+            app:layout_constraintTop_toTopOf="@id/iv_address"
+            tools:text="广州市天河区东圃镇天力居B3栋602房" />
+
+        <ImageView
+            android:id="@+id/iv_time"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/ic_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_address" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_time"
+            app:layout_constraintStart_toEndOf="@id/iv_time"
+            app:layout_constraintTop_toTopOf="@id/iv_time"
+            tools:text="11月14日（08:00~12:00）" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
