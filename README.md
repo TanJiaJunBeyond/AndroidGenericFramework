@@ -1,4 +1,4 @@
-# Kotlin-MVVM Demo
+# Kotlin-MVVM
 项目技术要点：
 1. 使用Kotlin编写（协程）。
 2. 使用MVVM架构。
