@@ -10,4 +10,19 @@
     <string name="password_hint">请输入密码</string>
     <string name="login">登录</string>
 
+    <!-- 首页 -->
+    <string name="big_deals">大宗交易</string>
+    <string name="order_wait_for_ordering">待接单</string>
+    <string name="order_wait_for_processing">待处理</string>
+    <string name="order_completed">已完成</string>
+    <string name="all_transactions">全部交易</string>
+    <string name="time_ascending_order">时间升序</string>
+    <string name="time_descending_order">时间降序</string>
+
+    <!-- 订单 -->
+    <string name="order">接单</string>
+    <string name="order_closed">订单关闭</string>
+    <string name="cancel_order">取消订单</string>
+    <string name="confirm_complete">确认完成</string>
+
 </resources>

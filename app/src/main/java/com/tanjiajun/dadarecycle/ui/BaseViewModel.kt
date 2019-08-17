@@ -1,13 +1,13 @@
 package com.tanjiajun.dadarecycle.ui
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tanjiajun.dadarecycle.utils.ObservableViewModel
 import kotlinx.coroutines.launch
 
 /**
  * Created by TanJiaJun on 2019-08-02.
  */
-abstract class BaseViewModel : ObservableViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     protected fun launch(
             block: suspend () -> Unit,

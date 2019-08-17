@@ -26,7 +26,7 @@ class SplashActivity : BaseActivity() {
         DataBindingUtil.setContentView<ActivitySplashBinding>(
                 this,
                 R.layout.activity_splash
-        )
+        ).apply { lifecycleOwner = this@SplashActivity }
 
         GlobalScope.launch {
             delay(1000)

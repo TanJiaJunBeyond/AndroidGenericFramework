@@ -2,10 +2,8 @@ package com.tanjiajun.dadarecycle.ui.user.viewModel
 
 import android.text.Editable
 import android.view.View
-import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tanjiajun.dadarecycle.BR
 import com.tanjiajun.dadarecycle.data.repository.UserRepository
 import com.tanjiajun.dadarecycle.ui.BaseViewModel
 
@@ -20,7 +18,6 @@ class LoginViewModel(
     val password = MutableLiveData<String>()
 
     private val _loginEnable = MutableLiveData<Boolean>()
-    @get:Bindable
     val loginEnable: LiveData<Boolean> = _loginEnable
 
     val loginSuccess = MutableLiveData<Boolean>()
@@ -28,7 +25,6 @@ class LoginViewModel(
 
     fun checkLoginEnable() {
         _loginEnable.value = !phoneNumber.value.isNullOrEmpty() && !password.value.isNullOrEmpty()
-        notifyPropertyChanged(BR.loginEnable)
     }
 
     fun login() =

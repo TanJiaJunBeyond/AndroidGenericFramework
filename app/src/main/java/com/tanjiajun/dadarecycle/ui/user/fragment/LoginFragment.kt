@@ -35,6 +35,7 @@ class LoginFragment
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             DataBindingUtil.inflate<FragmentLoginBinding>(inflater, getLayoutResource(), container, false)
                     .apply {
+                        lifecycleOwner = this@LoginFragment
                         viewModel = this@LoginFragment.viewModel
                         handlers = this@LoginFragment
                     }
