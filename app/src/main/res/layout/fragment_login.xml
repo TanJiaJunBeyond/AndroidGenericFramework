@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="com.tanjiajun.dadarecycle.ui.user.viewModel.LoginViewModel" />
+            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel" />
 
         <variable
             name="handlers"
-            type="com.tanjiajun.dadarecycle.ui.user.viewModel.LoginViewModel.Handlers" />
+            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel.Handlers" />
 
     </data>
 

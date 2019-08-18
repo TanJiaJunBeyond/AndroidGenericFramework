@@ -6,18 +6,56 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="12dp"
-        tools:background="@color/white">
+        android:background="@drawable/shape_order_background_color"
+        android:paddingBottom="10dp"
+        android:shadowColor="@color/common_item_shadow_color"
+        android:shadowDx="0"
+        android:shadowDy="2">
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/shape_green_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="标题" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/ic_call"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
             android:id="@+id/divider_line"
-            layout="@layout/layout_divider_line" />
+            layout="@layout/layout_divider_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:drawableStart="@drawable/ic_address"
@@ -26,14 +64,14 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_line"
             tools:text="地址" />
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:drawableStart="@drawable/ic_time"
             android:drawablePadding="3dp"
@@ -58,20 +96,6 @@
             tools:text="重量" />
 
         <TextView
-            android:id="@+id/tv_order_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:textColor="@color/text_black"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_time"
-            tools:text="订单号" />
-
-        <TextView
             android:id="@+id/tv_note_information"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -82,7 +106,7 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_order_number"
+            app:layout_constraintTop_toBottomOf="@id/tv_time"
             tools:text="备注信息" />
 
         <ImageView
@@ -122,6 +146,19 @@
             app:layout_constraintStart_toEndOf="@id/iv_second_photo"
             app:layout_constraintTop_toTopOf="@id/iv_first_photo"
             tools:background="@mipmap/ic_launcher" />
+
+        <Button
+            android:layout_width="138dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/selector_common_button_background_color_green"
+            android:text="@string/confirm"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_first_photo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
