@@ -2,18 +2,31 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel.Handlers" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color">
 
         <ImageView
-            android:id="@+id/iv_personal"
+            android:id="@+id/iv_personal_center"
             android:layout_width="16dp"
             android:layout_height="19dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/ic_personal"
+            android:onClick="@{handlers::onPersonalCenterClick}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +36,7 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/ic_bell"
-            app:layout_constraintStart_toEndOf="@id/iv_personal"
+            app:layout_constraintStart_toEndOf="@id/iv_personal_center"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

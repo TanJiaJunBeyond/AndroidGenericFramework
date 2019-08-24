@@ -8,23 +8,17 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class UserInfoData(
-    var code: String,
-    var data: Data
+        var code: String,
+        var errorMessage: String,
+        var data: Data
 ) : Parcelable {
 
     @Parcelize
     data class Data(
-        var avatar: String,
-        var birthday: String,
-        var introduce: String,
-        var nick: String,
-        var is_business: Boolean,
-        var qr_code: String,
-        var token: String,
-        var user_id: String,
-        var username: String,
-        var active_timestamp: Long,
-        var certificated: Int
+            var headPortraitUrl: String,
+            var userName: String,
+            var gender: String,
+            var age: Int
     ) : Parcelable
 
 }

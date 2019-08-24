@@ -1,5 +1,6 @@
 package com.tanjiajun.androidgenericframework.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -9,10 +10,10 @@ import kotlinx.coroutines.launch
  */
 abstract class BaseViewModel : ViewModel() {
 
-    protected fun launch(
-            block: suspend () -> Unit,
-            error: suspend (Throwable) -> Unit
-    ) =
+    val title = MutableLiveData<String>()
+
+    protected fun launch(block: suspend () -> Unit,
+                         error: suspend (Throwable) -> Unit) =
             viewModelScope.launch {
                 try {
                     block()

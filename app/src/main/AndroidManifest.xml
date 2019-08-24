@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.tanjiajun.androidgenericframework.AndroidGenericFrameworkApplication"
+        android:name=".AndroidGenericFrameworkApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.tanjiajun.androidgenericframework.ui.main.activity.SplashActivity"
+            android:name=".ui.main.activity.SplashActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnspecified|adjustPan">
@@ -34,13 +34,19 @@
         </activity>
 
         <activity
-            android:name="com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity"
+            android:name=".ui.user.activity.RegisterAndLoginActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnspecified|adjustPan" />
 
         <activity
-            android:name="com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity"
+            android:name=".ui.main.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnspecified|adjustPan" />
+
+        <activity
+            android:name=".ui.user.activity.PersonalCenterActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnspecified|adjustPan" />

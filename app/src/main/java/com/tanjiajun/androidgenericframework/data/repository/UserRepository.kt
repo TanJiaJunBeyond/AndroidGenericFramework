@@ -1,6 +1,7 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
 import com.tanjiajun.androidgenericframework.data.dao.UserDao
+import com.tanjiajun.androidgenericframework.data.model.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.UserNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -23,6 +24,13 @@ class UserRepository private constructor(
                 dao.cacheUserInfo(userInfoData)
                 userInfoData
             }
+
+    fun getUserInfo(): UserInfoData? =
+            dao.getCachedUserInfo()
+
+    fun logout() {
+        dao.clearUserInfoCache()
+    }
 
     companion object {
         @Volatile

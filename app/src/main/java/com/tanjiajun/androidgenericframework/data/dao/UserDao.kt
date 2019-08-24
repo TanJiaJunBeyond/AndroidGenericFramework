@@ -31,4 +31,9 @@ class UserDao {
                         gsonFromJson(it)
                     }
 
+    fun clearUserInfoCache() =
+            PreferenceManager.getDefaultSharedPreferences(AndroidGenericFrameworkApplication.context).edit {
+                clear()
+            }
+
 }
