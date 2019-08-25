@@ -17,10 +17,11 @@ class RegisterAndLoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityRegisterAndLoginBinding>(
-            this,
-            R.layout.activity_register_and_login
+                this,
+                R.layout.activity_register_and_login
         )
 
         addFragment(LoginFragment.newInstance())
     }
+
 }

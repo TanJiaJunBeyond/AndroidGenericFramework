@@ -39,18 +39,15 @@ class LoginFragment
                         viewModel = this@LoginFragment.viewModel
                         handlers = this@LoginFragment
                     }
+                    .also { observe() }
                     .root
-
-    override fun onResume() {
-        super.onResume()
-        observe()
-    }
 
     private fun observe() =
             viewModel.run {
                 loginSuccess.observe(this@LoginFragment, Observer {
                     if (it) {
                         startActivity<MainActivity>()
+                        activity?.finish()
                     }
                 })
 

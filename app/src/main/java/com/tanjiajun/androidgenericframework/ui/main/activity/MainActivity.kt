@@ -32,7 +32,10 @@ class MainActivity
         intent
                 ?.getBooleanExtra(EXTRA_LOGOUT, false)
                 ?.takeIf { it }
-                ?.let { startActivity<RegisterAndLoginActivity>() }
+                ?.let {
+                    startActivity<RegisterAndLoginActivity>()
+                    finish()
+                }
     }
 
     override fun onPersonalCenterClick(view: View) =
