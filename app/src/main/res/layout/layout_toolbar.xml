@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="viewModel"
             type="com.tanjiajun.androidgenericframework.ui.BaseViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.tanjiajun.androidgenericframework.ui.BaseViewModel.Handlers" />
 
     </data>
 
@@ -15,7 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
-        app:title="@{viewModel.title}">
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:onNavigationIconClick="@{handlers::onNavigationIconClick}"
+        app:title="@{viewModel.title}"
+        app:titleTextColor="@color/text_black"
+        tools:title="标题">
 
     </androidx.appcompat.widget.Toolbar>
 

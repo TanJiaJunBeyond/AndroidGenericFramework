@@ -25,10 +25,13 @@ class PersonalCenterViewModel(
     private val _age = MutableLiveData<String>()
     val age: LiveData<String> = _age
 
+    fun showTitle(title: String) {
+        _title.value = title
+    }
+
     fun showInfo() =
             repository
                     .getUserInfo()
-                    ?.data
                     ?.run {
                         _headPortraitUrl.value = headPortraitUrl
                         _userName.value = userName
@@ -39,7 +42,7 @@ class PersonalCenterViewModel(
     fun logout() =
             repository.logout()
 
-    interface Handlers {
+    interface Handlers : BaseViewModel.Handlers {
 
         fun onLogoutClick(view: View)
 

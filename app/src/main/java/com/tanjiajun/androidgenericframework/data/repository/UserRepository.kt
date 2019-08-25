@@ -3,6 +3,7 @@ package com.tanjiajun.androidgenericframework.data.repository
 import com.tanjiajun.androidgenericframework.data.dao.UserDao
 import com.tanjiajun.androidgenericframework.data.model.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.UserNetwork
+import com.tanjiajun.androidgenericframework.utils.gsonFromJson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -20,9 +21,14 @@ class UserRepository private constructor(
     suspend fun login(phoneNumber: String,
                       password: String) =
             withContext(Dispatchers.IO) {
-                val userInfoData = network.login(phoneNumber, password)
-                dao.cacheUserInfo(userInfoData)
-                userInfoData
+                // TODO 因为后端原因，暂时缓存本地数据
+                dao.cacheUserInfo(gsonFromJson("{\n" +
+                        "    \"headPortraitUrl\":\"\",\n" +
+                        "    \"userName\":\"谭嘉俊\",\n" +
+                        "    \"gender\":\"男\",\n" +
+                        "    \"age\":25\n" +
+                        "}"))
+                network.login(phoneNumber, password)
             }
 
     fun getUserInfo(): UserInfoData? =
@@ -41,8 +47,7 @@ class UserRepository private constructor(
                 dao: UserDao
         ): UserRepository =
                 instance ?: synchronized(this) {
-                    instance
-                            ?: UserRepository(network, dao).also { instance = it }
+                    instance ?: UserRepository(network, dao).also { instance = it }
                 }
     }
 

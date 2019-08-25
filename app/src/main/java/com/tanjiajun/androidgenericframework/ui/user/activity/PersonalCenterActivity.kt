@@ -28,6 +28,7 @@ class PersonalCenterActivity
                 R.layout.activity_personal_center
         ).apply {
             lifecycleOwner = this@PersonalCenterActivity
+            viewModel = this@PersonalCenterActivity.viewModel
             handlers = this@PersonalCenterActivity
         }
     }
@@ -35,10 +36,13 @@ class PersonalCenterActivity
     override fun onResume() {
         super.onResume()
         viewModel.run {
-            title.value = getString(R.string.personal_center)
+            showTitle(getString(R.string.personal_center))
             showInfo()
         }
     }
+
+    override fun onNavigationIconClick(view: View) =
+            finish()
 
     override fun onLogoutClick(view: View) {
         viewModel.logout()

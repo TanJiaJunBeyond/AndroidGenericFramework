@@ -1,5 +1,7 @@
 package com.tanjiajun.androidgenericframework.ui
 
+import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +12,8 @@ import kotlinx.coroutines.launch
  */
 abstract class BaseViewModel : ViewModel() {
 
-    val title = MutableLiveData<String>()
+    protected val _title = MutableLiveData<String>()
+    val title: LiveData<String> = _title
 
     protected fun launch(block: suspend () -> Unit,
                          error: suspend (Throwable) -> Unit) =
@@ -21,5 +24,11 @@ abstract class BaseViewModel : ViewModel() {
                     error(throwable)
                 }
             }
+
+    interface Handlers {
+
+        fun onNavigationIconClick(view: View)
+
+    }
 
 }

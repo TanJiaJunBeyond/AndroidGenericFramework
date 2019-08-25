@@ -1,7 +1,7 @@
 package com.tanjiajun.androidgenericframework.data.network.retrofit.services
 
+import com.google.gson.JsonObject
 import com.tanjiajun.androidgenericframework.data.model.request.LoginRequestData
-import com.tanjiajun.androidgenericframework.data.model.response.UserInfoData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -12,6 +12,6 @@ import retrofit2.http.POST
 interface UserService {
 
     @POST("user/v1/user/sign")
-    fun login(@Body loginRequestData: LoginRequestData): Call<UserInfoData>
+    fun login(@Body loginRequestData: LoginRequestData): Call<JsonObject>
 
 }
