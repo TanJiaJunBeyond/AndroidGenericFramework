@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by TanJiaJun on 2019-08-29.
  */
-abstract class BaseDataBindingAdapter
+abstract class BaseDataBindingAdapter<D : Any>
     : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
@@ -19,10 +19,11 @@ abstract class BaseDataBindingAdapter
                     false
             ))
 
-    override fun getItemViewType(position: Int): Int {
-        return getLayoutResourceByPosition(position)
-    }
+    override fun getItemViewType(position: Int): Int =
+            getLayoutResByPosition(position)
 
-    protected abstract fun getLayoutResourceByPosition(position: Int): Int
+    protected abstract fun getItemByPosition(position: Int): D?
+
+    protected abstract fun getLayoutResByPosition(position: Int): Int
 
 }
