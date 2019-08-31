@@ -40,7 +40,7 @@ class MultiViewTypeDataBindingAdapter<D : Any>
             items[position]
 
     override fun getLayoutResByPosition(position: Int): Int =
-            getViewTypeByPosition(position)?.getItemLayoutRes() ?: 0
+            getViewTypeByPosition(position).getItemLayoutRes()
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         recyclerView.layoutManager
@@ -48,7 +48,7 @@ class MultiViewTypeDataBindingAdapter<D : Any>
                     if (it is GridLayoutManager) {
                         it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                             override fun getSpanSize(position: Int): Int =
-                                    getViewTypeByPosition(position)?.getSpanSize() ?: 0
+                                    getViewTypeByPosition(position).getSpanSize()
                         }
                     }
                 }
