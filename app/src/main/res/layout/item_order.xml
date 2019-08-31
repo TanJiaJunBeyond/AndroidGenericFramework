@@ -52,6 +52,20 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
+            android:id="@+id/tv_order_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_line"
+            tools:text="订单号" />
+
+        <TextView
             android:id="@+id/tv_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -61,10 +75,9 @@
             android:drawableStart="@drawable/ic_address"
             android:drawablePadding="3dp"
             android:textColor="@color/text_black"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_line"
+            app:layout_constraintTop_toBottomOf="@id/tv_order_number"
             tools:text="地址" />
 
         <TextView
@@ -76,7 +89,7 @@
             android:drawableStart="@drawable/ic_time"
             android:drawablePadding="3dp"
             android:textColor="@color/text_black"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_address"
             tools:text="日期" />
@@ -89,7 +102,7 @@
             android:drawableStart="@drawable/ic_kg"
             android:drawablePadding="3dp"
             android:textColor="@color/text_black"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_time"
             app:layout_constraintStart_toEndOf="@id/tv_time"
             app:layout_constraintTop_toTopOf="@id/tv_time"
@@ -103,7 +116,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:textColor="@color/text_dark_grey"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_time"
