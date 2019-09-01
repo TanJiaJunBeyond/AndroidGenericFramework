@@ -10,6 +10,17 @@ import androidx.databinding.DataBindingUtil
  */
 abstract class BaseViewType<D> {
 
+    @LayoutRes
+    abstract fun getItemLayoutRes(): Int
+
+    abstract fun isMatchViewType(any: Any): Boolean
+
+    abstract fun bind(holder: BaseViewHolder,
+                      data: D,
+                      position: Int)
+
+    abstract fun getSpanSize(): Int
+
     fun onCreateDataBindingViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
             BaseViewHolder(DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
@@ -26,16 +37,5 @@ abstract class BaseViewType<D> {
                 bind(this, data, position)
                 binding.executePendingBindings()
             }
-
-    abstract fun bind(holder: BaseViewHolder,
-                      data: D,
-                      position: Int)
-
-    abstract fun getSpanSize(): Int
-
-    abstract fun isMatchViewType(any: Any): Boolean
-
-    @LayoutRes
-    abstract fun getItemLayoutRes(): Int
 
 }

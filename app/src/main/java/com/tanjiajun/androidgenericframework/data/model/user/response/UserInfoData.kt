@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.model.response
+package com.tanjiajun.androidgenericframework.data.model.user.response
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

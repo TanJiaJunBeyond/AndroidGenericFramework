@@ -44,7 +44,8 @@ ext {
     retrofitConverterScalarsVersion = '2.5.0'
     glideVersion = '3.7.0'
     lifecycleExtensionsVersion = '2.2.0-alpha02'
-    navigationVersion = "2.1.0-beta02"
+    navigationVersion = '2.1.0-beta02'
+    viewPager2Version = '1.0.0-beta03'
     junitVersion = '4.12'
     testRunnerVersion = '1.2.1'
 }

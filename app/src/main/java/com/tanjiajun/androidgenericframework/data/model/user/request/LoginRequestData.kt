@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.model.request
+package com.tanjiajun.androidgenericframework.data.model.user.request
 
 import com.google.gson.annotations.SerializedName
 

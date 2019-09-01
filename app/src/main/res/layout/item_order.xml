@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.tanjiajun.androidgenericframework.data.model.order.response.OrderData" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,9 +31,10 @@
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
+            android:text="@{data.title}"
             android:textColor="@color/text_black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +67,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
+            android:text="@{data.orderNumber}"
             android:textColor="@color/text_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +84,7 @@
             android:layout_marginEnd="12dp"
             android:drawableStart="@drawable/ic_address"
             android:drawablePadding="3dp"
+            android:text="@{data.address}"
             android:textColor="@color/text_black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +99,7 @@
             android:layout_marginTop="12dp"
             android:drawableStart="@drawable/ic_time"
             android:drawablePadding="3dp"
+            android:text="@{data.date}"
             android:textColor="@color/text_black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +113,7 @@
             android:layout_marginEnd="12dp"
             android:drawableStart="@drawable/ic_kg"
             android:drawablePadding="3dp"
+            android:text="@{data.weight}"
             android:textColor="@color/text_black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_time"
@@ -115,6 +128,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
+            android:text="@{data.noteInformation}"
             android:textColor="@color/text_dark_grey"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"

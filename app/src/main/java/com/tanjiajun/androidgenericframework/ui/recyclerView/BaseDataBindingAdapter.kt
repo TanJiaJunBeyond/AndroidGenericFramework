@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseDataBindingAdapter<D : Any>
     : RecyclerView.Adapter<BaseViewHolder>() {
 
+    protected abstract fun getLayoutResByPosition(position: Int): Int
+
+    protected abstract fun getItemByPosition(position: Int): D?
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
             BaseViewHolder(DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
@@ -21,9 +25,5 @@ abstract class BaseDataBindingAdapter<D : Any>
 
     override fun getItemViewType(position: Int): Int =
             getLayoutResByPosition(position)
-
-    protected abstract fun getItemByPosition(position: Int): D?
-
-    protected abstract fun getLayoutResByPosition(position: Int): Int
 
 }

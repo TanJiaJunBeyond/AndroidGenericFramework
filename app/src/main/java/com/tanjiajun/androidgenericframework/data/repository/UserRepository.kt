@@ -1,7 +1,7 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
 import com.tanjiajun.androidgenericframework.data.dao.UserDao
-import com.tanjiajun.androidgenericframework.data.model.response.UserInfoData
+import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.UserNetwork
 import com.tanjiajun.androidgenericframework.utils.gsonFromJson
 import kotlinx.coroutines.Dispatchers

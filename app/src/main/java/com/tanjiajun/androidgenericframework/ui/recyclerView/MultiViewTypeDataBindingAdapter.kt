@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by TanJiaJun on 2019-08-31.
  */
-class MultiViewTypeDataBindingAdapter<D : Any>
+abstract class MultiViewTypeDataBindingAdapter<D : Any>
     : BaseDataBindingAdapter<D>() {
 
     private val items = mutableListOf<D>()

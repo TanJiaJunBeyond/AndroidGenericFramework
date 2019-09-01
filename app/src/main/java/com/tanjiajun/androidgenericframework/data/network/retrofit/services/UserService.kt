@@ -1,7 +1,7 @@
 package com.tanjiajun.androidgenericframework.data.network.retrofit.services
 
 import com.google.gson.JsonObject
-import com.tanjiajun.androidgenericframework.data.model.request.LoginRequestData
+import com.tanjiajun.androidgenericframework.data.model.user.request.LoginRequestData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

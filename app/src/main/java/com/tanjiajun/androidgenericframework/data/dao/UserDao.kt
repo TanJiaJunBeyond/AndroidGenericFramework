@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.gson.Gson
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkApplication
-import com.tanjiajun.androidgenericframework.data.model.response.UserInfoData
+import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
 import com.tanjiajun.androidgenericframework.utils.gsonFromJson
 
 /**

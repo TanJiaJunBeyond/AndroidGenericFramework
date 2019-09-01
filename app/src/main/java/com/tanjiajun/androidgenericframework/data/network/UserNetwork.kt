@@ -1,7 +1,7 @@
 package com.tanjiajun.androidgenericframework.data.network
 
-import com.tanjiajun.androidgenericframework.data.model.request.LoginRequestData
-import com.tanjiajun.androidgenericframework.data.model.response.UserInfoData
+import com.tanjiajun.androidgenericframework.data.model.user.request.LoginRequestData
+import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.retrofit.UserRetrofit
 
 /**
