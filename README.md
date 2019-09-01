@@ -5,3 +5,4 @@
 3. 使用Android Jetpack组件：DataBinding、LiveData、ViewModel、LifeCycle、Navigation。
 4. 使用OkHttp、Retrofit做网络请求。
 5. 使用Glide加载图片。
+6. 使用ViewPager2。
