@@ -11,6 +11,11 @@ import com.tanjiajun.androidgenericframework.ui.recyclerView.MultiViewTypeDataBi
  * Created by TanJiaJun on 2019-09-01.
  */
 class OrderAdapter : MultiViewTypeDataBindingAdapter<OrderData>() {
+
+    init {
+        addViewType(OrderViewType())
+    }
+
 }
 
 class OrderViewType : BaseViewType<OrderData>() {

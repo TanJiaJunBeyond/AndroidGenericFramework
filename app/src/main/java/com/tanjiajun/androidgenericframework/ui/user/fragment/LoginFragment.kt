@@ -32,7 +32,9 @@ class LoginFragment
 
     override fun getTransactionTag(): String = FRAGMENT_TAG_LOGIN
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? =
             DataBindingUtil.inflate<FragmentLoginBinding>(inflater, getLayoutResource(), container, false)
                     .apply {
                         lifecycleOwner = this@LoginFragment
