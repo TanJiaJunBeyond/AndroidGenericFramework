@@ -23,6 +23,14 @@ abstract class BaseDataBindingAdapter<D : Any>
                     false
             ))
 
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        getItemByPosition(position)?.let { holder.bind(it) }
+    }
+
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int, payloads: MutableList<Any>) {
+        getItemByPosition(position)?.let { holder.bind(it) }
+    }
+
     override fun getItemViewType(position: Int): Int =
             getLayoutResByPosition(position)
 

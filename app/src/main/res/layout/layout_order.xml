@@ -9,9 +9,71 @@
         android:paddingBottom="12dp"
         tools:background="@color/white">
 
-        <include
-            android:id="@+id/divider_line"
-            layout="@layout/layout_divider_line" />
+        <ImageView
+            android:id="@+id/iv_first_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintDimensionRatio="w,4:3"
+            app:layout_constraintEnd_toStartOf="@id/iv_second_photo"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_note_information"
+            tools:background="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_second_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_first_photo"
+            app:layout_constraintDimensionRatio="w,4:3"
+            app:layout_constraintEnd_toStartOf="@id/iv_third_photo"
+            app:layout_constraintStart_toEndOf="@id/iv_first_photo"
+            app:layout_constraintTop_toTopOf="@id/iv_first_photo"
+            tools:background="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_third_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_first_photo"
+            app:layout_constraintDimensionRatio="w,4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_second_photo"
+            app:layout_constraintTop_toTopOf="@id/iv_first_photo"
+            tools:background="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_order_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_time"
+            tools:text="订单号" />
+
+        <TextView
+            android:id="@+id/tv_note_information"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:textColor="@color/text_dark_grey"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_order_number"
+            tools:text="备注信息" />
 
         <TextView
             android:id="@+id/tv_address"
@@ -57,71 +119,9 @@
             app:layout_constraintTop_toTopOf="@id/tv_time"
             tools:text="重量" />
 
-        <TextView
-            android:id="@+id/tv_order_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:textColor="@color/text_black"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_time"
-            tools:text="订单号" />
-
-        <TextView
-            android:id="@+id/tv_note_information"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:textColor="@color/text_dark_grey"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_order_number"
-            tools:text="备注信息" />
-
-        <ImageView
-            android:id="@+id/iv_first_photo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintDimensionRatio="w,4:3"
-            app:layout_constraintEnd_toStartOf="@id/iv_second_photo"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_note_information"
-            tools:background="@mipmap/ic_launcher" />
-
-        <ImageView
-            android:id="@+id/iv_second_photo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_first_photo"
-            app:layout_constraintDimensionRatio="w,4:3"
-            app:layout_constraintEnd_toStartOf="@id/iv_third_photo"
-            app:layout_constraintStart_toEndOf="@id/iv_first_photo"
-            app:layout_constraintTop_toTopOf="@id/iv_first_photo"
-            tools:background="@mipmap/ic_launcher" />
-
-        <ImageView
-            android:id="@+id/iv_third_photo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="12dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_first_photo"
-            app:layout_constraintDimensionRatio="w,4:3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_second_photo"
-            app:layout_constraintTop_toTopOf="@id/iv_first_photo"
-            tools:background="@mipmap/ic_launcher" />
+        <include
+            android:id="@+id/divider_line"
+            layout="@layout/layout_divider_line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

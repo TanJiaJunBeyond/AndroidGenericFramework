@@ -2,18 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel" />
-
-        <variable
-            name="handlers"
-            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel.Handlers" />
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,15 +39,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_order"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_order"
             android:layout_width="0dp"
@@ -69,6 +48,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tl_order" />
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_name"
+            app:tabBackground="@color/white"
+            app:tabIndicatorColor="@color/main_color"
+            app:tabIndicatorHeight="3dp"
+            app:tabSelectedTextColor="@color/main_color"
+            app:tabTextColor="@color/text_light_grey" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel.Handlers" />
+
+    </data>
 
 </layout>

@@ -12,8 +12,8 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
     : BaseDataBindingAdapter<D>() {
 
     private val items = mutableListOf<D>()
-    val viewTypes = SparseArray<BaseViewType<D>>()
-    val noDataViewTypes = SparseArray<NoDataViewType<D>>()
+    private val viewTypes = SparseArray<BaseViewType<D>>()
+    private val noDataViewTypes = SparseArray<NoDataViewType<D>>()
     var headerCount = 0
     var footerCount = 0
 
@@ -22,10 +22,12 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
                     .onCreateDataBindingViewHolder(parent, viewType)
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        super.onBindViewHolder(holder, position)
         bindViewType(holder, position)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
         payloads
                 .takeIf { it.isNotEmpty() }
                 ?.let {
@@ -78,9 +80,9 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
         val noDataViewTypesSize = noDataViewTypes.size()
 
         for (i in 0 until noDataViewTypesSize) {
-            val noDataViewType = noDataViewTypes[i]
+            val noDataViewType = noDataViewTypes.valueAt(i)
 
-            if (noDataViewType.isMatchViewType(position)) {
+            if (noDataViewType.isMatchViewType(position, headerCount, items.size, footerCount)) {
                 return noDataViewType
             }
         }
@@ -88,9 +90,9 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
         val viewTypesSize = viewTypes.size()
 
         for (i in 0 until viewTypesSize) {
-            val viewType = viewTypes[i]
+            val viewType = viewTypes.valueAt(i)
 
-            if (viewType.isMatchViewType(position)) {
+            if (viewType.isMatchViewType(items[getItemPositionByPosition(position)])) {
                 return viewType
             }
         }
@@ -121,7 +123,7 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
                     }
                     ?: false
 
-    fun findItemsHasMatchViewType(items: List<D>): List<D> =
+    private fun findItemsHasMatchViewType(items: List<D>): List<D> =
             mutableListOf<D>()
                     .apply {
                         val viewTypesSize = viewTypes.size()

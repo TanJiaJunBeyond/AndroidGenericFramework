@@ -2,22 +2,70 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel" />
-
-        <variable
-            name="handlers"
-            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel.Handlers" />
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="38dp"
+            android:background="@drawable/selector_common_button_background_color_green"
+            android:enabled="@{viewModel.loginEnable}"
+            android:onClick="@{handlers::onLoginClick}"
+            android:shadowColor="@color/common_button_shadow_color"
+            android:shadowDy="3"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="38dp"
+            android:afterTextChanged="@{handlers::onPasswordAfterTextChanged}"
+            android:background="@drawable/shape_common_edit_text_background"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="12dp"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:paddingStart="26dp"
+            android:paddingEnd="26dp"
+            android:text="@={viewModel.password}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_phone_number" />
+
+        <EditText
+            android:id="@+id/et_phone_number"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginEnd="38dp"
+            android:afterTextChanged="@{handlers::onPhoneNumberAfterTextChanged}"
+            android:background="@drawable/shape_common_edit_text_background"
+            android:drawableStart="@drawable/ic_phone_number"
+            android:drawablePadding="12dp"
+            android:hint="@string/phone_number_hint"
+            android:inputType="phone"
+            android:paddingStart="26dp"
+            android:paddingEnd="26dp"
+            android:text="@={viewModel.phoneNumber}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
 
         <ImageView
             android:id="@+id/iv_icon"
@@ -41,66 +89,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_icon" />
 
-        <EditText
-            android:id="@+id/et_phone_number"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="46dp"
-            android:layout_marginEnd="38dp"
-            android:afterTextChanged="@{handlers::onPhoneNumberAfterTextChanged}"
-            android:background="@drawable/shape_common_edit_text_background"
-            android:drawableStart="@drawable/ic_phone_number"
-            android:drawablePadding="12dp"
-            android:hint="@string/phone_number_hint"
-            android:inputType="phone"
-            android:paddingStart="26dp"
-            android:paddingEnd="26dp"
-            android:text="@={viewModel.phoneNumber}"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
-
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="38dp"
-            android:afterTextChanged="@{handlers::onPasswordAfterTextChanged}"
-            android:background="@drawable/shape_common_edit_text_background"
-            android:drawableStart="@drawable/ic_password"
-            android:drawablePadding="12dp"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword"
-            android:paddingStart="26dp"
-            android:paddingEnd="26dp"
-            android:text="@={viewModel.password}"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_phone_number" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="38dp"
-            android:background="@drawable/selector_common_button_background_color_green"
-            android:enabled="@{viewModel.loginEnable}"
-            android:onClick="@{handlers::onLoginClick}"
-            android:shadowColor="@color/common_button_shadow_color"
-            android:shadowDy="3"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_password" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel.Handlers" />
+
+    </data>
 
 </layout>
