@@ -17,10 +17,10 @@
     <string name="logout">退出登录</string>
 
     <!-- 首页 -->
-    <string name="first_list">列表1</string>
-    <string name="second_list">列表2</string>
-    <string name="third_list">列表3</string>
-    <string name="fourth_list">列表4</string>
+    <string name="add">添加</string>
+    <string name="remove">移除</string>
+
+    <!-- 订单 -->
     <string name="confirm">确认</string>
 
 </resources>
