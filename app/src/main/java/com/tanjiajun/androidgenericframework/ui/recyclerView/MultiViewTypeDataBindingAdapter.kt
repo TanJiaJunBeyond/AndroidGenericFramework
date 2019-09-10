@@ -14,8 +14,8 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
     private val items = mutableListOf<D>()
     private val viewTypes = SparseArray<BaseViewType<D>>()
     private val noDataViewTypes = SparseArray<NoDataViewType<D>>()
-    var headerCount = 0
-    var footerCount = 0
+    private var headerCount = 0
+    private var footerCount = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
             viewTypes[viewType, noDataViewTypes[viewType]]

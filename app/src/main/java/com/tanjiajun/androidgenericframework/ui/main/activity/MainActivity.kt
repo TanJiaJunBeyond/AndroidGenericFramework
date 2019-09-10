@@ -48,6 +48,7 @@ class MainActivity
         super.onCreate(savedInstanceState)
         binding.run {
             lifecycleOwner = this@MainActivity
+            viewModel = this@MainActivity.viewModel
             handlers = this@MainActivity
         }
 
