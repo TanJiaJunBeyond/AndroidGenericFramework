@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tanjiajun.androidgenericframework.ui.BaseViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.tanjiajun.androidgenericframework.ui.BaseViewModel.Handlers" />
+
+    </data>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,17 +27,5 @@
         tools:title="标题">
 
     </androidx.appcompat.widget.Toolbar>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.tanjiajun.androidgenericframework.ui.BaseViewModel" />
-
-        <variable
-            name="handlers"
-            type="com.tanjiajun.androidgenericframework.ui.BaseViewModel.Handlers" />
-
-    </data>
 
 </layout>

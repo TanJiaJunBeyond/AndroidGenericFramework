@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel.Handlers" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -77,17 +89,5 @@
             app:tabTextColor="@color/text_light_grey" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel" />
-
-        <variable
-            name="handlers"
-            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel.Handlers" />
-
-    </data>
 
 </layout>
