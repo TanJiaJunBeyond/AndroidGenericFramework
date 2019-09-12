@@ -35,7 +35,7 @@ class PersonalCenterActivity
 
     override fun onResume() {
         super.onResume()
-        viewModel.run {
+        with(viewModel) {
             showTitle(getString(R.string.personal_center))
             showInfo()
         }

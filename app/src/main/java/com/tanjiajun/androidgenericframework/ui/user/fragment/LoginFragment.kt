@@ -45,7 +45,7 @@ class LoginFragment
                     .root
 
     private fun observe() =
-            viewModel.run {
+            with(viewModel) {
                 loginSuccess.observe(this@LoginFragment, Observer {
                     if (it) {
                         startActivity<MainActivity>()

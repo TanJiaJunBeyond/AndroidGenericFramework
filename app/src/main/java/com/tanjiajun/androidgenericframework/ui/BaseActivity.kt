@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
 /**
  * Created by TanJiaJun on 2019-07-28.
@@ -71,33 +72,33 @@ abstract class BaseActivity : AppCompatActivity() {
             operateFragmentTransaction(fragment, ACTION_ADD_AND_HIDE_OTHERS, true, true)
 
     fun addFragmentAndHideOthersNotExecutePending(fragment: BaseFragment) =
-            operateFragmentTransaction(fragment, ACTION_ADD_AND_HIDE_OTHERS, false, true)
+            operateFragmentTransaction(fragment, ACTION_ADD_AND_HIDE_OTHERS, true, false)
 
     fun replaceFragment(fragment: BaseFragment) =
             replaceFragment(fragment, true)
 
     fun replaceFragment(fragment: BaseFragment, addToBackStack: Boolean) =
-            operateFragmentTransaction(fragment, ACTION_REPLACE, true, addToBackStack)
+            operateFragmentTransaction(fragment, ACTION_REPLACE, addToBackStack, true)
 
     protected fun addFragmentNotAddToBackStack(fragment: BaseFragment) =
             operateFragmentTransaction(fragment, ACTION_ADD, false, false)
 
     fun addFragmentNotExecutePending(fragment: BaseFragment) =
-            operateFragmentTransaction(fragment, ACTION_ADD, false, true)
+            operateFragmentTransaction(fragment, ACTION_ADD, true, false)
 
     private fun operateFragmentTransaction(
             fragment: BaseFragment,
             action: Int,
-            isExecutePending: Boolean,
-            isAddToBackStack: Boolean
+            isAddToBackStack: Boolean,
+            isExecutePending: Boolean
     ) =
-            manager.run {
+            with(manager) {
                 val containId = getContainId()
 
                 if (containId > 0) {
-                    beginTransaction().run {
+                    beginTransaction().let {
                         if (fragment.enableAnimation()) {
-                            setCustomAnimations(
+                            it.setCustomAnimations(
                                     fragment.getEnterAnimation(),
                                     fragment.getExitAnimation(),
                                     fragment.getPopEnterAnimation(),
@@ -105,24 +106,8 @@ abstract class BaseActivity : AppCompatActivity() {
                             )
                         }
 
-                        when (action) {
-                            ACTION_ADD -> add(containId, fragment, fragment.getTransactionTag())
-                            ACTION_REPLACE -> replace(containId, fragment, fragment.getTransactionTag())
-                            ACTION_ADD_AND_HIDE_OTHERS -> {
-                                manager.fragments
-                                        .filter { it.isVisible }
-                                        .forEach { hide(it) }
-
-                                add(containId, fragment, fragment.getTransactionTag())
-                            }
-                            else -> Unit
-                        }
-
-                        if (isAddToBackStack) {
-                            addToBackStack(fragment.getTransactionTag())
-                        }
-
-                        commitAllowingStateLoss()
+                        operateFragment(action, containId, fragment, manager, it, isAddToBackStack)
+                        it.commitAllowingStateLoss()
 
                         if (isExecutePending) {
                             try {
@@ -135,8 +120,33 @@ abstract class BaseActivity : AppCompatActivity() {
                 }
             }
 
+    private fun operateFragment(action: Int,
+                                containId: Int,
+                                fragment: BaseFragment,
+                                manager: FragmentManager,
+                                transaction: FragmentTransaction,
+                                isAddToBackStack: Boolean) =
+            with(manager) {
+                when (action) {
+                    ACTION_ADD -> transaction.add(containId, fragment, fragment.getTransactionTag())
+                    ACTION_REPLACE -> transaction.replace(containId, fragment, fragment.getTransactionTag())
+                    ACTION_ADD_AND_HIDE_OTHERS -> {
+                        fragments
+                                .filter { it.isVisible }
+                                .forEach { transaction.hide(it) }
+
+                        transaction.add(containId, fragment, fragment.getTransactionTag())
+                    }
+                    else -> Unit
+                }
+
+                if (isAddToBackStack) {
+                    transaction.addToBackStack(fragment.getTransactionTag())
+                }
+            }
+
     override fun onBackPressed() =
-            manager.run {
+            with(manager) {
                 if (backStackEntryCount > getFragmentCountToFinish()) {
                     (findFragmentById(getContainId()) as BaseFragment).let {
                         popBackStackImmediate()

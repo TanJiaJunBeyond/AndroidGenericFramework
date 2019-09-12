@@ -46,7 +46,7 @@ class MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.run {
+        with(binding) {
             lifecycleOwner = this@MainActivity
             viewModel = this@MainActivity.viewModel
             handlers = this@MainActivity
