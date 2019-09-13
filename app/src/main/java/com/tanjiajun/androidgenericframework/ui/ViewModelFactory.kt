@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tanjiajun.androidgenericframework.data.repository.UserRepository
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
-import com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel
-import com.tanjiajun.androidgenericframework.ui.user.viewModel.PersonalCenterViewModel
+import com.tanjiajun.androidgenericframework.ui.order.viewmodel.OrderViewModel
+import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
+import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel
 
 /**
  * Created by TanJiaJun on 2019-08-07.
@@ -26,6 +27,9 @@ class ViewModelFactory(
 
                     isAssignableFrom(PersonalCenterViewModel::class.java) ->
                         PersonalCenterViewModel(userRepository)
+
+                    isAssignableFrom(OrderViewModel::class.java) ->
+                        OrderViewModel(userRepository)
 
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

@@ -15,7 +15,7 @@ import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.FragmentLoginBinding
 import com.tanjiajun.androidgenericframework.ui.BaseFragment
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
-import com.tanjiajun.androidgenericframework.ui.user.viewModel.LoginViewModel
+import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
 import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.startActivity
 

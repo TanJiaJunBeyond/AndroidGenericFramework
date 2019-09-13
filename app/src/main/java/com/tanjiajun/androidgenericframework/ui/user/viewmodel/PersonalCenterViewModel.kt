@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui.user.viewModel
+package com.tanjiajun.androidgenericframework.ui.user.viewmodel
 
 import android.view.View
 import androidx.lifecycle.LiveData

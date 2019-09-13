@@ -16,6 +16,6 @@ data class OrderData(
         var weight: Int,
         var noteInformation: String,
         var firstImageUrl: String,
-        var secondImageUrl: String,
-        var thirdImageUrl: String
+        var secondImageUrl: String?,
+        var thirdImageUrl: String?
 ) : Parcelable

@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui.user.viewModel
+package com.tanjiajun.androidgenericframework.ui.user.viewmodel
 
 import android.text.Editable
 import android.view.View

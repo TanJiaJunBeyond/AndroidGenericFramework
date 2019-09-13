@@ -44,11 +44,12 @@
 
         <ImageView
             android:id="@+id/iv_first_photo"
+            url="@{data.firstImageUrl}"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintDimensionRatio="w,4:3"
+            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toStartOf="@id/iv_second_photo"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,11 +58,14 @@
 
         <ImageView
             android:id="@+id/iv_second_photo"
+            error="@drawable/ic_launcher_background"
+            placeholder="@drawable/ic_launcher_background"
+            url="@{data.secondImageUrl}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@id/iv_first_photo"
-            app:layout_constraintDimensionRatio="w,4:3"
+            app:layout_constraintDimensionRatio="w,16:9"
             app:layout_constraintEnd_toStartOf="@id/iv_third_photo"
             app:layout_constraintStart_toEndOf="@id/iv_first_photo"
             app:layout_constraintTop_toTopOf="@id/iv_first_photo"
@@ -69,6 +73,9 @@
 
         <ImageView
             android:id="@+id/iv_third_photo"
+            error="@drawable/ic_launcher_background"
+            placeholder="@drawable/ic_launcher_background"
+            url="@{data.thirdImageUrl}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

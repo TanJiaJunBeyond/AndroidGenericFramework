@@ -10,7 +10,7 @@ import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.ActivityPersonalCenterBinding
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
-import com.tanjiajun.androidgenericframework.ui.user.viewModel.PersonalCenterViewModel
+import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel
 import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 
 /**

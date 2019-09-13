@@ -6,22 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tanjiajun.androidgenericframework.EXTRA_POSITION
 import com.tanjiajun.androidgenericframework.FRAGMENT_TAG_ORDER
 import com.tanjiajun.androidgenericframework.R
-import com.tanjiajun.androidgenericframework.data.model.order.response.OrderData
 import com.tanjiajun.androidgenericframework.databinding.FragmentOrderBinding
 import com.tanjiajun.androidgenericframework.ui.BaseFragment
 import com.tanjiajun.androidgenericframework.ui.order.adapter.OrderAdapter
+import com.tanjiajun.androidgenericframework.ui.order.viewmodel.OrderViewModel
+import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 
 /**
  * Created by TanJiaJun on 2019-09-01.
  */
 class OrderFragment : BaseFragment() {
 
-    private var position = 0
+    private var position = DEFAULT_POSITION
     private lateinit var binding: FragmentOrderBinding
+    private val viewModel by viewModels<OrderViewModel> { getViewModelFactory() }
     private var adapter = OrderAdapter()
 
     override fun getLayoutResource(): Int = R.layout.fragment_order
@@ -30,7 +33,7 @@ class OrderFragment : BaseFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        arguments?.run { position = getInt(EXTRA_POSITION, 0) }
+        arguments?.run { position = getInt(EXTRA_POSITION, DEFAULT_POSITION) }
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -53,26 +56,10 @@ class OrderFragment : BaseFragment() {
             }
 
     private fun initData() =
-            adapter.setItems(mutableListOf<OrderData>()
-                    .apply {
-                        for (i in 0 until 50) {
-                            add(OrderData(
-                                    id = i.toLong(),
-                                    title = "第${position}个订单",
-                                    orderNumber = i.toString(),
-                                    address = "地址$i",
-                                    date = "2019年9月7日",
-                                    weight = 100,
-                                    noteInformation = "谭嘉俊",
-                                    firstImageUrl = COMMON_IMAGE_URL,
-                                    secondImageUrl = COMMON_IMAGE_URL,
-                                    thirdImageUrl = COMMON_IMAGE_URL
-                            ))
-                        }
-                    })
+            adapter.setItems(viewModel.getOrderList(position))
 
     companion object {
-        private const val COMMON_IMAGE_URL = "https://qa-media-api.xogrp.com/images/3932fa03-2437-4ca2-b413-b88ac261bc0f"
+        private const val DEFAULT_POSITION = 0
 
         fun newInstance(position: Int): OrderFragment =
                 OrderFragment().apply {

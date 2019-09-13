@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.PersonalCenterViewModel" />
+            type="com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel" />
 
         <variable
             name="handlers"
-            type="com.tanjiajun.androidgenericframework.ui.user.viewModel.PersonalCenterViewModel.Handlers" />
+            type="com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel.Handlers" />
 
     </data>
 
