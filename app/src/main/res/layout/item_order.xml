@@ -58,8 +58,7 @@
 
         <ImageView
             android:id="@+id/iv_second_photo"
-            error="@drawable/ic_launcher_background"
-            placeholder="@drawable/ic_launcher_background"
+            placeholder="@{@drawable/ic_launcher_background}"
             url="@{data.secondImageUrl}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,8 +72,8 @@
 
         <ImageView
             android:id="@+id/iv_third_photo"
-            error="@drawable/ic_launcher_background"
-            placeholder="@drawable/ic_launcher_background"
+            error="@{@drawable/ic_launcher_background}"
+            placeholder="@{@drawable/ic_launcher_background}"
             url="@{data.thirdImageUrl}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

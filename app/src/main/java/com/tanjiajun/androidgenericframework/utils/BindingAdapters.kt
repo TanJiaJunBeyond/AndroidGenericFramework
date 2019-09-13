@@ -1,5 +1,6 @@
 package com.tanjiajun.androidgenericframework.utils
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
@@ -15,10 +16,10 @@ fun Toolbar.setOnNavigationIconClickListener(listener: View.OnClickListener) =
         setNavigationOnClickListener(listener)
 
 @BindingAdapter(value = ["url", "placeholder", "error"], requireAll = false)
-fun ImageView.loadImage(url: String?, placeholder: Int?, error: Int?) =
+fun ImageView.loadImage(url: String?, placeholder: Drawable?, error: Drawable?) =
         Glide
                 .with(context)
                 .load(url)
-                .placeholder(placeholder ?: R.mipmap.ic_launcher)
-                .error(error ?: R.mipmap.ic_launcher)
+                .placeholder(placeholder ?: context.getDrawable(R.mipmap.ic_launcher))
+                .error(error ?: context.getDrawable(R.mipmap.ic_launcher))
                 .into(this)
