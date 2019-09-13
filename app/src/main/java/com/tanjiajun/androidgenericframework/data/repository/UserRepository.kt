@@ -23,7 +23,7 @@ class UserRepository private constructor(
             withContext(Dispatchers.IO) {
                 // TODO 因为后端原因，暂时缓存本地数据
                 dao.cacheUserInfo(gsonFromJson("{\n" +
-                        "    \"headPortraitUrl\":\"\",\n" +
+                        "    \"headPortraitUrl\":\"https://qa-media-api.xogrp.com/images/3932fa03-2437-4ca2-b413-b88ac261bc0f\",\n" +
                         "    \"userName\":\"谭嘉俊\",\n" +
                         "    \"gender\":\"男\",\n" +
                         "    \"age\":25\n" +

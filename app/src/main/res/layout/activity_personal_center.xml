@@ -23,6 +23,9 @@
 
         <ImageView
             android:id="@+id/iv_head_portrait"
+            error="@{@drawable/ic_default_head_portrait}"
+            placeholder="@{@drawable/ic_default_head_portrait}"
+            url="@{viewModel.headPortraitUrl}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -30,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_line"
-            tools:background="@mipmap/ic_launcher" />
+            tools:background="@drawable/ic_default_head_portrait" />
 
         <TextView
             android:id="@+id/tv_user_name"
