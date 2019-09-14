@@ -6,6 +6,8 @@ import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.tanjiajun.androidgenericframework.R
 
 /**
@@ -22,4 +24,5 @@ fun ImageView.loadImage(url: String?, placeholder: Drawable?, error: Drawable?) 
                 .load(url)
                 .placeholder(placeholder ?: context.getDrawable(R.mipmap.ic_launcher))
                 .error(error ?: context.getDrawable(R.mipmap.ic_launcher))
+                .transition(DrawableTransitionOptions.withCrossFade(DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()))
                 .into(this)

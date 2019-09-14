@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkApplication
+import com.google.android.material.snackbar.Snackbar
 import com.tanjiajun.androidgenericframework.FRAGMENT_TAG_LOGIN
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.FragmentLoginBinding
@@ -18,6 +19,9 @@ import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
 import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.startActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * Created by TanJiaJun on 2019-07-29.
@@ -47,32 +51,43 @@ class LoginFragment
     private fun observe() =
             with(viewModel) {
                 loginSuccess.observe(this@LoginFragment, Observer {
-                    if (it) {
-                        startActivity<MainActivity>()
-                        activity?.finish()
+                    GlobalScope.launch {
+                        delay(3000)
+
+                        if (it) {
+                            startActivity<MainActivity>()
+                            activity?.finish()
+                        }
                     }
                 })
 
-                errorMessage.observe(this@LoginFragment, Observer {
-                    Toast.makeText(AndroidGenericFrameworkApplication.context, it, Toast.LENGTH_SHORT).show()
+                errorMessage.observe(this@LoginFragment, Observer { message ->
+                    view?.let { view ->
+                        context?.let { context ->
+                            Snackbar
+                                    .make(view, message, Snackbar.LENGTH_LONG)
+                                    .setActionTextColor(ContextCompat.getColor(context, R.color.main_color))
+                                    .setAction(R.string.cancel) {
+                                        Toast.makeText(context, R.string.cancel, Toast.LENGTH_LONG).show()
+                                    }
+                                    .show()
+                        }
+                    }
                 })
             }
 
-    override fun onPhoneNumberAfterTextChanged(editable: Editable) {
-        viewModel.checkLoginEnable()
-    }
+    override fun onPhoneNumberAfterTextChanged(editable: Editable) =
+            viewModel.checkLoginEnable()
 
-    override fun onPasswordAfterTextChanged(editable: Editable) {
-        viewModel.checkLoginEnable()
-    }
+    override fun onPasswordAfterTextChanged(editable: Editable) =
+            viewModel.checkLoginEnable()
 
     override fun onLoginClick(view: View) {
         viewModel.login()
     }
 
     companion object {
-        fun newInstance() =
-                LoginFragment()
+        fun newInstance() = LoginFragment()
     }
 
 }
