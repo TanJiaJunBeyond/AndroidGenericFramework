@@ -17,11 +17,11 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        onNavigationIconClick="@{handlers::onNavigationIconClick}"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:onNavigationIconClick="@{handlers::onNavigationIconClick}"
         app:title="@{viewModel.title}"
         app:titleTextColor="@color/text_black"
         tools:title="标题">
