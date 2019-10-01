@@ -7,9 +7,6 @@ import com.google.android.material.tabs.TabLayout
  */
 private typealias OnTabCallback = (tab: TabLayout.Tab?) -> Unit
 
-fun registerOnTabSelectedListener(function: OnTabSelectedListenerBuilder.() -> Unit) =
-        OnTabSelectedListenerBuilder().also(function)
-
 class OnTabSelectedListenerBuilder : TabLayout.OnTabSelectedListener {
 
     private var onTabReselectedCallback: OnTabCallback? = null
@@ -38,3 +35,6 @@ class OnTabSelectedListenerBuilder : TabLayout.OnTabSelectedListener {
     }
 
 }
+
+fun registerOnTabSelectedListener(function: OnTabSelectedListenerBuilder.() -> Unit) =
+        OnTabSelectedListenerBuilder().also(function)
