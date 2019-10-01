@@ -27,7 +27,10 @@ import com.tanjiajun.androidgenericframework.utils.startActivity
 class MainActivity
     : BaseActivity(), MainViewModel.Handlers {
 
-    private val binding by lazy { DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main) }
+    private val binding by lazy {
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+    }
+
     private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
 
     private val tlOrder: TabLayout
