@@ -3,14 +3,14 @@ package com.tanjiajun.androidgenericframework.ui.user.viewmodel
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tanjiajun.androidgenericframework.data.repository.UserRepository
+import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 
 /**
  * Created by TanJiaJun on 2019-08-24.
  */
 class PersonalCenterViewModel(
-        private val repository: UserRepository
+        private val repository: UserInfoRepository
 ) : BaseViewModel() {
 
     private val _headPortraitUrl = MutableLiveData<String>()

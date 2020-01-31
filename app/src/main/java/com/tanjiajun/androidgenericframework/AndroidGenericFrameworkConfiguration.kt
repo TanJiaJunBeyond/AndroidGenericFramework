@@ -7,6 +7,6 @@ object AndroidGenericFrameworkConfiguration {
 
     const val CONNECT_TIMEOUT = 20000L
     const val READ_TIMEOUT = 20000L
-    const val HOST = "www.ctrash.com"
+    const val HOST = "api.github.com"
 
 }

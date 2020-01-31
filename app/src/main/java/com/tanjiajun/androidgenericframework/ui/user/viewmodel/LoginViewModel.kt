@@ -4,14 +4,14 @@ import android.text.Editable
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tanjiajun.androidgenericframework.data.repository.UserRepository
+import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 
 /**
  * Created by TanJiaJun on 2019-08-02.
  */
 class LoginViewModel(
-        private val repository: UserRepository
+        private val repository: UserInfoRepository
 ) : BaseViewModel() {
 
     val phoneNumber = MutableLiveData<String>()

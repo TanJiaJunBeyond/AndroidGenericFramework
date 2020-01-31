@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 /**
  * Created by TanJiaJun on 2019-07-31.
  */
-class UserRepository private constructor(
+class UserInfoRepository private constructor(
         private val network: UserNetwork,
         private val dao: UserDao
 ) {
@@ -34,20 +34,19 @@ class UserRepository private constructor(
     fun getUserInfo(): UserInfoData? =
             dao.getCachedUserInfo()
 
-    fun logout() {
-        dao.clearUserInfoCache()
-    }
+    fun logout() =
+            dao.clearUserInfoCache() ?: Unit
 
     companion object {
         @Volatile
-        private var instance: UserRepository? = null
+        private var instance: UserInfoRepository? = null
 
         fun getInstance(
                 network: UserNetwork,
                 dao: UserDao
-        ): UserRepository =
+        ): UserInfoRepository =
                 instance ?: synchronized(this) {
-                    instance ?: UserRepository(network, dao).also { instance = it }
+                    instance ?: UserInfoRepository(network, dao).also { instance = it }
                 }
     }
 

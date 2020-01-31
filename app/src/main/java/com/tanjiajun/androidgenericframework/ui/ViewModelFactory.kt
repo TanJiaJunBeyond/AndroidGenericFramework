@@ -2,7 +2,7 @@ package com.tanjiajun.androidgenericframework.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.tanjiajun.androidgenericframework.data.repository.UserRepository
+import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
 import com.tanjiajun.androidgenericframework.ui.order.viewmodel.OrderViewModel
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
@@ -13,7 +13,7 @@ import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterVie
  */
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
-        private val userRepository: UserRepository
+        private val userRepository: UserInfoRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =

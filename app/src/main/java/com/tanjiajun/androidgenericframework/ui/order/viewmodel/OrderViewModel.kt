@@ -1,14 +1,14 @@
 package com.tanjiajun.androidgenericframework.ui.order.viewmodel
 
 import com.tanjiajun.androidgenericframework.data.model.order.response.OrderData
-import com.tanjiajun.androidgenericframework.data.repository.UserRepository
+import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 
 /**
  * Created by TanJiaJun on 2019-09-13.
  */
 class OrderViewModel(
-        private val repository: UserRepository
+        private val repository: UserInfoRepository
 ) : BaseViewModel() {
 
     fun getOrderList(position: Int): List<OrderData> =
