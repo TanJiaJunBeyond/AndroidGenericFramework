@@ -4,6 +4,9 @@ import com.tanjiajun.androidgenericframework.data.dao.UserDao
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.UserNetwork
 import com.tanjiajun.androidgenericframework.utils.gsonFromJson
+import com.tanjiajun.mmkvdemo.utils.boolean
+import com.tanjiajun.mmkvdemo.utils.string
+import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -12,8 +15,14 @@ import kotlinx.coroutines.withContext
  */
 class UserInfoRepository private constructor(
         private val network: UserNetwork,
-        private val dao: UserDao
+        private val dao: UserDao,
+        private val mmkv: MMKV
 ) {
+
+    var accessToken by mmkv.string("user_access_token")
+    var username by mmkv.string("username")
+    var password by mmkv.string("password")
+    var isAutoLogin by mmkv.boolean("is_auto_login")
 
     fun isUserInfoCached(): Boolean =
             dao.getCachedUserInfo() != null
@@ -43,10 +52,11 @@ class UserInfoRepository private constructor(
 
         fun getInstance(
                 network: UserNetwork,
-                dao: UserDao
+                dao: UserDao,
+                mmkv: MMKV
         ): UserInfoRepository =
                 instance ?: synchronized(this) {
-                    instance ?: UserInfoRepository(network, dao).also { instance = it }
+                    instance ?: UserInfoRepository(network, dao, mmkv).also { instance = it }
                 }
     }
 
