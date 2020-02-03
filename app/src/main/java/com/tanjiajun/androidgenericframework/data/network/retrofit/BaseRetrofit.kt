@@ -1,5 +1,6 @@
 package com.tanjiajun.androidgenericframework.data.network.retrofit
 
+import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkApplication
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -32,6 +33,9 @@ abstract class BaseRetrofit {
             OkHttpClient.Builder()
                     .connectTimeout(connectTimeout, TimeUnit.MILLISECONDS)
                     .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
+                    .addInterceptor(BasicAuthInterceptor(
+                            dao = AndroidGenericFrameworkApplication.instance.userDao
+                    ))
                     .addInterceptor { chain ->
                         chain.request().newBuilder().let {
                             addHeader(it)
