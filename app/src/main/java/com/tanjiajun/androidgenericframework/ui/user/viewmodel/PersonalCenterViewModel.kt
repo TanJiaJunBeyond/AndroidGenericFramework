@@ -29,15 +29,15 @@ class PersonalCenterViewModel(
         _title.value = title
     }
 
-    fun showInfo() =
-            repository
-                    .getUserInfo()
-                    ?.run {
-                        _headPortraitUrl.value = headPortraitUrl
-                        _userName.value = userName
-                        _gender.value = gender
-                        _age.value = age.toString()
-                    }
+    fun showInfo() = Unit
+//            repository
+//                    .getUserInfo()
+//                    ?.run {
+//                        _headPortraitUrl.value = headPortraitUrl
+//                        _userName.value = userName
+//                        _gender.value = gender
+//                        _age.value = age.toString()
+//                    }
 
     fun logout() =
             repository.logout()

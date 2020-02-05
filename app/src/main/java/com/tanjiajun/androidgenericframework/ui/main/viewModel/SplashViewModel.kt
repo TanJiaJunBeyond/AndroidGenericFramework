@@ -10,6 +10,6 @@ class SplashViewModel(
         private val repository: UserInfoRepository
 ) : BaseViewModel() {
 
-    fun isLogin(): Boolean = repository.isUserInfoCached()
+    fun isLogin(): Boolean = false
 
 }

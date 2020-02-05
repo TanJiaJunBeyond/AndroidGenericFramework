@@ -1,7 +1,6 @@
 package com.tanjiajun.androidgenericframework.data.network
 
 import com.tanjiajun.androidgenericframework.data.model.user.request.LoginRequestData
-import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.retrofit.UserRetrofit
 
 /**
@@ -11,8 +10,11 @@ class UserNetwork private constructor() : BaseNetwork() {
 
     private val userService = UserRetrofit.instance.userService
 
-    suspend fun login(phoneNumber: String, password: String) =
-            userService.login(LoginRequestData(phoneNumber, password)).await(UserInfoData::class.java)
+    suspend fun authorizations() =
+            userService.authorizations(LoginRequestData.generate())
+
+    suspend fun fetchUserInfo() =
+            userService.fetchUserInfo()
 
     companion object {
         val instance by lazy { UserNetwork() }

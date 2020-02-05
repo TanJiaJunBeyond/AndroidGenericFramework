@@ -8,7 +8,7 @@ import com.tanjiajun.androidgenericframework.ui.ViewModelFactory
 /**
  * Created by TanJiaJun on 2019-08-07.
  */
-inline fun <reified T : BaseActivity> Fragment.startActivity() =
+inline fun <reified T : BaseActivity<*>> Fragment.startActivity() =
         startActivity(android.content.Intent(context, T::class.java))
 
 fun Fragment.getViewModelFactory(): ViewModelFactory =

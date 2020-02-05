@@ -3,7 +3,6 @@ package com.tanjiajun.androidgenericframework.ui.main.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
@@ -24,12 +23,9 @@ import com.tanjiajun.androidgenericframework.utils.startActivity
 /**
  * Created by TanJiaJun on 2019-07-22.
  */
-class MainActivity
-    : BaseActivity(), MainViewModel.Handlers {
+class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers {
 
-    private val binding by lazy {
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-    }
+    override val layoutRes: Int = R.layout.activity_main
 
     private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
 

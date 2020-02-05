@@ -2,10 +2,6 @@ package com.tanjiajun.androidgenericframework.ui.order.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tanjiajun.androidgenericframework.EXTRA_POSITION
@@ -20,14 +16,13 @@ import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 /**
  * Created by TanJiaJun on 2019-09-01.
  */
-class OrderFragment : BaseFragment() {
+class OrderFragment : BaseFragment<FragmentOrderBinding>() {
+
+    override val layoutRes: Int = R.layout.fragment_order
 
     private var position = DEFAULT_POSITION
-    private lateinit var binding: FragmentOrderBinding
     private val viewModel by viewModels<OrderViewModel> { getViewModelFactory() }
     private var adapter = OrderAdapter()
-
-    override fun getLayoutResource(): Int = R.layout.fragment_order
 
     override fun getTransactionTag(): String = FRAGMENT_TAG_ORDER
 
@@ -35,13 +30,6 @@ class OrderFragment : BaseFragment() {
         super.onAttach(context)
         arguments?.run { position = getInt(EXTRA_POSITION, DEFAULT_POSITION) }
     }
-
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? =
-            DataBindingUtil.inflate<FragmentOrderBinding>(inflater, getLayoutResource(), container, false)
-                    .also { binding = it }
-                    .root
 
     override fun onResume() {
         super.onResume()

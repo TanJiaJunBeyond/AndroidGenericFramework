@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tanjiajun.androidgenericframework.data.network.ExceptionHandler
+import com.tanjiajun.androidgenericframework.data.network.ResponseThrowable
 import com.tanjiajun.androidgenericframework.utils.SingleLiveEvent
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 
 /**
  * Created by TanJiaJun on 2019-08-02.
@@ -29,20 +29,45 @@ abstract class BaseViewModel : ViewModel() {
     fun <T> launchFlow(block: suspend () -> T): Flow<T> =
             flow { emit(block()) }
 
-    protected fun launch(block: suspend () -> Unit,
-                         error: suspend (Throwable) -> Unit) =
-            viewModelScope.launch {
+    private suspend fun <T> handle(block: suspend CoroutineScope.() -> T,
+                                   error: suspend CoroutineScope.(ResponseThrowable) -> Unit,
+                                   complete: suspend CoroutineScope.() -> Unit) =
+            coroutineScope {
                 try {
                     block()
                 } catch (throwable: Throwable) {
-                    error(throwable)
+                    error(ExceptionHandler.handleException(throwable))
+                } finally {
+                    complete()
                 }
             }
 
+    fun <T> launch(isShowDialog: Boolean,
+                   block: suspend CoroutineScope.() -> T,
+                   error: suspend CoroutineScope.(ResponseThrowable) -> Unit = {
+                       defaultUI.showToastEvent.postValue("${it.code}:${it.errorMessage}")
+                   },
+                   complete: suspend CoroutineScope.() -> Unit) {
+        if (isShowDialog) defaultUI.showDialogEvent.call()
+        launchUI {
+            handle(
+                    block = withContext(Dispatchers.IO) { block },
+                    error = { error(it) },
+                    complete = {
+                        defaultUI.dismissDialogEvent.call()
+                        complete()
+                    }
+            )
+        }
+    }
+
     inner class UIChange {
-        val toastEvent by lazy { SingleLiveEvent<String>() }
+
+        val showToastEvent by lazy { SingleLiveEvent<String>() }
+        val showSnackbar by lazy { SingleLiveEvent<String>() }
         val showDialogEvent by lazy { SingleLiveEvent<Boolean>() }
         val dismissDialogEvent by lazy { SingleLiveEvent<Boolean>() }
+
     }
 
     interface Handlers {

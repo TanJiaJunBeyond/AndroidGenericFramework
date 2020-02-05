@@ -1,6 +1,5 @@
 package com.tanjiajun.androidgenericframework
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration.MMKV_CRYPT_KEY
@@ -15,20 +14,22 @@ import com.tencent.mmkv.MMKV
  */
 class AndroidGenericFrameworkApplication : MultiDexApplication() {
 
-    val userRepository: UserInfoRepository
-        get() = UserInfoRepository.getInstance(
-                network = UserNetwork.instance,
-                dao = UserDao(),
-                mmkv = MMKV.mmkvWithID(MMKV_ID, MMKV.SINGLE_PROCESS_MODE, MMKV_CRYPT_KEY)
-        )
+    lateinit var userDao: UserDao
+    lateinit var userRepository: UserInfoRepository
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         context = this
+
+        MMKV.initialize(this)
+
+        userDao = UserDao(MMKV.mmkvWithID(MMKV_ID, MMKV.SINGLE_PROCESS_MODE, MMKV_CRYPT_KEY))
+        userRepository = UserInfoRepository.getInstance(network = UserNetwork.instance, dao = userDao)
     }
 
     companion object {
-        @SuppressLint("StaticFieldLeak")
+        lateinit var instance: AndroidGenericFrameworkApplication
         lateinit var context: Context
     }
 

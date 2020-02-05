@@ -2,12 +2,9 @@ package com.tanjiajun.androidgenericframework.ui.user.fragment
 
 import android.os.Bundle
 import android.text.Editable
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
@@ -19,34 +16,27 @@ import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
 import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.startActivity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * Created by TanJiaJun on 2019-07-29.
  */
 class LoginFragment
-    : BaseFragment(),
+    : BaseFragment<FragmentLoginBinding>(),
         LoginViewModel.Handlers {
+
+    override val layoutRes: Int = R.layout.fragment_login
 
     private val viewModel by viewModels<LoginViewModel> { getViewModelFactory() }
 
-    override fun getLayoutResource(): Int = R.layout.fragment_login
-
     override fun getTransactionTag(): String = FRAGMENT_TAG_LOGIN
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? =
-            DataBindingUtil.inflate<FragmentLoginBinding>(inflater, getLayoutResource(), container, false)
-                    .apply {
-                        lifecycleOwner = this@LoginFragment
-                        viewModel = this@LoginFragment.viewModel
-                        handlers = this@LoginFragment
-                    }
-                    .also { observe() }
-                    .root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) =
+            with(binding) {
+                lifecycleOwner = this@LoginFragment
+                viewModel = this@LoginFragment.viewModel
+                handlers = this@LoginFragment
+            }.also { observe() }
 
     private fun observe() =
             with(viewModel) {
@@ -76,12 +66,14 @@ class LoginFragment
                 })
             }
 
-    override fun onPhoneNumberAfterTextChanged(editable: Editable) =
+    override fun onUsernameAfterTextChanged(editable: Editable) =
             viewModel.checkLoginEnable()
 
     override fun onPasswordAfterTextChanged(editable: Editable) =
             viewModel.checkLoginEnable()
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     override fun onLoginClick(view: View) {
         viewModel.login()
     }

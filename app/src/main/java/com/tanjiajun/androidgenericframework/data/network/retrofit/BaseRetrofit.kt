@@ -36,12 +36,6 @@ abstract class BaseRetrofit {
                     .addInterceptor(BasicAuthInterceptor(
                             dao = AndroidGenericFrameworkApplication.instance.userDao
                     ))
-                    .addInterceptor { chain ->
-                        chain.request().newBuilder().let {
-                            addHeader(it)
-                            chain.proceed(it.build())
-                        }
-                    }
 
     open fun addHeader(builder: Request.Builder) =
             builder.apply {

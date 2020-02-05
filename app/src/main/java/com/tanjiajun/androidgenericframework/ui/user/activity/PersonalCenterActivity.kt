@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import com.tanjiajun.androidgenericframework.EXTRA_LOGOUT
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.ActivityPersonalCenterBinding
@@ -17,16 +16,15 @@ import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
  * Created by TanJiaJun on 2019-08-24.
  */
 class PersonalCenterActivity
-    : BaseActivity(), PersonalCenterViewModel.Handlers {
+    : BaseActivity<ActivityPersonalCenterBinding>(), PersonalCenterViewModel.Handlers {
+
+    override val layoutRes: Int = R.layout.activity_personal_center
 
     private val viewModel by viewModels<PersonalCenterViewModel> { getViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<ActivityPersonalCenterBinding>(
-                this,
-                R.layout.activity_personal_center
-        ).apply {
+        with(binding) {
             lifecycleOwner = this@PersonalCenterActivity
             viewModel = this@PersonalCenterActivity.viewModel
             handlers = this@PersonalCenterActivity
