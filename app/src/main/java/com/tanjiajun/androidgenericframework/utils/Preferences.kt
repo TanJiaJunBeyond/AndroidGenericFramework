@@ -1,4 +1,4 @@
-package com.tanjiajun.mmkvdemo.utils
+package com.tanjiajun.androidgenericframework.utils
 
 import android.os.Parcelable
 import com.tencent.mmkv.MMKV

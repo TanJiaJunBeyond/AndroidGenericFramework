@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.network.retrofit
+package com.tanjiajun.androidgenericframework.data.network
 
 import android.util.Base64
 import com.tanjiajun.androidgenericframework.data.dao.UserDao

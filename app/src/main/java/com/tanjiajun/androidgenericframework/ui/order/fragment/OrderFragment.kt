@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tanjiajun.androidgenericframework.EXTRA_POSITION
-import com.tanjiajun.androidgenericframework.FRAGMENT_TAG_ORDER
+import com.tanjiajun.androidgenericframework.FRAGMENT_TAG_REPOSITORY
 import com.tanjiajun.androidgenericframework.R
-import com.tanjiajun.androidgenericframework.databinding.FragmentOrderBinding
+import com.tanjiajun.androidgenericframework.databinding.FragmentRepositoryBinding
 import com.tanjiajun.androidgenericframework.ui.BaseFragment
 import com.tanjiajun.androidgenericframework.ui.order.adapter.OrderAdapter
 import com.tanjiajun.androidgenericframework.ui.order.viewmodel.OrderViewModel
@@ -16,15 +16,15 @@ import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 /**
  * Created by TanJiaJun on 2019-09-01.
  */
-class OrderFragment : BaseFragment<FragmentOrderBinding>() {
+class OrderFragment : BaseFragment<FragmentRepositoryBinding>() {
 
-    override val layoutRes: Int = R.layout.fragment_order
+    override val layoutRes: Int = R.layout.fragment_repository
 
     private var position = DEFAULT_POSITION
     private val viewModel by viewModels<OrderViewModel> { getViewModelFactory() }
     private var adapter = OrderAdapter()
 
-    override fun getTransactionTag(): String = FRAGMENT_TAG_ORDER
+    override fun getTransactionTag(): String = FRAGMENT_TAG_REPOSITORY
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,7 +38,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
     }
 
     private fun initUI() =
-            binding.rvOrder.run {
+            binding.rvRepository.run {
                 layoutManager = LinearLayoutManager(context)
                 adapter = this@OrderFragment.adapter
             }

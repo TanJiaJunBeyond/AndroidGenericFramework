@@ -30,11 +30,12 @@ abstract class BaseViewModel : ViewModel() {
             flow { emit(block()) }
 
     private suspend fun <T> handle(block: suspend CoroutineScope.() -> T,
+                                   success: suspend CoroutineScope.(T) -> Unit,
                                    error: suspend CoroutineScope.(ResponseThrowable) -> Unit,
                                    complete: suspend CoroutineScope.() -> Unit) =
             coroutineScope {
                 try {
-                    block()
+                    success(block())
                 } catch (throwable: Throwable) {
                     error(ExceptionHandler.handleException(throwable))
                 } finally {
@@ -44,7 +45,8 @@ abstract class BaseViewModel : ViewModel() {
 
     fun <T> launch(isShowDialog: Boolean,
                    block: suspend CoroutineScope.() -> T,
-                   error: suspend CoroutineScope.(ResponseThrowable) -> Unit = {
+                   success: (T) -> Unit,
+                   error: CoroutineScope.(ResponseThrowable) -> Unit = {
                        defaultUI.showToastEvent.postValue("${it.code}:${it.errorMessage}")
                    },
                    complete: suspend CoroutineScope.() -> Unit) {
@@ -52,6 +54,7 @@ abstract class BaseViewModel : ViewModel() {
         launchUI {
             handle(
                     block = withContext(Dispatchers.IO) { block },
+                    success = { coroutineScope { success(it) } },
                     error = { error(it) },
                     complete = {
                         defaultUI.dismissDialogEvent.call()

@@ -5,9 +5,9 @@ import android.preference.PreferenceManager
 import com.google.gson.Gson
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkApplication
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
+import com.tanjiajun.androidgenericframework.utils.boolean
 import com.tanjiajun.androidgenericframework.utils.gsonFromJson
-import com.tanjiajun.mmkvdemo.utils.boolean
-import com.tanjiajun.mmkvdemo.utils.string
+import com.tanjiajun.androidgenericframework.utils.string
 import com.tencent.mmkv.MMKV
 
 /**

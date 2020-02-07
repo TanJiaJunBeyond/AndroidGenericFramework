@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.network.retrofit
+package com.tanjiajun.androidgenericframework.data.network
 
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkApplication
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration

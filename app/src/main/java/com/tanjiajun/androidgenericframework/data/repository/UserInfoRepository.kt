@@ -1,7 +1,7 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
 import com.tanjiajun.androidgenericframework.data.dao.UserDao
-import com.tanjiajun.androidgenericframework.data.network.UserNetwork
+import com.tanjiajun.androidgenericframework.data.network.user.UserNetwork
 
 /**
  * Created by TanJiaJun on 2019-07-31.
