@@ -58,7 +58,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:onClick="@{handlers::onStateClick}"
-            android:text="@{viewModel.added ? @string/remove : @string/add}"
+            android:text="@string/add"
             android:textColor="@color/text_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,16 +66,16 @@
             tools:text="@string/add" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_order"
+            android:id="@+id/vp_repository"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tl_order" />
+            app:layout_constraintTop_toBottomOf="@id/tl_repository" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_order"
+            android:id="@+id/tl_repository"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -85,6 +85,7 @@
             app:tabBackground="@color/white"
             app:tabIndicatorColor="@color/main_color"
             app:tabIndicatorHeight="3dp"
+            app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/main_color"
             app:tabTextColor="@color/text_light_grey" />
 

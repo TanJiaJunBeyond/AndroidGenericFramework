@@ -80,7 +80,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="10dp"
-            android:text="@{data.forkCount}"
+            android:text="@{String.valueOf(data.forkCount)}"
             android:textColor="@color/text_dark_grey"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -94,10 +94,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/fork_icon"
+            android:src="@drawable/ic_fork"
             app:layout_constraintBottom_toBottomOf="@id/tv_fork_count"
             app:layout_constraintEnd_toStartOf="@id/tv_fork_count"
-            app:layout_constraintTop_toTopOf="@id/tv_fork_count"
-            tools:src="@drawable/ic_fork" />
+            app:layout_constraintTop_toTopOf="@id/tv_fork_count" />
 
         <TextView
             android:id="@+id/tv_star_count"
@@ -106,7 +106,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            android:text="@{data.starCount}"
+            android:text="@{String.valueOf(data.starCount)}"
             android:textColor="@color/text_dark_grey"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -119,10 +119,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/star_icon"
+            android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="@id/tv_star_count"
             app:layout_constraintEnd_toStartOf="@id/tv_star_count"
-            app:layout_constraintTop_toTopOf="@id/tv_star_count"
-            tools:src="@drawable/ic_star" />
+            app:layout_constraintTop_toTopOf="@id/tv_star_count" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

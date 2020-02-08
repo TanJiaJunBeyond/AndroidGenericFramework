@@ -33,8 +33,6 @@ enum class Language(val languageName: String, @DrawableRes val iconRes: Int) {
     OTHER("Other", R.drawable.ic_circle_other);
 
     companion object {
-        val LANGUAGES = listOf(KOTLIN, JAVA, SWIFT, JAVA_SCRIPT, PYTHON, GO, CSS, PHP, RUBY, C_PLUS_PLUS, C, OTHER)
-
         fun of(language: String): Language =
                 when (language) {
                     KOTLIN.languageName -> KOTLIN

@@ -138,9 +138,10 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
                     }
 
     fun setItems(items: List<D>) =
-            this.items.run {
-                clear()
+            with(this.items) {
+                if (isNotEmpty()) clear()
                 addAll(findItemsHasMatchViewType(items))
+                notifyDataSetChanged()
             }
 
     fun addItems(items: List<D>) =
@@ -148,10 +149,5 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
                 addAll(findItemsHasMatchViewType(items))
                 notifyItemRangeInserted(headerCount + size, items.size)
             }
-
-    fun updateAllItems(items: List<D>) {
-        setItems(items)
-        notifyDataSetChanged()
-    }
 
 }

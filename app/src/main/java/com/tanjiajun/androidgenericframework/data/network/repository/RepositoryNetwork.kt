@@ -13,15 +13,15 @@ import java.time.LocalDateTime
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
-class RepositoryNetwork {
+class RepositoryNetwork private constructor() {
 
     private val service by lazy { RepositoryRetrofit().service }
 
-    suspend fun fetchRepositories(language: String,
+    suspend fun fetchRepositories(languageName: String,
                                   fromDateTime: LocalDateTime): List<RepositoryData> =
             service
                     .fetchRepositories(
-                            query = "language:${language} created:>${fromDateTime.format(dateFormatForRepository())}"
+                            query = "language:${languageName} created:>${fromDateTime.format(dateFormatForRepository())}"
                     )
                     .items
                     ?.map { RepositoryMapper.toRepositoryData(it) }

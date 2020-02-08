@@ -1,6 +1,8 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
 import com.tanjiajun.androidgenericframework.data.dao.UserDao
+import com.tanjiajun.androidgenericframework.data.model.user.response.UserAccessTokenData
+import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.user.UserNetwork
 
 /**
@@ -17,10 +19,10 @@ class UserInfoRepository private constructor(
     fun isUserInfoCached(): Boolean =
             dao.getCachedUserInfo() != null
 
-    suspend fun authorizations() =
+    suspend fun authorizations(): UserAccessTokenData =
             network.authorizations()
 
-    suspend fun getUserInfo() =
+    suspend fun getUserInfo(): UserInfoData =
             network.fetchUserInfo()
 
     fun logout() =

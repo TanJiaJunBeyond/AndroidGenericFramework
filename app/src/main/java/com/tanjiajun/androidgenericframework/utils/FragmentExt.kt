@@ -12,4 +12,6 @@ inline fun <reified T : BaseActivity<*>> Fragment.startActivity() =
         startActivity(android.content.Intent(context, T::class.java))
 
 fun Fragment.getViewModelFactory(): ViewModelFactory =
-        ViewModelFactory((requireContext().applicationContext as AndroidGenericFrameworkApplication).userRepository)
+        with(requireContext().applicationContext as AndroidGenericFrameworkApplication) {
+            ViewModelFactory(userRepository, repositoryOfGitHubRepository)
+        }

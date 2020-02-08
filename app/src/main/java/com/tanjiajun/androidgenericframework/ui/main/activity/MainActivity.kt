@@ -3,9 +3,10 @@ package com.tanjiajun.androidgenericframework.ui.main.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -14,9 +15,10 @@ import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.ActivityMainBinding
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
-import com.tanjiajun.androidgenericframework.ui.order.fragment.OrderFragment
+import com.tanjiajun.androidgenericframework.ui.repository.fragment.RepositoryFragment
 import com.tanjiajun.androidgenericframework.ui.user.activity.PersonalCenterActivity
 import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity
+import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.registerOnTabSelectedListener
 import com.tanjiajun.androidgenericframework.utils.startActivity
 
@@ -27,21 +29,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers
 
     override val layoutRes: Int = R.layout.activity_main
 
-    private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
+    private val viewModel by viewModels<MainViewModel> { getViewModelFactory() }
 
-    private val tlOrder: TabLayout
-        get() = binding.tlOrder
+    private val tlRepository: TabLayout
+        get() = binding.tlRepository
 
-    private val vpOrder: ViewPager2
-        get() = binding.vpOrder
+    private val vpRepository: ViewPager2
+        get() = binding.vpRepository
 
-    private val list = mutableListOf<OrderFragment>().apply {
-        for (i in 0 until ORDER_ITEM_COUNT) {
-            add(OrderFragment.newInstance(i))
-        }
-    }
+    private lateinit var repositoryFragments: List<RepositoryFragment>
 
-    private val adapter by lazy { OrderFragmentStateAdapter(this@MainActivity, list) }
+    private lateinit var adapter: OrderFragmentStateAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,23 +50,36 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers
         }
 
         initUI()
+        initData()
     }
 
     private fun initUI() {
-        for (i in 0 until ORDER_ITEM_COUNT) {
-            tlOrder.addTab(tlOrder.newTab().setText("订单$i"))
+        repositoryFragments = mutableListOf<RepositoryFragment>().apply {
+            viewModel.getDefaultLanguageNames().forEach { add(RepositoryFragment.newInstance(it)) }
+        }
+        adapter = OrderFragmentStateAdapter(this, repositoryFragments)
+        viewModel.getDefaultLanguageNames().forEach {
+            tlRepository.addTab(tlRepository.newTab().setText(it))
         }
 
-        tlOrder.addOnTabSelectedListener(registerOnTabSelectedListener {
-            onTabSelected { vpOrder.currentItem = it?.position ?: 0 }
+        tlRepository.addOnTabSelectedListener(registerOnTabSelectedListener {
+            onTabSelected { vpRepository.currentItem = it?.position ?: 0 }
         })
 
-        vpOrder.adapter = adapter
-        vpOrder.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        vpRepository.adapter = adapter
+        vpRepository.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) =
-                    tlOrder.setScrollPosition(position, 0f, true)
+                    tlRepository.setScrollPosition(position, 0f, true)
         })
     }
+
+    private fun initData() =
+            with(viewModel) {
+                index.observe(this@MainActivity, Observer {
+                    tlRepository.addTab(tlRepository.newTab().setText(getLastLanguageName()))
+                    adapter.notifyItemInserted(getLastLanguageNameIndex())
+                })
+            }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
@@ -85,32 +96,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers
             startActivity<PersonalCenterActivity>()
 
     override fun onStateClick(view: View) {
-        if (viewModel.added.value == true) {
-            tlOrder.removeTabAt(ORDER_ITEM_COUNT)
-            list.removeAt(ORDER_ITEM_COUNT)
-            adapter.notifyItemRemoved(ORDER_ITEM_COUNT)
-            vpOrder.currentItem = 0
-        } else {
-            tlOrder.addTab(tlOrder.newTab().setText("订单$ORDER_ITEM_COUNT"))
-            list.add(OrderFragment.newInstance(ORDER_ITEM_COUNT))
-            adapter.notifyItemInserted(ORDER_ITEM_COUNT)
-            vpOrder.currentItem = ORDER_ITEM_COUNT
-        }
-
-        viewModel.changeState()
+        viewModel.addLanguageName()
     }
 
 }
 
 class OrderFragmentStateAdapter(fragmentActivity: FragmentActivity,
-                                private val list: List<OrderFragment>)
+                                private val repositoryFragments: List<RepositoryFragment>)
     : FragmentStateAdapter(fragmentActivity) {
 
     override fun createFragment(position: Int): Fragment =
-            list[position]
+            repositoryFragments[position]
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = repositoryFragments.size
 
 }
-
-const val ORDER_ITEM_COUNT = 4

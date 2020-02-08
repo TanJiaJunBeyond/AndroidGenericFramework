@@ -13,4 +13,6 @@ inline fun <reified T : BaseActivity<*>> Activity.startActivity() =
         startActivity(Intent(this, T::class.java))
 
 fun Activity.getViewModelFactory(): ViewModelFactory =
-        ViewModelFactory((applicationContext as AndroidGenericFrameworkApplication).userRepository)
+        with(applicationContext as AndroidGenericFrameworkApplication) {
+            ViewModelFactory(userRepository, repositoryOfGitHubRepository)
+        }

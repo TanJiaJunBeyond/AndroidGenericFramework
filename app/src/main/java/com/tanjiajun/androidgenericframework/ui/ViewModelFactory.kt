@@ -2,9 +2,12 @@ package com.tanjiajun.androidgenericframework.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
+import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
 import com.tanjiajun.androidgenericframework.ui.order.viewmodel.OrderViewModel
+import com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel
 
@@ -13,7 +16,8 @@ import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterVie
  */
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
-        private val userRepository: UserInfoRepository
+        private val userRepository: UserInfoRepository,
+        private val repositoryOfGitHubRepository: RepositoryOfGitHubRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
@@ -25,11 +29,17 @@ class ViewModelFactory(
                     isAssignableFrom(SplashViewModel::class.java) ->
                         SplashViewModel(userRepository)
 
+                    isAssignableFrom(MainViewModel::class.java) ->
+                        MainViewModel(repositoryOfGitHubRepository)
+
                     isAssignableFrom(PersonalCenterViewModel::class.java) ->
                         PersonalCenterViewModel(userRepository)
 
                     isAssignableFrom(OrderViewModel::class.java) ->
                         OrderViewModel(userRepository)
+
+                    isAssignableFrom(RepositoryViewModel::class.java) ->
+                        RepositoryViewModel(repositoryOfGitHubRepository)
 
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

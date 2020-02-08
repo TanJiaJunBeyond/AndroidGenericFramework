@@ -12,14 +12,14 @@ import retrofit2.http.POST
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
-class UserNetwork {
+class UserNetwork private constructor() {
 
     private val service by lazy { UserRetrofit().service }
 
-    suspend fun authorizations() =
+    suspend fun authorizations(): UserAccessTokenData =
             service.authorizations(LoginRequestData.generate())
 
-    suspend fun fetchUserInfo() =
+    suspend fun fetchUserInfo(): UserInfoData =
             service.fetchUserInfo()
 
     interface UserService {
