@@ -6,7 +6,6 @@ import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubR
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
-import com.tanjiajun.androidgenericframework.ui.order.viewmodel.OrderViewModel
 import com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel
@@ -34,9 +33,6 @@ class ViewModelFactory(
 
                     isAssignableFrom(PersonalCenterViewModel::class.java) ->
                         PersonalCenterViewModel(userRepository)
-
-                    isAssignableFrom(OrderViewModel::class.java) ->
-                        OrderViewModel(userRepository)
 
                     isAssignableFrom(RepositoryViewModel::class.java) ->
                         RepositoryViewModel(repositoryOfGitHubRepository)

@@ -13,31 +13,19 @@ class PersonalCenterViewModel(
         private val repository: UserInfoRepository
 ) : BaseViewModel() {
 
-    private val _headPortraitUrl = MutableLiveData<String>()
-    val headPortraitUrl: LiveData<String> = _headPortraitUrl
+    private val _avatarUrl = MutableLiveData<String>().apply {
+        value = repository.getAvatarUrl()
+    }
+    val avatarUrl: LiveData<String> = _avatarUrl
 
-    private val _userName = MutableLiveData<String>()
-    val userName: LiveData<String> = _userName
-
-    private val _gender = MutableLiveData<String>()
-    val gender: LiveData<String> = _gender
-
-    private val _age = MutableLiveData<String>()
-    val age: LiveData<String> = _age
+    private val _name = MutableLiveData<String>().apply {
+        value = repository.getName()
+    }
+    val name: LiveData<String> = _name
 
     fun showTitle(title: String) {
         _title.value = title
     }
-
-    fun showInfo() = Unit
-//            repository
-//                    .getUserInfo()
-//                    ?.run {
-//                        _headPortraitUrl.value = headPortraitUrl
-//                        _userName.value = userName
-//                        _gender.value = gender
-//                        _age.value = age.toString()
-//                    }
 
     fun logout() =
             repository.logout()

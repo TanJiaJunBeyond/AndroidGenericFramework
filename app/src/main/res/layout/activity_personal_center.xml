@@ -23,9 +23,9 @@
 
         <ImageView
             android:id="@+id/iv_head_portrait"
-            error="@{@drawable/ic_default_head_portrait}"
-            placeholder="@{@drawable/ic_default_head_portrait}"
-            url="@{viewModel.headPortraitUrl}"
+            error="@{@drawable/ic_default_avatar}"
+            placeholder="@{@drawable/ic_default_avatar}"
+            url="@{viewModel.avatarUrl}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -33,15 +33,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_line"
-            tools:background="@drawable/ic_default_head_portrait" />
+            tools:background="@drawable/ic_default_avatar" />
 
         <TextView
-            android:id="@+id/tv_user_name"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="@string/user_name"
+            android:text="@string/name"
             android:textColor="@color/text_black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,60 +52,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:text="@{viewModel.userName}"
+            android:text="@{viewModel.name}"
             android:textColor="@color/text_dark_grey"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_head_portrait"
-            tools:text="用户名" />
-
-        <TextView
-            android:id="@+id/tv_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/gender"
-            android:textColor="@color/text_black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_line_user_name" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{viewModel.gender}"
-            android:textColor="@color/text_dark_grey"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_line_user_name"
-            tools:text="性别" />
-
-        <TextView
-            android:id="@+id/tv_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/age"
-            android:textColor="@color/text_black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_line_gender" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{viewModel.age}"
-            android:textColor="@color/text_dark_grey"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_line_gender"
-            tools:text="年龄" />
+            tools:text="名字" />
 
         <TextView
             android:id="@+id/tv_logout"
@@ -118,7 +70,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_line_age" />
+            app:layout_constraintTop_toBottomOf="@id/divider_line_user_name" />
 
         <include
             android:id="@+id/toolbar"
@@ -146,27 +98,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
-
-        <include
-            android:id="@+id/divider_line_gender"
-            layout="@layout/layout_divider_line"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_gender" />
-
-        <include
-            android:id="@+id/divider_line_age"
-            layout="@layout/layout_divider_line"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_age" />
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
         <include
             layout="@layout/layout_divider_line"

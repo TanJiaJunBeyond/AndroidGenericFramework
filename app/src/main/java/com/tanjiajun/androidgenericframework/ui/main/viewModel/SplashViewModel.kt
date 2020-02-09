@@ -10,6 +10,7 @@ class SplashViewModel(
         private val repository: UserInfoRepository
 ) : BaseViewModel() {
 
-    fun isLogin(): Boolean = true
+    fun isLogin(): Boolean =
+            repository.isLogin()
 
 }

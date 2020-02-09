@@ -29,14 +29,7 @@ class PersonalCenterActivity
             viewModel = this@PersonalCenterActivity.viewModel
             handlers = this@PersonalCenterActivity
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        with(viewModel) {
-            showTitle(getString(R.string.personal_center))
-            showInfo()
-        }
+        viewModel.showTitle(getString(R.string.personal_center))
     }
 
     override fun onNavigationIconClick(view: View) =

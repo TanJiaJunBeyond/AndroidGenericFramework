@@ -38,10 +38,8 @@ class LoginViewModel(
             launchUI {
                 launchFlow {
                     repository.run {
-                        cacheUserInfo(
-                                username = username.value ?: "",
-                                password = password.value ?: ""
-                        )
+                        cacheUsername(username.value ?: "")
+                        cachePassword(password.value ?: "")
                         authorizations()
                     }
                 }
@@ -57,6 +55,11 @@ class LoginViewModel(
                         }
                         .onCompletion { defaultUI.dismissDialogEvent.call() }
                         .collect {
+                            repository.run {
+                                cacheUserId(it.id)
+                                cacheName(it.login)
+                                cacheAvatarUrl(it.avatarUrl)
+                            }
                             loginSuccess.value = true
                         }
             }

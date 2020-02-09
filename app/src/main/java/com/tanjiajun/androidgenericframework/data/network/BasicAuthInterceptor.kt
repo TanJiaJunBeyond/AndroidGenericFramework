@@ -1,7 +1,7 @@
 package com.tanjiajun.androidgenericframework.data.network
 
 import android.util.Base64
-import com.tanjiajun.androidgenericframework.data.dao.UserDao
+import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
 import com.tanjiajun.androidgenericframework.utils.otherwise
 import com.tanjiajun.androidgenericframework.utils.yes
 import okhttp3.Interceptor

@@ -12,19 +12,13 @@
     <string name="cancel">取消</string>
 
     <string name="personal_center">个人中心</string>
-    <string name="user_name">用户名</string>
-    <string name="gender">性别</string>
-    <string name="age">年龄</string>
+    <string name="name">名字</string>
     <string name="logout">退出登录</string>
 
     <!-- 首页 -->
     <string name="add">添加</string>
-    <string name="remove">移除</string>
 
-    <!-- 订单 -->
-    <string name="confirm">确认</string>
-
-    <!-- 项目 -->
+    <!-- 仓库 -->
     <string name="language_icon">语言图标</string>
     <string name="star_icon">star图标</string>
     <string name="fork_icon">fork图标</string>

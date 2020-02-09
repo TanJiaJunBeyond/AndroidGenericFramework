@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration.MMKV_CRYPT_KEY
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration.MMKV_ID
-import com.tanjiajun.androidgenericframework.data.dao.UserDao
+import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
 import com.tanjiajun.androidgenericframework.data.network.repository.RepositoryNetwork
 import com.tanjiajun.androidgenericframework.data.network.user.UserNetwork
 import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository

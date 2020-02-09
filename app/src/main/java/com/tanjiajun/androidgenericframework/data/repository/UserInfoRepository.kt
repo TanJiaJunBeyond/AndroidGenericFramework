@@ -1,6 +1,6 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
-import com.tanjiajun.androidgenericframework.data.dao.UserDao
+import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserAccessTokenData
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
 import com.tanjiajun.androidgenericframework.data.network.user.UserNetwork
@@ -13,11 +13,14 @@ class UserInfoRepository private constructor(
         private val dao: UserDao
 ) {
 
-    fun cacheUserInfo(username: String, password: String) =
-            dao.cacheUserInfo(username, password)
+    fun isLogin(): Boolean =
+            dao.userId != -1
 
-    fun isUserInfoCached(): Boolean =
-            dao.getCachedUserInfo() != null
+    fun cacheUsername(username: String) =
+            dao.cacheUsername(username)
+
+    fun cachePassword(password: String) =
+            dao.cachePassword(password)
 
     suspend fun authorizations(): UserAccessTokenData =
             network.authorizations()
@@ -25,8 +28,23 @@ class UserInfoRepository private constructor(
     suspend fun getUserInfo(): UserInfoData =
             network.fetchUserInfo()
 
+    fun cacheUserId(userId: Int) =
+            dao.cacheUserId(userId)
+
+    fun getName(): String =
+            dao.name
+
+    fun cacheName(name: String) =
+            dao.cacheName(name)
+
+    fun getAvatarUrl(): String =
+            dao.avatarUrl
+
+    fun cacheAvatarUrl(avatarUrl: String) =
+            dao.cacheAvatarUrl(avatarUrl)
+
     fun logout() =
-            dao.clearUserInfoCache() ?: Unit
+            dao.clearUserInfoCache()
 
     companion object {
         @Volatile
