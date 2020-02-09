@@ -37,7 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers
     private val vpRepository: ViewPager2
         get() = binding.vpRepository
 
-    private lateinit var repositoryFragments: List<RepositoryFragment>
+    private lateinit var repositoryFragments: MutableList<RepositoryFragment>
 
     private lateinit var adapter: OrderFragmentStateAdapter
 
@@ -75,9 +75,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers
 
     private fun initData() =
             with(viewModel) {
-                index.observe(this@MainActivity, Observer {
-                    tlRepository.addTab(tlRepository.newTab().setText(getLastLanguageName()))
-                    adapter.notifyItemInserted(getLastLanguageNameIndex())
+                languageNames.observe(this@MainActivity, Observer {
+                    if (it.size > getDefaultLanguageNamesCount()) {
+                        tlRepository.addTab(tlRepository.newTab().setText(getLastLanguageName()))
+                        repositoryFragments.add(RepositoryFragment.newInstance(getLastLanguageName()))
+                        adapter.notifyItemInserted(getLastLanguageNameIndex())
+                        vpRepository.currentItem = getLastLanguageNameIndex()
+                    }
                 })
             }
 
@@ -95,7 +99,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers
     override fun onPersonalCenterClick(view: View) =
             startActivity<PersonalCenterActivity>()
 
-    override fun onStateClick(view: View) {
+    override fun onAddClick(view: View) {
         viewModel.addLanguageName()
     }
 

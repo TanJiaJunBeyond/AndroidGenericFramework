@@ -4,8 +4,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
-    <color name="main_color">#ff0000</color>
-    <color name="deputy_color">#f78181</color>
+    <color name="main_color">#5e616d</color>
 
     <color name="background_color">#f8f9fb</color>
 
@@ -16,8 +15,8 @@
     <color name="text_dark_grey">#5e616d</color>
 
     <color name="common_button_background_color_unable">#cfd6e0</color>
-    <color name="common_button_background_color_enable">#ff0000</color>
-    <color name="common_button_shadow_color">#B40404</color>
+    <color name="common_button_background_color_enable">#5e616d</color>
+    <color name="common_button_shadow_color">#a8acbf</color>
 
     <color name="common_item_shadow_color">#a8acbf</color>
 

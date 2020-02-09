@@ -16,15 +16,15 @@ class RepositoryOfGitHubRepository(
             listOf(
                     Language.KOTLIN.languageName,
                     Language.JAVA.languageName,
-                    Language.SWIFT.languageName
+                    Language.SWIFT.languageName,
+                    Language.JAVA_SCRIPT.languageName,
+                    Language.PYTHON.languageName,
+                    Language.GO.languageName,
+                    Language.CSS.languageName
             )
 
     fun getMoreLanguageNames(): List<String> =
             listOf(
-                    Language.JAVA_SCRIPT.languageName,
-                    Language.PYTHON.languageName,
-                    Language.GO.languageName,
-                    Language.CSS.languageName,
                     Language.PHP.languageName,
                     Language.RUBY.languageName,
                     Language.C_PLUS_PLUS.languageName,
