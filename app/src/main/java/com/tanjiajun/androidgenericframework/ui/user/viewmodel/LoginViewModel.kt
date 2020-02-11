@@ -47,7 +47,7 @@ class LoginViewModel(
                             launchFlow { repository.getUserInfo() }
                         }
                         .flowOn(Dispatchers.IO)
-                        .onStart { defaultUI.showDialogEvent.call() }
+                        .onStart { _isShowLoadingView.value = true }
                         .catch {
                             val responseThrowable = ExceptionHandler.handleException(it)
                             defaultUI.showSnackbar.value = "${responseThrowable.code}:${responseThrowable.errorMessage}"

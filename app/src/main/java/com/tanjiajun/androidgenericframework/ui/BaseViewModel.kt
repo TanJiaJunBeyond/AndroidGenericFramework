@@ -20,10 +20,10 @@ abstract class BaseViewModel : ViewModel() {
     protected val _title = MutableLiveData<String>()
     val title: LiveData<String> = _title
 
-    private val _isShowLoadingView = MutableLiveData<Boolean>()
+    protected val _isShowLoadingView = MutableLiveData<Boolean>()
     val isShowLoadingView: LiveData<Boolean> = _isShowLoadingView
 
-    private val _isShowErrorView = MutableLiveData<Boolean>()
+    protected val _isShowErrorView = MutableLiveData<Boolean>()
     val isShowErrorView: LiveData<Boolean> = _isShowErrorView
 
     val defaultUI by lazy { UIChange() }
