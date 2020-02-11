@@ -20,6 +20,12 @@ abstract class BaseViewModel : ViewModel() {
     protected val _title = MutableLiveData<String>()
     val title: LiveData<String> = _title
 
+    private val _isShowLoadingView = MutableLiveData<Boolean>()
+    val isShowLoadingView: LiveData<Boolean> = _isShowLoadingView
+
+    private val _isShowErrorView = MutableLiveData<Boolean>()
+    val isShowErrorView: LiveData<Boolean> = _isShowErrorView
+
     val defaultUI by lazy { UIChange() }
 
     fun launchUI(block: suspend CoroutineScope.() -> Unit) =
@@ -43,19 +49,23 @@ abstract class BaseViewModel : ViewModel() {
                 }
             }
 
-    fun <T> launch(isShowDialog: Boolean,
+    fun <T> launch(isShowDialog: Boolean = false,
+                   isShowErrorToast: Boolean = false,
+                   isShowErrorView: Boolean = false,
                    block: suspend CoroutineScope.() -> T,
-                   success: (T) -> Unit,
-                   error: CoroutineScope.(ResponseThrowable) -> Unit = {
-                       defaultUI.showToastEvent.postValue("${it.code}:${it.errorMessage}")
-                   },
+                   success: suspend CoroutineScope.(T) -> Unit,
+                   error: (CoroutineScope.(ResponseThrowable) -> Unit)? = null,
                    complete: suspend CoroutineScope.() -> Unit) {
-        if (isShowDialog) defaultUI.showDialogEvent.call()
+        if (isShowDialog) _isShowLoadingView.value = true
         launchUI {
             handle(
                     block = withContext(Dispatchers.IO) { block },
-                    success = { coroutineScope { success(it) } },
-                    error = { error(it) },
+                    success = withContext(Dispatchers.Main) { success },
+                    error = {
+                        if (isShowErrorToast) defaultUI.showToastEvent.postValue("${it.code}:${it.errorMessage}")
+                        if (isShowErrorView) _isShowErrorView.postValue(true)
+                        error?.invoke(this, it)
+                    },
                     complete = {
                         defaultUI.dismissDialogEvent.call()
                         complete()
@@ -68,7 +78,6 @@ abstract class BaseViewModel : ViewModel() {
 
         val showToastEvent by lazy { SingleLiveEvent<String>() }
         val showSnackbar by lazy { SingleLiveEvent<String>() }
-        val showDialogEvent by lazy { SingleLiveEvent<Boolean>() }
         val dismissDialogEvent by lazy { SingleLiveEvent<Boolean>() }
 
     }
