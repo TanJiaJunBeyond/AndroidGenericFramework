@@ -18,15 +18,15 @@ import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
-class RepositoryFragment : BaseFragment<FragmentRepositoryBinding>() {
-
-    private val viewModel by viewModels<RepositoryViewModel> { getViewModelFactory() }
-    private lateinit var language: String
-    private val adapter = RepositoryAdapter()
+class RepositoryFragment private constructor()
+    : BaseFragment<FragmentRepositoryBinding, RepositoryViewModel>() {
 
     override val layoutRes: Int = R.layout.fragment_repository
+    override val viewModel by viewModels<RepositoryViewModel> { getViewModelFactory() }
+    override val transactionTag: String = FRAGMENT_TAG_REPOSITORY
 
-    override fun getTransactionTag(): String = FRAGMENT_TAG_REPOSITORY
+    private lateinit var language: String
+    private val adapter = RepositoryAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

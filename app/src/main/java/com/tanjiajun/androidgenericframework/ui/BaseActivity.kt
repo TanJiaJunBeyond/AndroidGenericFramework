@@ -3,18 +3,23 @@ package com.tanjiajun.androidgenericframework.ui
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
+import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.utils.otherwise
+import com.tanjiajun.androidgenericframework.utils.toastShort
 import com.tanjiajun.androidgenericframework.utils.yes
 
 /**
  * Created by TanJiaJun on 2019-07-28.
  */
-abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
 
     lateinit var binding: T
     private lateinit var manager: FragmentManager
@@ -28,10 +33,31 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     @get:LayoutRes
     abstract val layoutRes: Int
 
-    open fun getContainId(): Int = -1
+    abstract val viewModel: VM
 
-    fun getCurrentFragment(): BaseFragment<*> =
-            manager.findFragmentById(getContainId()) as BaseFragment<*>
+    open val containId: Int = 0
+
+    fun registerUIChange() =
+            with(viewModel.uiLiveEvent) {
+                showToastEvent.observe(this@BaseActivity, Observer {
+                    toastShort(it)
+                })
+                showLoadingProgressDialog.observe(this@BaseActivity, Observer {
+
+                })
+                dismissLoadingProgressDialog.observe(this@BaseActivity, Observer {
+
+                })
+                showSnackbarEvent.observe(this@BaseActivity, Observer {
+                    Snackbar
+                            .make(window.decorView, it, Snackbar.LENGTH_SHORT)
+                            .setActionTextColor(ContextCompat.getColor(this@BaseActivity, R.color.white))
+                            .show()
+                })
+            }
+
+    fun getCurrentFragment(): BaseFragment<*, *> =
+            manager.findFragmentById(containId) as BaseFragment<*, *>
 
     fun getFragmentList(): List<Fragment?> =
             mutableListOf<Fragment?>().apply {
@@ -42,11 +68,11 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 }
             }
 
-    fun getPreviousFragment(): BaseFragment<*>? =
+    fun getPreviousFragment(): BaseFragment<*, *>? =
             manager.backStackEntryCount
                     .takeIf { it >= 2 }
                     ?.let {
-                        manager.findFragmentByTag(manager.getBackStackEntryAt(it.minus(2)).name) as BaseFragment<*>?
+                        manager.findFragmentByTag(manager.getBackStackEntryAt(it.minus(2)).name) as BaseFragment<*, *>?
                     }
 
     fun popBackStackImmediate(): Boolean =
@@ -75,108 +101,104 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 }
             }
 
-    fun addFragment(fragment: BaseFragment<*>) =
-            operateFragmentTransaction(
+    fun addFragment(fragment: BaseFragment<*, *>) =
+            handleFragmentTransaction(
                     fragment = fragment,
                     action = ACTION_ADD,
                     isAddToBackStack = true,
                     isExecutePending = true
             )
 
-    fun addFragmentAndHideOthers(fragment: BaseFragment<*>) =
-            operateFragmentTransaction(
+    fun addFragmentAndHideOthers(fragment: BaseFragment<*, *>) =
+            handleFragmentTransaction(
                     fragment = fragment,
                     action = ACTION_ADD_AND_HIDE_OTHERS,
                     isAddToBackStack = true,
                     isExecutePending = true
             )
 
-    fun addFragmentAndHideOthersNotExecutePending(fragment: BaseFragment<*>) =
-            operateFragmentTransaction(
+    fun addFragmentAndHideOthersNotExecutePending(fragment: BaseFragment<*, *>) =
+            handleFragmentTransaction(
                     fragment = fragment,
                     action = ACTION_ADD_AND_HIDE_OTHERS,
                     isAddToBackStack = true,
                     isExecutePending = false
             )
 
-    fun replaceFragment(fragment: BaseFragment<*>, addToBackStack: Boolean = true) =
-            operateFragmentTransaction(
+    fun replaceFragment(fragment: BaseFragment<*, *>, addToBackStack: Boolean = true) =
+            handleFragmentTransaction(
                     fragment = fragment,
                     action = ACTION_REPLACE,
                     isAddToBackStack = addToBackStack,
                     isExecutePending = true
             )
 
-    protected fun addFragmentNotAddToBackStack(fragment: BaseFragment<*>) =
-            operateFragmentTransaction(
+    protected fun addFragmentNotAddToBackStack(fragment: BaseFragment<*, *>) =
+            handleFragmentTransaction(
                     fragment = fragment,
                     action = ACTION_ADD,
                     isAddToBackStack = false,
                     isExecutePending = false
             )
 
-    fun addFragmentNotExecutePending(fragment: BaseFragment<*>) =
-            operateFragmentTransaction(
+    fun addFragmentNotExecutePending(fragment: BaseFragment<*, *>) =
+            handleFragmentTransaction(
                     fragment = fragment,
                     action = ACTION_ADD,
                     isAddToBackStack = true,
                     isExecutePending = false
             )
 
-    private fun operateFragmentTransaction(fragment: BaseFragment<*>,
-                                           action: Int,
-                                           isAddToBackStack: Boolean,
-                                           isExecutePending: Boolean) =
+    private fun handleFragmentTransaction(fragment: BaseFragment<*, *>,
+                                          action: Int,
+                                          isAddToBackStack: Boolean,
+                                          isExecutePending: Boolean) =
             with(manager) {
-                val containId = getContainId()
+                beginTransaction().let {
+                    if (fragment.enableAnimation) {
+                        it.setCustomAnimations(
+                                fragment.enterAnimation,
+                                fragment.exitAnimation,
+                                fragment.popEnterAnimation,
+                                fragment.popExitAnimation
+                        )
+                    }
 
-                if (containId > 0) {
-                    beginTransaction().let {
-                        if (fragment.enableAnimation()) {
-                            it.setCustomAnimations(
-                                    fragment.getEnterAnimation(),
-                                    fragment.getExitAnimation(),
-                                    fragment.getPopEnterAnimation(),
-                                    fragment.getPopExitAnimation()
-                            )
-                        }
+                    handleFragment(action, containId, fragment, manager, it, isAddToBackStack)
+                    it.commitAllowingStateLoss()
 
-                        operateFragment(action, containId, fragment, manager, it, isAddToBackStack)
-                        it.commitAllowingStateLoss()
-
-                        if (isExecutePending) {
-                            try {
-                                executePendingTransactions()
-                            } catch (exception: NullPointerException) {
-                                // ignore exception
-                            }
+                    if (isExecutePending) {
+                        try {
+                            executePendingTransactions()
+                        } catch (exception: NullPointerException) {
+                            // ignore exception
                         }
                     }
                 }
             }
 
-    private fun operateFragment(action: Int,
-                                containId: Int,
-                                fragment: BaseFragment<*>,
-                                manager: FragmentManager,
-                                transaction: FragmentTransaction,
-                                isAddToBackStack: Boolean) =
+    private fun handleFragment(action: Int,
+                               containId: Int,
+                               fragment: BaseFragment<*, *>,
+                               manager: FragmentManager,
+                               transaction: FragmentTransaction,
+                               isAddToBackStack: Boolean) =
             with(manager) {
                 when (action) {
-                    ACTION_ADD -> transaction.add(containId, fragment, fragment.getTransactionTag())
-                    ACTION_REPLACE -> transaction.replace(containId, fragment, fragment.getTransactionTag())
+                    ACTION_ADD -> transaction.add(containId, fragment, fragment.transactionTag)
+                    ACTION_REPLACE -> transaction.replace(containId, fragment, fragment.transactionTag)
                     ACTION_ADD_AND_HIDE_OTHERS -> {
                         fragments
                                 .filter { it.isVisible }
                                 .forEach { transaction.hide(it) }
 
-                        transaction.add(containId, fragment, fragment.getTransactionTag())
+                        transaction.add(containId, fragment, fragment.transactionTag)
                     }
                     else -> Unit
                 }
 
                 if (isAddToBackStack) {
-                    transaction.addToBackStack(fragment.getTransactionTag())
+                    transaction.addToBackStack(fragment.transactionTag)
                 }
             }
 
@@ -184,7 +206,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
             with(manager) {
                 (backStackEntryCount > getFragmentCountToFinish())
                         .yes {
-                            (findFragmentById(getContainId()) as BaseFragment<*>).let {
+                            (findFragmentById(containId) as BaseFragment<*, *>).let {
                                 popBackStackImmediate()
                                 it.onHandleGoBack()
                             }

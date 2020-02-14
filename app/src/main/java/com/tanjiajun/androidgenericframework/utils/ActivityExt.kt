@@ -9,7 +9,7 @@ import com.tanjiajun.androidgenericframework.ui.ViewModelFactory
 /**
  * Created by TanJiaJun on 2019-08-12.
  */
-inline fun <reified T : BaseActivity<*>> Activity.startActivity() =
+inline fun <reified T : BaseActivity<*, *>> Activity.startActivity() =
         startActivity(Intent(this, T::class.java))
 
 fun Activity.getViewModelFactory(): ViewModelFactory =

@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_repository"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/layout_loading"
+            app:viewModel="@{viewModel}" />
+
+        <ViewStub
+            android:id="@+id/vs_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/layout_error" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_repository"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

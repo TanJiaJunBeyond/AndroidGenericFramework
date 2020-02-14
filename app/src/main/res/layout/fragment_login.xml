@@ -25,7 +25,7 @@
             android:layout_marginStart="38dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="38dp"
-            android:background="@drawable/selector_common_button_background_color_green"
+            android:background="@drawable/selector_common_button_background_color"
             android:enabled="@{viewModel.loginEnable}"
             android:onClick="@{handlers::onLoginClick}"
             android:shadowColor="@color/common_button_shadow_color"

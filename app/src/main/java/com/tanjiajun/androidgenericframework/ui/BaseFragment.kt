@@ -13,7 +13,7 @@ import com.tanjiajun.androidgenericframework.R
 /**
  * Created by TanJiaJun on 2019-07-28.
  */
-abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment() {
 
     lateinit var binding: T
 
@@ -27,21 +27,23 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     @get:LayoutRes
     abstract val layoutRes: Int
 
-    abstract fun getTransactionTag(): String
+    abstract val viewModel: VM
 
-    fun getEnterAnimation(): Int =
+    abstract val transactionTag: String
+
+    open val enterAnimation: Int =
             R.anim.switch_in_right
 
-    fun getExitAnimation(): Int =
+    open val exitAnimation: Int =
             R.anim.switch_out_left
 
-    fun getPopEnterAnimation(): Int =
+    open val popEnterAnimation: Int =
             R.anim.switch_in_left
 
-    fun getPopExitAnimation(): Int =
+    open val popExitAnimation: Int =
             R.anim.switch_out_right
 
-    fun enableAnimation(): Boolean = true
+    open val enableAnimation: Boolean = true
 
     open fun onHandleGoBack() {
         // no implementation

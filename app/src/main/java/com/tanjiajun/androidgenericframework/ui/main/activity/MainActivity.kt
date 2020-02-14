@@ -25,11 +25,10 @@ import com.tanjiajun.androidgenericframework.utils.startActivity
 /**
  * Created by TanJiaJun on 2019-07-22.
  */
-class MainActivity : BaseActivity<ActivityMainBinding>(), MainViewModel.Handlers {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.activity_main
-
-    private val viewModel by viewModels<MainViewModel> { getViewModelFactory() }
+    override val viewModel by viewModels<MainViewModel> { getViewModelFactory() }
 
     private val tlRepository: TabLayout
         get() = binding.tlRepository

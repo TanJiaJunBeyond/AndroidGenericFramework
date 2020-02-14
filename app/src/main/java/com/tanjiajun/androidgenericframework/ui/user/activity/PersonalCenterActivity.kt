@@ -16,11 +16,10 @@ import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
  * Created by TanJiaJun on 2019-08-24.
  */
 class PersonalCenterActivity
-    : BaseActivity<ActivityPersonalCenterBinding>(), PersonalCenterViewModel.Handlers {
+    : BaseActivity<ActivityPersonalCenterBinding, PersonalCenterViewModel>(), PersonalCenterViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.activity_personal_center
-
-    private val viewModel by viewModels<PersonalCenterViewModel> { getViewModelFactory() }
+    override val viewModel by viewModels<PersonalCenterViewModel> { getViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

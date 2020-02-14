@@ -26,7 +26,7 @@ abstract class BaseViewModel : ViewModel() {
     protected val _isShowErrorView = MutableLiveData<Boolean>()
     val isShowErrorView: LiveData<Boolean> = _isShowErrorView
 
-    val defaultUI by lazy { UIChange() }
+    val uiLiveEvent by lazy { UILiveEvent() }
 
     fun launchUI(block: suspend CoroutineScope.() -> Unit) =
             viewModelScope.launch { block() }
@@ -49,42 +49,54 @@ abstract class BaseViewModel : ViewModel() {
                 }
             }
 
-    fun <T> launch(isShowDialog: Boolean = false,
+    fun <T> launch(isShowLoadingProgressDialog: Boolean = false,
+                   isShowLoadingView: Boolean = false,
                    isShowErrorToast: Boolean = false,
                    isShowErrorView: Boolean = false,
                    block: suspend CoroutineScope.() -> T,
                    success: suspend CoroutineScope.(T) -> Unit,
                    error: (CoroutineScope.(ResponseThrowable) -> Unit)? = null,
                    complete: suspend CoroutineScope.() -> Unit) {
-        if (isShowDialog) _isShowLoadingView.value = true
+        if (isShowLoadingProgressDialog) uiLiveEvent.showLoadingProgressDialog.call()
+        if (isShowLoadingView) _isShowLoadingView.value = true
         launchUI {
             handle(
                     block = withContext(Dispatchers.IO) { block },
                     success = withContext(Dispatchers.Main) { success },
                     error = {
-                        if (isShowErrorToast) defaultUI.showToastEvent.postValue("${it.code}:${it.errorMessage}")
+                        if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.code}:${it.errorMessage}")
                         if (isShowErrorView) _isShowErrorView.postValue(true)
                         error?.invoke(this, it)
                     },
                     complete = {
-                        defaultUI.dismissDialogEvent.call()
+                        if (isShowLoadingProgressDialog) uiLiveEvent.dismissLoadingProgressDialog.call()
+                        if (isShowLoadingView) _isShowLoadingView.value = false
                         complete()
                     }
             )
         }
     }
 
-    inner class UIChange {
+    inner class UILiveEvent {
 
         val showToastEvent by lazy { SingleLiveEvent<String>() }
-        val showSnackbar by lazy { SingleLiveEvent<String>() }
-        val dismissDialogEvent by lazy { SingleLiveEvent<Boolean>() }
+        val showLoadingProgressDialog by lazy { SingleLiveEvent<Boolean>() }
+        val dismissLoadingProgressDialog by lazy { SingleLiveEvent<Boolean>() }
+        val showSnackbarEvent by lazy { SingleLiveEvent<String>() }
 
     }
 
     interface Handlers {
 
-        fun onNavigationIconClick(view: View)
+        @JvmDefault
+        fun onNavigationIconClick(view: View) {
+            // no implementation
+        }
+
+        @JvmDefault
+        fun onRetryClick(view: View) {
+            // no implementation
+        }
 
     }
 

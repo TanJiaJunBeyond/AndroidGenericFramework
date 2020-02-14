@@ -1,6 +1,5 @@
 package com.tanjiajun.androidgenericframework
 
-import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration.MMKV_CRYPT_KEY
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration.MMKV_ID
@@ -23,7 +22,6 @@ class AndroidGenericFrameworkApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        context = this
 
         MMKV.initialize(this)
 
@@ -34,7 +32,6 @@ class AndroidGenericFrameworkApplication : MultiDexApplication() {
 
     companion object {
         lateinit var instance: AndroidGenericFrameworkApplication
-        lateinit var context: Context
     }
 
 }

@@ -21,15 +21,13 @@ import kotlinx.coroutines.*
 /**
  * Created by TanJiaJun on 2019-07-29.
  */
-class LoginFragment
-    : BaseFragment<FragmentLoginBinding>(),
+class LoginFragment private constructor()
+    : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
         LoginViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.fragment_login
-
-    private val viewModel by viewModels<LoginViewModel> { getViewModelFactory() }
-
-    override fun getTransactionTag(): String = FRAGMENT_TAG_LOGIN
+    override val viewModel by viewModels<LoginViewModel> { getViewModelFactory() }
+    override val transactionTag: String = FRAGMENT_TAG_LOGIN
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) =
             with(binding) {

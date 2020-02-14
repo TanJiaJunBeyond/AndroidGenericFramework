@@ -5,6 +5,10 @@
     <!-- 公共 -->
     <string name="base_url_format">%1$s://%2$s/</string>
 
+    <!-- 错误页面 -->
+    <string name="error_hint">出错了！请点击重试。</string>
+    <string name="retry">重试</string>
+
     <!-- 用户 -->
     <string name="username_hint">请输入用户名</string>
     <string name="password_hint">请输入密码</string>
