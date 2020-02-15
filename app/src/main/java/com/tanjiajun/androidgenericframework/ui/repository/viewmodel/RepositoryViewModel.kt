@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryData
 import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
+import com.tanjiajun.androidgenericframework.ui.UIState
 
 /**
  * Created by TanJiaJun on 2020-02-07.
@@ -18,11 +19,9 @@ class RepositoryViewModel(
 
     fun getRepositories(languageName: String) =
             launch(
-                    isShowDialog = true,
+                    uiState = UIState(isShowLoadingView = true, isShowErrorView = true),
                     block = { repository.getRepositories(languageName) },
-                    success = { _repositories.value = it },
-                    error = {},
-                    complete = {}
+                    success = { _repositories.value = it }
             )
 
 }

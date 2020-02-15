@@ -50,10 +50,10 @@ class LoginViewModel(
                         .onStart { _isShowLoadingView.value = true }
                         .catch {
                             val responseThrowable = ExceptionHandler.handleException(it)
-                            defaultUI.showSnackbar.value = "${responseThrowable.code}:${responseThrowable.errorMessage}"
+                            uiLiveEvent.showSnackbarEvent.value = "${responseThrowable.code}:${responseThrowable.errorMessage}"
                             loginSuccess.value = false
                         }
-                        .onCompletion { defaultUI.dismissDialogEvent.call() }
+                        .onCompletion { uiLiveEvent.dismissLoadingProgressDialog.call() }
                         .collect {
                             repository.run {
                                 cacheUserId(it.id)

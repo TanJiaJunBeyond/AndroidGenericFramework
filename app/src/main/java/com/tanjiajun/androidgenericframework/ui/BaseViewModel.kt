@@ -15,17 +15,25 @@ import kotlinx.coroutines.flow.flow
 /**
  * Created by TanJiaJun on 2019-08-02.
  */
+private typealias CommonCallback = suspend CoroutineScope.() -> Unit
+
+private typealias ErrorCallback = suspend CoroutineScope.(ResponseThrowable) -> Unit
+
 abstract class BaseViewModel : ViewModel() {
 
+    // 标题
     protected val _title = MutableLiveData<String>()
     val title: LiveData<String> = _title
 
+    // 是否显示加载中页面
     protected val _isShowLoadingView = MutableLiveData<Boolean>()
     val isShowLoadingView: LiveData<Boolean> = _isShowLoadingView
 
+    // 是否显示失败页面
     protected val _isShowErrorView = MutableLiveData<Boolean>()
     val isShowErrorView: LiveData<Boolean> = _isShowErrorView
 
+    // UI事件
     val uiLiveEvent by lazy { UILiveEvent() }
 
     fun launchUI(block: suspend CoroutineScope.() -> Unit) =
@@ -35,10 +43,18 @@ abstract class BaseViewModel : ViewModel() {
     fun <T> launchFlow(block: suspend () -> T): Flow<T> =
             flow { emit(block()) }
 
+    /**
+     * 处理逻辑
+     *
+     * @param block 请求块
+     * @param success 成功回调
+     * @param error 失败回调
+     * @param complete 完成回调（成功或者失败都会回调）
+     */
     private suspend fun <T> handle(block: suspend CoroutineScope.() -> T,
                                    success: suspend CoroutineScope.(T) -> Unit,
-                                   error: suspend CoroutineScope.(ResponseThrowable) -> Unit,
-                                   complete: suspend CoroutineScope.() -> Unit) =
+                                   error: ErrorCallback,
+                                   complete: CommonCallback) =
             coroutineScope {
                 try {
                     success(block())
@@ -49,33 +65,40 @@ abstract class BaseViewModel : ViewModel() {
                 }
             }
 
-    fun <T> launch(isShowLoadingProgressDialog: Boolean = false,
-                   isShowLoadingView: Boolean = false,
-                   isShowErrorToast: Boolean = false,
-                   isShowErrorView: Boolean = false,
+    /**
+     * 处理网络请求
+     *
+     * @param uiState 处理UI状态
+     * @param block 请求块
+     * @param success 成功回调
+     * @param error 失败回调
+     * @param complete 完成回调（成功或者失败都会回调）
+     */
+    fun <T> launch(uiState: UIState = UIState(),
                    block: suspend CoroutineScope.() -> T,
-                   success: suspend CoroutineScope.(T) -> Unit,
-                   error: (CoroutineScope.(ResponseThrowable) -> Unit)? = null,
-                   complete: suspend CoroutineScope.() -> Unit) {
-        if (isShowLoadingProgressDialog) uiLiveEvent.showLoadingProgressDialog.call()
-        if (isShowLoadingView) _isShowLoadingView.value = true
-        launchUI {
-            handle(
-                    block = withContext(Dispatchers.IO) { block },
-                    success = withContext(Dispatchers.Main) { success },
-                    error = {
-                        if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.code}:${it.errorMessage}")
-                        if (isShowErrorView) _isShowErrorView.postValue(true)
-                        error?.invoke(this, it)
-                    },
-                    complete = {
-                        if (isShowLoadingProgressDialog) uiLiveEvent.dismissLoadingProgressDialog.call()
-                        if (isShowLoadingView) _isShowLoadingView.value = false
-                        complete()
-                    }
-            )
-        }
-    }
+                   success: (suspend CoroutineScope.(T) -> Unit)? = null,
+                   error: (ErrorCallback)? = null,
+                   complete: (CommonCallback)? = null) =
+            with(uiState) {
+                if (isShowLoadingProgressDialog) uiLiveEvent.showLoadingProgressDialog.call()
+                if (isShowLoadingView) _isShowLoadingView.value = true
+                launchUI {
+                    handle(
+                            block = withContext(Dispatchers.IO) { block },
+                            success = { withContext(Dispatchers.Main) { success } },
+                            error = {
+                                if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.code}:${it.errorMessage}")
+                                if (isShowErrorView) _isShowErrorView.postValue(true)
+                                error?.invoke(this, it)
+                            },
+                            complete = {
+                                if (isShowLoadingProgressDialog) uiLiveEvent.dismissLoadingProgressDialog.call()
+                                if (isShowLoadingView) _isShowLoadingView.value = false
+                                complete?.invoke(this)
+                            }
+                    )
+                }
+            }
 
     inner class UILiveEvent {
 
@@ -101,3 +124,18 @@ abstract class BaseViewModel : ViewModel() {
     }
 
 }
+
+/**
+ * UI状态
+ *
+ * @param isShowLoadingProgressDialog 是否显示加载中ProgressDialog
+ * @param isShowLoadingView 是否显示加载中页面
+ * @param isShowErrorToast 是否弹出错误Toast
+ * @param isShowErrorView 是否显示错误页面
+ */
+data class UIState(
+        val isShowLoadingProgressDialog: Boolean = false,
+        val isShowLoadingView: Boolean = false,
+        val isShowErrorToast: Boolean = false,
+        val isShowErrorView: Boolean = false
+)
