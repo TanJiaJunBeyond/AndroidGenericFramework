@@ -13,17 +13,16 @@ import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.FragmentRepositoryBinding
 import com.tanjiajun.androidgenericframework.databinding.LayoutErrorBinding
 import com.tanjiajun.androidgenericframework.ui.BaseFragment
+import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import com.tanjiajun.androidgenericframework.ui.repository.adapter.RepositoryAdapter
 import com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel
 import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
-import com.tanjiajun.androidgenericframework.utils.otherwise
-import com.tanjiajun.androidgenericframework.utils.yes
 
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
 class RepositoryFragment private constructor()
-    : BaseFragment<FragmentRepositoryBinding, RepositoryViewModel>() {
+    : BaseFragment<FragmentRepositoryBinding, RepositoryViewModel>(), BaseViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.fragment_repository
     override val viewModel by viewModels<RepositoryViewModel> { getViewModelFactory() }
@@ -51,19 +50,23 @@ class RepositoryFragment private constructor()
                 rvRepository.layoutManager = LinearLayoutManager(context)
                 rvRepository.adapter = this@RepositoryFragment.adapter
 
+                vsError.setOnInflateListener { _, inflated ->
+                    DataBindingUtil.bind<LayoutErrorBinding>(inflated)?.run {
+                        lifecycleOwner = this@RepositoryFragment
+                        viewModel = this@RepositoryFragment.viewModel
+                        handlers = this@RepositoryFragment
+                    }
+                }
                 this@RepositoryFragment.viewModel.isShowErrorView.observe(this@RepositoryFragment, Observer { isShowErrorView ->
-                    isShowErrorView
-                            .yes {
-                                if (!vsError.isInflated) {
-                                    vsError.viewStub?.inflate()?.also { errorView = it }
-                                    vsError.setOnInflateListener { _, inflated ->
-                                        DataBindingUtil.bind<LayoutErrorBinding>(inflated)?.viewModel = viewModel
-                                    }
-                                } else {
-                                    errorView?.visibility = View.VISIBLE
-                                }
-                            }
-                            .otherwise { errorView?.visibility = View.GONE }
+                    if (isShowErrorView) {
+                        if (!vsError.isInflated) {
+                            vsError.viewStub?.inflate()?.also { errorView = it }
+                        } else {
+                            errorView?.visibility = View.VISIBLE
+                        }
+                    } else {
+                        errorView?.visibility = View.GONE
+                    }
                 })
             }
 
@@ -74,6 +77,10 @@ class RepositoryFragment private constructor()
                     adapter.setItems(it)
                 })
             }
+
+    override fun onRetryClick(view: View) {
+        viewModel.getRepositories(language)
+    }
 
     companion object {
         fun newInstance(language: String): RepositoryFragment =
