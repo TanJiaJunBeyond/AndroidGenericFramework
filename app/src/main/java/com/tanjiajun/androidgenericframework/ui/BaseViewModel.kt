@@ -86,7 +86,7 @@ abstract class BaseViewModel : ViewModel() {
                 launchUI {
                     handle(
                             block = withContext(Dispatchers.IO) { block },
-                            success = { withContext(Dispatchers.Main) { success } },
+                            success = { withContext(Dispatchers.Main) { success?.invoke(this, it) } },
                             error = {
                                 withContext(Dispatchers.Main) {
                                     if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.code}:${it.errorMessage}")

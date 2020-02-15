@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel" />
@@ -27,7 +29,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_repository"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.isShowRepositoryView() ? View.VISIBLE : View.GONE}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

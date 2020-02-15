@@ -45,6 +45,7 @@ class RepositoryFragment private constructor()
 
     private fun initUI() =
             with(binding) {
+                lifecycleOwner = this@RepositoryFragment
                 viewModel = this@RepositoryFragment.viewModel
 
                 rvRepository.layoutManager = LinearLayoutManager(context)

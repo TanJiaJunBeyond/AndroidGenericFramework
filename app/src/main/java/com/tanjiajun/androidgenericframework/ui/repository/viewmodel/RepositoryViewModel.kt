@@ -6,13 +6,17 @@ import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryDat
 import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import com.tanjiajun.androidgenericframework.ui.UIState
+import com.tanjiajun.androidgenericframework.utils.yes
 
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
 class RepositoryViewModel(
-        val repository: RepositoryOfGitHubRepository
+        private val repository: RepositoryOfGitHubRepository
 ) : BaseViewModel() {
+
+    private val _isShowRepositoryView = MutableLiveData<Boolean>()
+    val isShowRepositoryView: LiveData<Boolean> = _isShowRepositoryView
 
     private val _repositories = MutableLiveData<List<RepositoryData>>()
     val repositories: LiveData<List<RepositoryData>> = _repositories
@@ -21,7 +25,12 @@ class RepositoryViewModel(
             launch(
                     uiState = UIState(isShowLoadingView = true, isShowErrorView = true),
                     block = { repository.getRepositories(languageName) },
-                    success = { _repositories.value = it }
+                    success = {
+                        it.isNotEmpty().yes {
+                            _repositories.value = it
+                            _isShowRepositoryView.value = true
+                        }
+                    }
             )
 
 }
