@@ -1,6 +1,9 @@
 package com.tanjiajun.androidgenericframework.ui
 
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.FrameLayout
+import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -23,11 +26,13 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     lateinit var binding: T
     private lateinit var manager: FragmentManager
+    private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
         manager = supportFragmentManager
+        registerUIChange()
     }
 
     @get:LayoutRes
@@ -37,16 +42,25 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     open val containId: Int = 0
 
-    fun registerUIChange() =
+    private fun registerUIChange() =
             with(viewModel.uiLiveEvent) {
                 showToastEvent.observe(this@BaseActivity, Observer {
                     toastShort(it)
                 })
-                showLoadingProgressDialog.observe(this@BaseActivity, Observer {
-
+                showLoadingProgressBar.observe(this@BaseActivity, Observer {
+                    findViewById<FrameLayout>(android.R.id.content).addView(
+                            ProgressBar(this@BaseActivity)
+                                    .apply {
+                                        layoutParams = FrameLayout.LayoutParams(
+                                                FrameLayout.LayoutParams.WRAP_CONTENT,
+                                                FrameLayout.LayoutParams.WRAP_CONTENT
+                                        ).also { it.gravity = Gravity.CENTER }
+                                    }
+                                    .also { progressBar = it }
+                    )
                 })
-                dismissLoadingProgressDialog.observe(this@BaseActivity, Observer {
-
+                dismissLoadingProgressBar.observe(this@BaseActivity, Observer {
+                    progressBar?.let { findViewById<FrameLayout>(android.R.id.content).removeView(it) }
                 })
                 showSnackbarEvent.observe(this@BaseActivity, Observer {
                     Snackbar

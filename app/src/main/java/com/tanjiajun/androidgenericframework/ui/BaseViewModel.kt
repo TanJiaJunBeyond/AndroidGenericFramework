@@ -80,7 +80,7 @@ abstract class BaseViewModel : ViewModel() {
                    error: (ErrorCallback)? = null,
                    complete: (CommonCallback)? = null) =
             with(uiState) {
-                if (isShowLoadingProgressDialog) uiLiveEvent.showLoadingProgressDialog.call()
+                if (isShowLoadingProgressBar) uiLiveEvent.showLoadingProgressBar.call()
                 if (isShowLoadingView) _isShowLoadingView.value = true
                 if (isShowErrorView) _isShowErrorView.value = false
                 launchUI {
@@ -96,7 +96,7 @@ abstract class BaseViewModel : ViewModel() {
                             },
                             complete = {
                                 withContext(Dispatchers.Main) {
-                                    if (isShowLoadingProgressDialog) uiLiveEvent.dismissLoadingProgressDialog.call()
+                                    if (isShowLoadingProgressBar) uiLiveEvent.dismissLoadingProgressBar.call()
                                     if (isShowLoadingView) _isShowLoadingView.value = false
                                     complete?.invoke(this)
                                 }
@@ -108,8 +108,8 @@ abstract class BaseViewModel : ViewModel() {
     inner class UILiveEvent {
 
         val showToastEvent by lazy { SingleLiveEvent<String>() }
-        val showLoadingProgressDialog by lazy { SingleLiveEvent<Boolean>() }
-        val dismissLoadingProgressDialog by lazy { SingleLiveEvent<Boolean>() }
+        val showLoadingProgressBar by lazy { SingleLiveEvent<Boolean>() }
+        val dismissLoadingProgressBar by lazy { SingleLiveEvent<Boolean>() }
         val showSnackbarEvent by lazy { SingleLiveEvent<String>() }
 
     }
@@ -133,13 +133,13 @@ abstract class BaseViewModel : ViewModel() {
 /**
  * UI状态
  *
- * @param isShowLoadingProgressDialog 是否显示加载中ProgressDialog
+ * @param isShowLoadingProgressBar 是否显示加载中ProgressBar
  * @param isShowLoadingView 是否显示加载中页面
  * @param isShowErrorToast 是否弹出错误Toast
  * @param isShowErrorView 是否显示错误页面
  */
 data class UIState(
-        val isShowLoadingProgressDialog: Boolean = false,
+        val isShowLoadingProgressBar: Boolean = false,
         val isShowLoadingView: Boolean = false,
         val isShowErrorToast: Boolean = false,
         val isShowErrorView: Boolean = false

@@ -36,6 +36,7 @@ class LoginViewModel(
     @FlowPreview
     fun login() =
             launchUI {
+                uiLiveEvent.showLoadingProgressBar.call()
                 launchFlow {
                     repository.run {
                         cacheUsername(username.value ?: "")
@@ -53,7 +54,7 @@ class LoginViewModel(
                             uiLiveEvent.showSnackbarEvent.value = "${responseThrowable.code}:${responseThrowable.errorMessage}"
                             loginSuccess.value = false
                         }
-                        .onCompletion { uiLiveEvent.dismissLoadingProgressDialog.call() }
+                        .onCompletion { uiLiveEvent.dismissLoadingProgressBar.call() }
                         .collect {
                             repository.run {
                                 cacheUserId(it.id)
