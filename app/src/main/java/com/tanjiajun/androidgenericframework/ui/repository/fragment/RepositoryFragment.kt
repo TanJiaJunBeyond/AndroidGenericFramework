@@ -31,7 +31,7 @@ class RepositoryFragment private constructor()
 
     private lateinit var language: String
     private val adapter = RepositoryAdapter()
-    private lateinit var errorView: View
+    private var errorView: View? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -59,10 +59,10 @@ class RepositoryFragment private constructor()
                                         DataBindingUtil.bind<LayoutErrorBinding>(inflated)?.viewModel = viewModel
                                     }
                                 } else {
-                                    errorView.visibility = View.VISIBLE
+                                    errorView?.visibility = View.VISIBLE
                                 }
                             }
-                            .otherwise { errorView.visibility = View.GONE }
+                            .otherwise { errorView?.visibility = View.GONE }
                 })
             }
 

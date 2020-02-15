@@ -82,19 +82,24 @@ abstract class BaseViewModel : ViewModel() {
             with(uiState) {
                 if (isShowLoadingProgressDialog) uiLiveEvent.showLoadingProgressDialog.call()
                 if (isShowLoadingView) _isShowLoadingView.value = true
+                if (isShowErrorView) _isShowErrorView.value = false
                 launchUI {
                     handle(
                             block = withContext(Dispatchers.IO) { block },
                             success = { withContext(Dispatchers.Main) { success } },
                             error = {
-                                if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.code}:${it.errorMessage}")
-                                if (isShowErrorView) _isShowErrorView.postValue(true)
-                                error?.invoke(this, it)
+                                withContext(Dispatchers.Main) {
+                                    if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.code}:${it.errorMessage}")
+                                    if (isShowErrorView) _isShowErrorView.value = true
+                                    error?.invoke(this, it)
+                                }
                             },
                             complete = {
-                                if (isShowLoadingProgressDialog) uiLiveEvent.dismissLoadingProgressDialog.call()
-                                if (isShowLoadingView) _isShowLoadingView.value = false
-                                complete?.invoke(this)
+                                withContext(Dispatchers.Main) {
+                                    if (isShowLoadingProgressDialog) uiLiveEvent.dismissLoadingProgressDialog.call()
+                                    if (isShowLoadingView) _isShowLoadingView.value = false
+                                    complete?.invoke(this)
+                                }
                             }
                     )
                 }
