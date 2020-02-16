@@ -22,21 +22,19 @@ class LoginViewModel(
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
-    private val _loginEnable = MutableLiveData<Boolean>()
-    val loginEnable: LiveData<Boolean> = _loginEnable
+    private val _isLoginEnable = MutableLiveData<Boolean>()
+    val isLoginEnable: LiveData<Boolean> = _isLoginEnable
 
-    val loginSuccess = MutableLiveData<Boolean>()
-    val errorMessage = MutableLiveData<String>()
+    val isLoginSuccess = MutableLiveData<Boolean>()
 
     fun checkLoginEnable() {
-        _loginEnable.value = !username.value.isNullOrEmpty() && !password.value.isNullOrEmpty()
+        _isLoginEnable.value = !username.value.isNullOrEmpty() && !password.value.isNullOrEmpty()
     }
 
     @ExperimentalCoroutinesApi
     @FlowPreview
     fun login() =
             launchUI {
-                uiLiveEvent.showLoadingProgressBar.call()
                 launchFlow {
                     repository.run {
                         cacheUsername(username.value ?: "")
@@ -48,20 +46,19 @@ class LoginViewModel(
                             launchFlow { repository.getUserInfo() }
                         }
                         .flowOn(Dispatchers.IO)
-                        .onStart { _isShowLoadingView.value = true }
+                        .onStart { uiLiveEvent.showLoadingProgressBarEvent.call() }
                         .catch {
                             val responseThrowable = ExceptionHandler.handleException(it)
-                            uiLiveEvent.showSnackbarEvent.value = "${responseThrowable.code}:${responseThrowable.errorMessage}"
-                            loginSuccess.value = false
+                            uiLiveEvent.showSnackbarEvent.value = "${responseThrowable.errorCode}:${responseThrowable.errorMessage}"
                         }
-                        .onCompletion { uiLiveEvent.dismissLoadingProgressBar.call() }
+                        .onCompletion { uiLiveEvent.dismissLoadingProgressBarEvent.call() }
                         .collect {
                             repository.run {
                                 cacheUserId(it.id)
                                 cacheName(it.login)
                                 cacheAvatarUrl(it.avatarUrl)
                             }
-                            loginSuccess.value = true
+                            isLoginSuccess.value = true
                         }
             }
 

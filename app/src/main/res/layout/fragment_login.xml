@@ -83,7 +83,7 @@
             android:layout_width="81dp"
             android:layout_height="81dp"
             android:layout_marginTop="52dp"
-            android:background="@mipmap/ic_launcher"
+            android:background="@drawable/ic_github"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

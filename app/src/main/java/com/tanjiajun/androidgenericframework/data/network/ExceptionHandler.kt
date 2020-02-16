@@ -2,8 +2,6 @@ package com.tanjiajun.androidgenericframework.data.network
 
 import android.util.MalformedJsonException
 import com.google.gson.JsonParseException
-import com.tanjiajun.androidgenericframework.utils.otherwise
-import com.tanjiajun.androidgenericframework.utils.yes
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -19,25 +17,35 @@ object ExceptionHandler {
 
     fun handleException(throwable: Throwable): ResponseThrowable =
             when (throwable) {
-                is JsonParseException, is JSONException, is ParseException, is MalformedJsonException ->
-                    ResponseThrowable(error = Error.PARSE_ERROR, throwable = throwable)
+                is JsonParseException ->
+                    ResponseThrowable(errorCode = 0, errorMessage = "JsonParseException", throwable = throwable)
+
+                is JSONException ->
+                    ResponseThrowable(errorCode = 0, errorMessage = "JSONException", throwable = throwable)
+
+                is ParseException ->
+                    ResponseThrowable(errorCode = 0, errorMessage = "ParseException", throwable = throwable)
+
+                is MalformedJsonException ->
+                    ResponseThrowable(errorCode = 0, errorMessage = "MalformedJsonException", throwable = throwable)
 
                 is ConnectException ->
-                    ResponseThrowable(error = Error.NETWORK_ERROR, throwable = throwable)
+                    ResponseThrowable(errorCode = 0, errorMessage = "ConnectException", throwable = throwable)
 
                 is HttpException ->
-                    ResponseThrowable(error = Error.HTTP_ERROR, throwable = throwable)
+                    ResponseThrowable(errorCode = throwable.code(), errorMessage = throwable.message(), throwable = throwable)
 
                 is SSLException ->
-                    ResponseThrowable(error = Error.SSL_ERROR, throwable = throwable)
+                    ResponseThrowable(errorCode = 0, errorMessage = "SSLException", throwable = throwable)
 
-                is SocketTimeoutException, is UnknownHostException ->
-                    ResponseThrowable(error = Error.TIMEOUT_ERROR, throwable = throwable)
+                is SocketTimeoutException ->
+                    ResponseThrowable(errorCode = 0, errorMessage = "SocketTimeoutException", throwable = throwable)
+
+                is UnknownHostException ->
+                    ResponseThrowable(errorCode = 0, errorMessage = "UnknownHostException", throwable = throwable)
 
                 else ->
-                    (throwable.message.isNullOrEmpty())
-                            .yes { ResponseThrowable(code = 1000, throwable = throwable) }
-                            .otherwise { ResponseThrowable(error = Error.UNKNOWN_ERROR, throwable = throwable) }
+                    ResponseThrowable(errorCode = 0, errorMessage = "UnknownError", throwable = throwable)
             }
 
 }

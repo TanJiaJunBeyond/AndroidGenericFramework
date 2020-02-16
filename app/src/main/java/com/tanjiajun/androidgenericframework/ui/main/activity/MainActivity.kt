@@ -37,7 +37,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
         get() = binding.vpRepository
 
     private lateinit var repositoryFragments: MutableList<RepositoryFragment>
-
     private lateinit var adapter: OrderFragmentStateAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
         vpRepository.adapter = adapter
         vpRepository.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) =
-                    tlRepository.setScrollPosition(position, 0f, true)
+                    tlRepository.setScrollPosition(position, 0.0F, true)
         })
     }
 

@@ -32,7 +32,6 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
         manager = supportFragmentManager
-        registerUIChange()
     }
 
     @get:LayoutRes
@@ -42,12 +41,14 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     open val containId: Int = 0
 
-    private fun registerUIChange() =
+    protected fun registerToastEvent() =
+            viewModel.uiLiveEvent.showToastEvent.observe(this, Observer {
+                toastShort(it)
+            })
+
+    protected fun registerLoadingProgressBarEvent() =
             with(viewModel.uiLiveEvent) {
-                showToastEvent.observe(this@BaseActivity, Observer {
-                    toastShort(it)
-                })
-                showLoadingProgressBar.observe(this@BaseActivity, Observer {
+                showLoadingProgressBarEvent.observe(this@BaseActivity, Observer {
                     findViewById<FrameLayout>(android.R.id.content).addView(
                             ProgressBar(this@BaseActivity)
                                     .apply {
@@ -59,16 +60,18 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
                                     .also { progressBar = it }
                     )
                 })
-                dismissLoadingProgressBar.observe(this@BaseActivity, Observer {
+                dismissLoadingProgressBarEvent.observe(this@BaseActivity, Observer {
                     progressBar?.let { findViewById<FrameLayout>(android.R.id.content).removeView(it) }
                 })
-                showSnackbarEvent.observe(this@BaseActivity, Observer {
-                    Snackbar
-                            .make(window.decorView, it, Snackbar.LENGTH_SHORT)
-                            .setActionTextColor(ContextCompat.getColor(this@BaseActivity, R.color.white))
-                            .show()
-                })
             }
+
+    protected fun registerSnackbarEvent() =
+            viewModel.uiLiveEvent.showSnackbarEvent.observe(this, Observer {
+                Snackbar
+                        .make(window.decorView, it, Snackbar.LENGTH_SHORT)
+                        .setActionTextColor(ContextCompat.getColor(this@BaseActivity, R.color.white))
+                        .show()
+            })
 
     fun getCurrentFragment(): BaseFragment<*, *> =
             manager.findFragmentById(containId) as BaseFragment<*, *>

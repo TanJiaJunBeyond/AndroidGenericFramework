@@ -80,7 +80,7 @@ abstract class BaseViewModel : ViewModel() {
                    error: (ErrorCallback)? = null,
                    complete: (CommonCallback)? = null) =
             with(uiState) {
-                if (isShowLoadingProgressBar) uiLiveEvent.showLoadingProgressBar.call()
+                if (isShowLoadingProgressBar) uiLiveEvent.showLoadingProgressBarEvent.call()
                 if (isShowLoadingView) _isShowLoadingView.value = true
                 if (isShowErrorView) _isShowErrorView.value = false
                 launchUI {
@@ -89,14 +89,14 @@ abstract class BaseViewModel : ViewModel() {
                             success = { withContext(Dispatchers.Main) { success?.invoke(this, it) } },
                             error = {
                                 withContext(Dispatchers.Main) {
-                                    if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.code}:${it.errorMessage}")
+                                    if (isShowErrorToast) uiLiveEvent.showToastEvent.postValue("${it.errorCode}:${it.errorMessage}")
                                     if (isShowErrorView) _isShowErrorView.value = true
                                     error?.invoke(this, it)
                                 }
                             },
                             complete = {
                                 withContext(Dispatchers.Main) {
-                                    if (isShowLoadingProgressBar) uiLiveEvent.dismissLoadingProgressBar.call()
+                                    if (isShowLoadingProgressBar) uiLiveEvent.dismissLoadingProgressBarEvent.call()
                                     if (isShowLoadingView) _isShowLoadingView.value = false
                                     complete?.invoke(this)
                                 }
@@ -108,8 +108,8 @@ abstract class BaseViewModel : ViewModel() {
     inner class UILiveEvent {
 
         val showToastEvent by lazy { SingleLiveEvent<String>() }
-        val showLoadingProgressBar by lazy { SingleLiveEvent<Boolean>() }
-        val dismissLoadingProgressBar by lazy { SingleLiveEvent<Boolean>() }
+        val showLoadingProgressBarEvent by lazy { SingleLiveEvent<Boolean>() }
+        val dismissLoadingProgressBarEvent by lazy { SingleLiveEvent<Boolean>() }
         val showSnackbarEvent by lazy { SingleLiveEvent<String>() }
 
     }
