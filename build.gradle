@@ -56,6 +56,7 @@ ext {
     navigationVersion = '2.1.0-beta02'
     viewPager2Version = '1.0.0-beta03'
     mmkvVersion = '1.0.23'
+    daggerVersion = '2.23.2'
     junitVersion = '4.12'
     testRunnerVersion = '1.2.1'
 }
