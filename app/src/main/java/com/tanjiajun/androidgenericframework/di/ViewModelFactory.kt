@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui
+package com.tanjiajun.androidgenericframework.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
