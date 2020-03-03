@@ -21,6 +21,7 @@ import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginAc
 import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.registerOnTabSelectedListener
 import com.tanjiajun.androidgenericframework.utils.startActivity
+import com.tanjiajun.androidgenericframework.utils.yes
 
 /**
  * Created by TanJiaJun on 2019-07-22.
@@ -87,8 +88,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
         super.onNewIntent(intent)
         intent
                 ?.getBooleanExtra(EXTRA_LOGOUT, false)
-                ?.takeIf { it }
-                ?.let {
+                ?.yes {
                     startActivity<RegisterAndLoginActivity>()
                     finish()
                 }
