@@ -12,7 +12,7 @@ import retrofit2.http.POST
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
-class UserNetwork private constructor() {
+class UserNetwork {
 
     private val service by lazy { UserRetrofit().service }
 
@@ -37,10 +37,6 @@ class UserNetwork private constructor() {
 
         var service: UserService = retrofit.create(UserService::class.java)
 
-    }
-
-    companion object {
-        val instance by lazy { UserNetwork() }
     }
 
 }

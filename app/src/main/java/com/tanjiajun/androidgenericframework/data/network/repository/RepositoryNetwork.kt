@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
-class RepositoryNetwork private constructor() {
+class RepositoryNetwork {
 
     private val service by lazy { RepositoryRetrofit().service }
 
@@ -39,10 +39,6 @@ class RepositoryNetwork private constructor() {
 
         val service: RepositoryService = retrofit.create(RepositoryService::class.java)
 
-    }
-
-    companion object {
-        val instance by lazy { RepositoryNetwork() }
     }
 
 }
