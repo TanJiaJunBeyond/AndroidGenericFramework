@@ -4,12 +4,13 @@ import android.content.SharedPreferences
 import com.tanjiajun.androidgenericframework.utils.int
 import com.tanjiajun.androidgenericframework.utils.string
 import com.tencent.mmkv.MMKV
+import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2019-08-08.
  */
-class UserDao(
-        val mmkv: MMKV
+class UserDao @Inject constructor(
+        private val mmkv: MMKV
 ) {
 
     var accessToken by mmkv.string("user_access_token", "")

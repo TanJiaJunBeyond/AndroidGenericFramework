@@ -11,18 +11,23 @@ import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.utils.toastShort
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2019-07-28.
  */
-abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : DaggerFragment() {
 
     lateinit var binding: T
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @get:LayoutRes
     abstract val layoutRes: Int
@@ -55,9 +60,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
                     .root
 
     protected fun registerToastEvent() =
-            viewModel.uiLiveEvent.showToastEvent.observe(this, Observer {
-                toastShort(it)
-            })
+            viewModel.uiLiveEvent.showToastEvent.observe(this, Observer { toastShort(it) })
 
     protected fun registerLoadingProgressBarEvent() =
             with(viewModel.uiLiveEvent) {

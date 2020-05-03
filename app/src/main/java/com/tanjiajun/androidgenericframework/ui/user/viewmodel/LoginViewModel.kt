@@ -4,18 +4,19 @@ import android.text.Editable
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tanjiajun.androidgenericframework.data.network.ExceptionHandler
+import com.tanjiajun.androidgenericframework.data.apiclient.ExceptionHandler
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2019-08-02.
  */
-class LoginViewModel(
+class LoginViewModel @Inject constructor(
         private val repository: UserInfoRepository
 ) : BaseViewModel() {
 

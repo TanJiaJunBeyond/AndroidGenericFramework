@@ -7,7 +7,6 @@ import com.tanjiajun.androidgenericframework.databinding.ActivitySplashBinding
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
 import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity
-import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.startActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -19,7 +18,7 @@ import kotlinx.coroutines.launch
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override val layoutRes: Int = R.layout.activity_splash
-    override val viewModel by viewModels<SplashViewModel> { getViewModelFactory() }
+    override val viewModel by viewModels<SplashViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -4,7 +4,6 @@ import android.content.Context
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkApplication
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
@@ -15,8 +14,12 @@ import javax.inject.Singleton
 @Singleton
 @Component(
         modules = [
-            AndroidInjectionModule::class,
-            AndroidSupportInjectionModule::class
+            AndroidSupportInjectionModule::class,
+            ApplicationModule::class,
+            NetworkModule::class,
+            MainModule::class,
+            UserModule::class,
+            RepositoryModule::class
         ]
 )
 interface ApplicationComponent : AndroidInjector<AndroidGenericFrameworkApplication> {

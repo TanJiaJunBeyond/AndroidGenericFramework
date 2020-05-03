@@ -10,7 +10,6 @@ import com.tanjiajun.androidgenericframework.databinding.ActivityPersonalCenterB
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel
-import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 
 /**
  * Created by TanJiaJun on 2019-08-24.
@@ -19,7 +18,7 @@ class PersonalCenterActivity
     : BaseActivity<ActivityPersonalCenterBinding, PersonalCenterViewModel>(), PersonalCenterViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.activity_personal_center
-    override val viewModel by viewModels<PersonalCenterViewModel> { getViewModelFactory() }
+    override val viewModel by viewModels<PersonalCenterViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

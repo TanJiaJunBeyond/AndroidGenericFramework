@@ -11,7 +11,6 @@ import com.tanjiajun.androidgenericframework.databinding.FragmentLoginBinding
 import com.tanjiajun.androidgenericframework.ui.BaseFragment
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.LoginViewModel
-import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.startActivity
 import com.tanjiajun.androidgenericframework.utils.yes
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,7 +24,7 @@ class LoginFragment private constructor()
         LoginViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.fragment_login
-    override val viewModel by viewModels<LoginViewModel> { getViewModelFactory() }
+    override val viewModel by viewModels<LoginViewModel> { viewModelFactory }
     override val transactionTag: String = FRAGMENT_TAG_LOGIN
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) =

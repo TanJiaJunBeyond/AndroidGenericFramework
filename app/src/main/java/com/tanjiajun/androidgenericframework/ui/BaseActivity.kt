@@ -5,7 +5,6 @@ import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -13,18 +12,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.utils.otherwise
 import com.tanjiajun.androidgenericframework.utils.toastShort
 import com.tanjiajun.androidgenericframework.utils.yes
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2019-07-28.
  */
-abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : DaggerAppCompatActivity() {
 
     lateinit var binding: T
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var manager: FragmentManager
     private var progressBar: ProgressBar? = null
 
@@ -42,9 +48,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
     open val containId: Int = 0
 
     protected fun registerToastEvent() =
-            viewModel.uiLiveEvent.showToastEvent.observe(this, Observer {
-                toastShort(it)
-            })
+            viewModel.uiLiveEvent.showToastEvent.observe(this, Observer { toastShort(it) })
 
     protected fun registerLoadingProgressBarEvent() =
             with(viewModel.uiLiveEvent) {
@@ -93,30 +97,16 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
                     }
 
     fun popBackStackImmediate(): Boolean =
-            manager.run {
-                if (backStackEntryCount < 1) {
-                    return@run false
-                }
-
-                try {
-                    manager.popBackStackImmediate()
-                } catch (exception: IllegalStateException) {
-                    return@run false
-                }
-            }
+            manager
+                    .takeIf { it.backStackEntryCount > 0 }
+                    ?.popBackStackImmediate()
+                    ?: false
 
     fun popBackStackImmediate(name: String, flags: Int): Boolean =
-            manager.run {
-                if (backStackEntryCount < 1) {
-                    return@run false
-                }
-
-                try {
-                    manager.popBackStackImmediate(name, flags)
-                } catch (exception: IllegalStateException) {
-                    return@run false
-                }
-            }
+            manager
+                    .takeIf { it.backStackEntryCount > 0 }
+                    ?.popBackStackImmediate(name, flags)
+                    ?: false
 
     fun addFragment(fragment: BaseFragment<*, *>) =
             handleFragmentTransaction(
@@ -238,8 +228,10 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         overridePendingTransition(0, 0)
     }
 
-}
+    private companion object {
+        const val ACTION_ADD = 0
+        const val ACTION_REPLACE = 1
+        const val ACTION_ADD_AND_HIDE_OTHERS = 2
+    }
 
-const val ACTION_ADD = 0
-const val ACTION_REPLACE = 1
-const val ACTION_ADD_AND_HIDE_OTHERS = 2
+}

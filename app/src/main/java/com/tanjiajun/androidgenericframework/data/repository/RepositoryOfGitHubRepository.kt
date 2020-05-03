@@ -1,15 +1,16 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
+import com.tanjiajun.androidgenericframework.data.apiclient.repository.RepositoryApiClient
 import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryData
-import com.tanjiajun.androidgenericframework.data.network.repository.RepositoryNetwork
 import com.tanjiajun.androidgenericframework.utils.Language
 import java.time.LocalDateTime
+import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2020-02-08.
  */
-class RepositoryOfGitHubRepository(
-        val network: RepositoryNetwork
+class RepositoryOfGitHubRepository @Inject constructor(
+        private val apiClient: RepositoryApiClient
 ) {
 
     fun getDefaultLanguageNames(): List<String> =
@@ -33,7 +34,7 @@ class RepositoryOfGitHubRepository(
             )
 
     suspend fun getRepositories(languageName: String): List<RepositoryData> =
-            network.fetchRepositories(
+            apiClient.fetchRepositories(
                     languageName = languageName,
                     fromDateTime = LocalDateTime.now().minusMonths(1)
             )

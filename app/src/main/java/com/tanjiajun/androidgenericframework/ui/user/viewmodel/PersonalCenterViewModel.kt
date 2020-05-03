@@ -5,11 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
+import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2019-08-24.
  */
-class PersonalCenterViewModel(
+class PersonalCenterViewModel @Inject constructor(
         private val repository: UserInfoRepository
 ) : BaseViewModel() {
 

@@ -18,7 +18,6 @@ import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
 import com.tanjiajun.androidgenericframework.ui.repository.fragment.RepositoryFragment
 import com.tanjiajun.androidgenericframework.ui.user.activity.PersonalCenterActivity
 import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity
-import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.registerOnTabSelectedListener
 import com.tanjiajun.androidgenericframework.utils.startActivity
 import com.tanjiajun.androidgenericframework.utils.yes
@@ -29,7 +28,7 @@ import com.tanjiajun.androidgenericframework.utils.yes
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.activity_main
-    override val viewModel by viewModels<MainViewModel> { getViewModelFactory() }
+    override val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
     private val tlRepository: TabLayout
         get() = binding.tlRepository

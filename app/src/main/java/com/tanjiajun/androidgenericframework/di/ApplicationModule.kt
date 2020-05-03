@@ -1,9 +1,11 @@
 package com.tanjiajun.androidgenericframework.di
 
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration
+import com.tanjiajun.androidgenericframework.data.apiclient.repository.RepositoryApiClient
+import com.tanjiajun.androidgenericframework.data.apiclient.user.UserApiClient
 import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
-import com.tanjiajun.androidgenericframework.data.network.repository.RepositoryNetwork
-import com.tanjiajun.androidgenericframework.data.network.user.UserNetwork
+import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
+import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tencent.mmkv.MMKV
 import dagger.Module
 import dagger.Provides
@@ -13,7 +15,7 @@ import javax.inject.Singleton
  * Created by TanJiaJun on 2020/3/4.
  */
 @Module
-object ApplicationModule {
+open class ApplicationModule {
 
     @Provides
     @Singleton
@@ -26,12 +28,13 @@ object ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideUserNetwork(): UserNetwork =
-            UserNetwork()
+    fun provideRepositoryOfGitHubRepository(apiClient: RepositoryApiClient): RepositoryOfGitHubRepository =
+            RepositoryOfGitHubRepository(apiClient)
 
     @Provides
     @Singleton
-    fun provideRepositoryNetwork(): RepositoryNetwork =
-            RepositoryNetwork()
+    fun provideUserInfoRepository(apiClient: UserApiClient,
+                                  dao: UserDao): UserInfoRepository =
+            UserInfoRepository(apiClient, dao)
 
 }

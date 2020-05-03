@@ -7,11 +7,12 @@ import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubR
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import com.tanjiajun.androidgenericframework.ui.UIState
 import com.tanjiajun.androidgenericframework.utils.yes
+import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2020-02-07.
  */
-class RepositoryViewModel(
+class RepositoryViewModel @Inject constructor(
         private val repository: RepositoryOfGitHubRepository
 ) : BaseViewModel() {
 
