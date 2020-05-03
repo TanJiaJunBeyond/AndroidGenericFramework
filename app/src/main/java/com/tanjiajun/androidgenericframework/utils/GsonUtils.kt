@@ -8,10 +8,10 @@ import java.io.Reader
 /**
  * Created by TanJiaJun on 2019/5/3.
  */
-inline fun <reified T : Any> gsonFromJson(string: String): T = Gson().fromJson(string, T::class.java)
+inline fun <reified T> gsonFromJson(string: String): T = Gson().fromJson(string, T::class.java)
 
-inline fun <reified T : Any> gsonFromJsonByType(string: String): T = Gson().fromJson(string, object : TypeToken<T>() {}.type)
+inline fun <reified T> gsonFromJsonByType(string: String): T = Gson().fromJson(string, object : TypeToken<T>() {}.type)
 
-inline fun <reified T : Any> gsonFromJson(reader: Reader): T = Gson().fromJson(reader, T::class.java)
+inline fun <reified T> gsonFromJson(reader: Reader): T = Gson().fromJson(reader, T::class.java)
 
-inline fun <reified T : Any> gsonFromJson(jsonElement: JsonElement): T = Gson().fromJson(jsonElement, T::class.java)
+inline fun <reified T> gsonFromJson(jsonElement: JsonElement): T = Gson().fromJson(jsonElement, T::class.java)

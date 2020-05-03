@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 /**
  * Created by TanJiaJun on 2019-08-31.
  */
-abstract class BaseViewType<D> {
+abstract class BaseViewType<T : Any> {
 
     @LayoutRes
     abstract fun getItemLayoutRes(): Int
@@ -16,7 +16,7 @@ abstract class BaseViewType<D> {
     abstract fun isMatchViewType(any: Any): Boolean
 
     abstract fun bind(holder: BaseViewHolder,
-                      data: D,
+                      data: T,
                       position: Int)
 
     abstract fun getSpanSize(): Int
@@ -30,10 +30,10 @@ abstract class BaseViewType<D> {
             ))
 
     open fun bind(holder: BaseViewHolder,
-                  data: D,
+                  data: T,
                   position: Int,
                   payLoads: List<Any>) =
-            holder.run {
+            with(holder) {
                 bind(this, data, position)
                 binding.executePendingBindings()
             }

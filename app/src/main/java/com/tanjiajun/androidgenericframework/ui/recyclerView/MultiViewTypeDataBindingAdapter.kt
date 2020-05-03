@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by TanJiaJun on 2019-08-31.
  */
-abstract class MultiViewTypeDataBindingAdapter<D : Any>
-    : BaseDataBindingAdapter<D>() {
+abstract class MultiViewTypeDataBindingAdapter<T : Any>
+    : BaseDataBindingAdapter<T>() {
 
-    private val items = mutableListOf<D>()
-    private val viewTypes = SparseArray<BaseViewType<D>>()
-    private val noDataViewTypes = SparseArray<NoDataViewType<D>>()
+    private val items = mutableListOf<T>()
+    private val viewTypes = SparseArray<BaseViewType<T>>()
+    private val noDataViewTypes = SparseArray<NoDataViewType<T>>()
     private var headerCount = 0
     private var footerCount = 0
 
@@ -38,7 +38,7 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
     override fun getItemCount(): Int =
             headerCount + items.size + footerCount
 
-    override fun getItemByPosition(position: Int): D? =
+    override fun getItemByPosition(position: Int): T? =
             items[position]
 
     override fun getLayoutResByPosition(position: Int): Int =
@@ -76,7 +76,7 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
     private fun getItemPositionByPosition(position: Int): Int =
             position - headerCount
 
-    fun getViewTypeByPosition(position: Int): BaseViewType<D> {
+    fun getViewTypeByPosition(position: Int): BaseViewType<T> {
         val noDataViewTypesSize = noDataViewTypes.size()
 
         for (i in 0 until noDataViewTypesSize) {
@@ -100,15 +100,15 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
         throw IllegalStateException("View type not find.")
     }
 
-    fun addHeaderViewType(viewType: NoDataViewType<D>) {
+    fun addHeaderViewType(viewType: NoDataViewType<T>) {
         noDataViewTypes.put(viewType.getItemLayoutRes(), viewType)
         headerCount++
     }
 
-    fun addViewType(viewType: BaseViewType<D>) =
+    fun addViewType(viewType: BaseViewType<T>) =
             viewTypes.put(viewType.getItemLayoutRes(), viewType)
 
-    fun addFooterViewType(viewType: NoDataViewType<D>) {
+    fun addFooterViewType(viewType: NoDataViewType<T>) {
         noDataViewTypes.put(viewType.getItemLayoutRes(), viewType)
         footerCount++
     }
@@ -123,8 +123,8 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
                     }
                     ?: false
 
-    private fun findItemsHasMatchViewType(items: List<D>): List<D> =
-            mutableListOf<D>()
+    private fun findItemsHasMatchViewType(items: List<T>): List<T> =
+            mutableListOf<T>()
                     .apply {
                         val viewTypesSize = viewTypes.size()
 
@@ -137,15 +137,15 @@ abstract class MultiViewTypeDataBindingAdapter<D : Any>
                         }
                     }
 
-    fun setItems(items: List<D>) =
+    fun setItems(items: List<T>) =
             with(this.items) {
                 if (isNotEmpty()) clear()
                 addAll(findItemsHasMatchViewType(items))
                 notifyDataSetChanged()
             }
 
-    fun addItems(items: List<D>) =
-            this.items.run {
+    fun addItems(items: List<T>) =
+            with(this.items) {
                 addAll(findItemsHasMatchViewType(items))
                 notifyItemRangeInserted(headerCount + size, items.size)
             }

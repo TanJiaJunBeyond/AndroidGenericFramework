@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by TanJiaJun on 2019-08-29.
  */
-abstract class BaseDataBindingAdapter<D : Any>
+abstract class BaseDataBindingAdapter<T : Any>
     : RecyclerView.Adapter<BaseViewHolder>() {
 
     protected abstract fun getLayoutResByPosition(position: Int): Int
 
-    protected abstract fun getItemByPosition(position: Int): D?
+    protected abstract fun getItemByPosition(position: Int): T?
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
             BaseViewHolder(DataBindingUtil.inflate(

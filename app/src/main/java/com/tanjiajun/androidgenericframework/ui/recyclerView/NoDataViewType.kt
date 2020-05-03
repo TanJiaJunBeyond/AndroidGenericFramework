@@ -3,7 +3,7 @@ package com.tanjiajun.androidgenericframework.ui.recyclerView
 /**
  * Created by TanJiaJun on 2019-08-31.
  */
-abstract class NoDataViewType<D> : BaseViewType<D>() {
+abstract class NoDataViewType<T : Any> : BaseViewType<T>() {
 
     abstract fun bind(holder: BaseViewHolder,
                       position: Int)
@@ -13,11 +13,11 @@ abstract class NoDataViewType<D> : BaseViewType<D>() {
                                  itemCount: Int,
                                  footerCount: Int): Boolean
 
-    override fun bind(holder: BaseViewHolder, data: D, position: Int) {
+    override fun bind(holder: BaseViewHolder, data: T, position: Int) {
         // no implementation
     }
 
-    override fun bind(holder: BaseViewHolder, data: D,
+    override fun bind(holder: BaseViewHolder, data: T,
                       position: Int,
                       payLoads: List<Any>) {
         // no implementation
@@ -28,7 +28,7 @@ abstract class NoDataViewType<D> : BaseViewType<D>() {
     fun bind(holder: BaseViewHolder,
              position: Int,
              payLoads: List<Any>) =
-            holder.run {
+            with(holder) {
                 bind(this, position)
                 binding.executePendingBindings()
             }

@@ -11,7 +11,7 @@ class BaseViewHolder(val binding: ViewDataBinding)
     : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(data: Any) =
-            binding.run {
+            with(binding) {
                 setVariable(BR.data, data)
                 executePendingBindings()
             }
