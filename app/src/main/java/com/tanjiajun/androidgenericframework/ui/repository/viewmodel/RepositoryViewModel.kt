@@ -3,7 +3,7 @@ package com.tanjiajun.androidgenericframework.ui.repository.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryData
-import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
+import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import com.tanjiajun.androidgenericframework.ui.UIState
 import com.tanjiajun.androidgenericframework.utils.yes
@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Created by TanJiaJun on 2020-02-07.
  */
 class RepositoryViewModel @Inject constructor(
-        private val repository: RepositoryOfGitHubRepository
+        private val repository: GitHubRepository
 ) : BaseViewModel() {
 
     private val _isShowRepositoryView = MutableLiveData<Boolean>()

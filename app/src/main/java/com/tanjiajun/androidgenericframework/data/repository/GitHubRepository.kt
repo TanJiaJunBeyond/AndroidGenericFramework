@@ -9,7 +9,7 @@ import javax.inject.Inject
 /**
  * Created by TanJiaJun on 2020-02-08.
  */
-class RepositoryOfGitHubRepository @Inject constructor(
+class GitHubRepository @Inject constructor(
         private val apiClient: RepositoryApiClient
 ) {
 

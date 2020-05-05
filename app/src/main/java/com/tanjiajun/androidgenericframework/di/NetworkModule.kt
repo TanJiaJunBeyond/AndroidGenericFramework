@@ -17,11 +17,12 @@ import javax.inject.Singleton
 /**
  * Created by TanJiaJun on 2020/4/4.
  */
+@Suppress("unused")
 @Module
 open class NetworkModule {
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideOkHttpClient(userDao: UserDao): OkHttpClient =
             OkHttpClient.Builder()
                     .connectTimeout(AndroidGenericFrameworkConfiguration.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
@@ -29,28 +30,24 @@ open class NetworkModule {
                     .addInterceptor(BasicAuthInterceptor(userDao))
                     .build()
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit =
             Retrofit.Builder()
                     .client(client)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(String.format("%1\$s://%2\$s/", SCHEMA_HTTPS, AndroidGenericFrameworkConfiguration.HOST))
+                    .baseUrl(String.format("%1\$s://%2\$s/", "https", AndroidGenericFrameworkConfiguration.HOST))
                     .build()
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideUserApiClient(retrofit: Retrofit): UserApiClient =
             UserApiClient(retrofit)
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideRepositoryApiClient(retrofit: Retrofit): RepositoryApiClient =
             RepositoryApiClient(retrofit)
-
-    private companion object {
-        const val SCHEMA_HTTPS = "https"
-    }
 
 }

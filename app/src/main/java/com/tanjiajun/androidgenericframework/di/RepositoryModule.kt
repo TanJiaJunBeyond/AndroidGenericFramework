@@ -1,26 +1,30 @@
 package com.tanjiajun.androidgenericframework.di
 
-import androidx.lifecycle.ViewModel
-import com.tanjiajun.androidgenericframework.ui.repository.fragment.RepositoryFragment
-import com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel
-import dagger.Binds
+import com.tanjiajun.androidgenericframework.data.apiclient.repository.RepositoryApiClient
+import com.tanjiajun.androidgenericframework.data.apiclient.user.UserApiClient
+import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
+import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
+import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
-import dagger.multibindings.IntoMap
+import dagger.Provides
+import javax.inject.Singleton
 
 /**
- * Created by TanJiaJun on 2020/3/8.
+ * Created by TanJiaJun on 2020/5/6.
  */
 @Suppress("unused")
 @Module
-abstract class RepositoryModule {
+open class RepositoryModule {
 
-    @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
-    internal abstract fun contributeRepositoryFragment(): RepositoryFragment
+    @Provides
+    @Singleton
+    fun provideRepositoryOfGitHubRepository(apiClient: RepositoryApiClient): GitHubRepository =
+            GitHubRepository(apiClient)
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(RepositoryViewModel::class)
-    internal abstract fun bindRepositoryViewModel(viewModel: RepositoryViewModel): ViewModel
+    @Provides
+    @Singleton
+    fun provideUserInfoRepository(apiClient: UserApiClient,
+                                  dao: UserDao): UserInfoRepository =
+            UserInfoRepository(apiClient, dao)
 
 }
