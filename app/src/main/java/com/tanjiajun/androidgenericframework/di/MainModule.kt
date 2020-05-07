@@ -18,19 +18,19 @@ import dagger.multibindings.IntoMap
 abstract class MainModule {
 
     @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
-    internal abstract fun contributeMainActivity(): MainActivity
-
-    @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
     internal abstract fun contributeSplashActivity(): SplashActivity
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    internal abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+    @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
+    internal abstract fun contributeMainActivity(): MainActivity
 
     @Binds
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
     internal abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    internal abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
 }
