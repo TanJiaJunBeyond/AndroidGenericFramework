@@ -1,15 +1,15 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
+import com.tanjiajun.androidgenericframework.data.apiclient.user.UserApiClient
 import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserAccessTokenData
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
-import com.tanjiajun.androidgenericframework.data.network.user.UserNetwork
 
 /**
  * Created by TanJiaJun on 2019-07-31.
  */
-class UserInfoRepository private constructor(
-        private val network: UserNetwork,
+class UserInfoRepository(
+        private val apiClient: UserApiClient,
         private val dao: UserDao
 ) {
 
@@ -23,10 +23,10 @@ class UserInfoRepository private constructor(
             dao.cachePassword(password)
 
     suspend fun authorizations(): UserAccessTokenData =
-            network.authorizations()
+            apiClient.authorizations()
 
     suspend fun getUserInfo(): UserInfoData =
-            network.fetchUserInfo()
+            apiClient.fetchUserInfo()
 
     fun cacheUserId(userId: Int) =
             dao.cacheUserId(userId)
@@ -45,18 +45,5 @@ class UserInfoRepository private constructor(
 
     fun logout() =
             dao.clearUserInfoCache()
-
-    companion object {
-        @Volatile
-        private var instance: UserInfoRepository? = null
-
-        fun getInstance(
-                network: UserNetwork,
-                dao: UserDao
-        ): UserInfoRepository =
-                instance ?: synchronized(this) {
-                    instance ?: UserInfoRepository(network, dao).also { instance = it }
-                }
-    }
 
 }

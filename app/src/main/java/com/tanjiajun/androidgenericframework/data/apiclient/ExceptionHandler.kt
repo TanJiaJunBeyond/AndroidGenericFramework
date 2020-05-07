@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.network
+package com.tanjiajun.androidgenericframework.data.apiclient
 
 import android.util.MalformedJsonException
 import com.google.gson.JsonParseException

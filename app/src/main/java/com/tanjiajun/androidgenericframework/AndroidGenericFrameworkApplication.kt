@@ -1,33 +1,31 @@
 package com.tanjiajun.androidgenericframework
 
 import androidx.multidex.MultiDexApplication
-import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration.MMKV_CRYPT_KEY
-import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration.MMKV_ID
-import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
-import com.tanjiajun.androidgenericframework.data.network.repository.RepositoryNetwork
-import com.tanjiajun.androidgenericframework.data.network.user.UserNetwork
-import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
-import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
+import com.tanjiajun.androidgenericframework.di.applicationModules
 import com.tencent.mmkv.MMKV
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidFileProperties
+import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.fragment.koin.fragmentFactory
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 /**
  * Created by TanJiaJun on 2019-07-28.
  */
 class AndroidGenericFrameworkApplication : MultiDexApplication() {
 
-    lateinit var userDao: UserDao
-    lateinit var userRepository: UserInfoRepository
-    lateinit var repositoryOfGitHubRepository: RepositoryOfGitHubRepository
-
     override fun onCreate() {
         super.onCreate()
         instance = this
-
         MMKV.initialize(this)
-
-        userDao = UserDao(MMKV.mmkvWithID(MMKV_ID, MMKV.SINGLE_PROCESS_MODE, MMKV_CRYPT_KEY))
-        userRepository = UserInfoRepository.getInstance(network = UserNetwork.instance, dao = userDao)
-        repositoryOfGitHubRepository = RepositoryOfGitHubRepository(network = RepositoryNetwork.instance)
+        startKoin {
+            androidLogger(Level.DEBUG)
+            androidContext(this@AndroidGenericFrameworkApplication)
+            androidFileProperties()
+            fragmentFactory()
+            modules(applicationModules)
+        }
     }
 
     companion object {

@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tanjiajun.androidgenericframework.EXTRA_LANGUAGE
@@ -16,7 +15,8 @@ import com.tanjiajun.androidgenericframework.ui.BaseFragment
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import com.tanjiajun.androidgenericframework.ui.repository.adapter.RepositoryAdapter
 import com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel
-import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
+import org.koin.androidx.scope.lifecycleScope
+import org.koin.androidx.viewmodel.scope.viewModel
 
 /**
  * Created by TanJiaJun on 2020-02-07.
@@ -25,7 +25,7 @@ class RepositoryFragment private constructor()
     : BaseFragment<FragmentRepositoryBinding, RepositoryViewModel>(), BaseViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.fragment_repository
-    override val viewModel by viewModels<RepositoryViewModel> { getViewModelFactory() }
+    override val viewModel by lifecycleScope.viewModel<RepositoryViewModel>(this)
     override val transactionTag: String = FRAGMENT_TAG_REPOSITORY
 
     private lateinit var language: String

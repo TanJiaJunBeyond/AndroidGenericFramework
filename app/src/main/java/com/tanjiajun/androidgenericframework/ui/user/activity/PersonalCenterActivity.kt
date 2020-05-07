@@ -3,14 +3,14 @@ package com.tanjiajun.androidgenericframework.ui.user.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import com.tanjiajun.androidgenericframework.EXTRA_LOGOUT
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.ActivityPersonalCenterBinding
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
 import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterViewModel
-import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
+import org.koin.androidx.scope.lifecycleScope
+import org.koin.androidx.viewmodel.scope.viewModel
 
 /**
  * Created by TanJiaJun on 2019-08-24.
@@ -19,7 +19,7 @@ class PersonalCenterActivity
     : BaseActivity<ActivityPersonalCenterBinding, PersonalCenterViewModel>(), PersonalCenterViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.activity_personal_center
-    override val viewModel by viewModels<PersonalCenterViewModel> { getViewModelFactory() }
+    override val viewModel by lifecycleScope.viewModel<PersonalCenterViewModel>(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

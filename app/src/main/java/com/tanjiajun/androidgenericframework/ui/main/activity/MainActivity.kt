@@ -3,7 +3,6 @@ package com.tanjiajun.androidgenericframework.ui.main.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
@@ -18,9 +17,10 @@ import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
 import com.tanjiajun.androidgenericframework.ui.repository.fragment.RepositoryFragment
 import com.tanjiajun.androidgenericframework.ui.user.activity.PersonalCenterActivity
 import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity
-import com.tanjiajun.androidgenericframework.utils.getViewModelFactory
 import com.tanjiajun.androidgenericframework.utils.registerOnTabSelectedListener
 import com.tanjiajun.androidgenericframework.utils.startActivity
+import org.koin.androidx.scope.lifecycleScope
+import org.koin.androidx.viewmodel.scope.viewModel
 
 /**
  * Created by TanJiaJun on 2019-07-22.
@@ -28,7 +28,7 @@ import com.tanjiajun.androidgenericframework.utils.startActivity
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.activity_main
-    override val viewModel by viewModels<MainViewModel> { getViewModelFactory() }
+    override val viewModel by lifecycleScope.viewModel<MainViewModel>(this)
 
     private val tlRepository: TabLayout
         get() = binding.tlRepository

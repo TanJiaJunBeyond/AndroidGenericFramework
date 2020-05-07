@@ -3,7 +3,7 @@ package com.tanjiajun.androidgenericframework.ui.main.viewModel
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
+import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import com.tanjiajun.androidgenericframework.utils.otherwise
 import com.tanjiajun.androidgenericframework.utils.yes
@@ -12,7 +12,7 @@ import com.tanjiajun.androidgenericframework.utils.yes
  * Created by TanJiaJun on 2019-08-24.
  */
 class MainViewModel(
-        val repository: RepositoryOfGitHubRepository
+        val repository: GitHubRepository
 ) : BaseViewModel() {
 
     private val _languageNames = MutableLiveData<MutableList<String>>().apply {

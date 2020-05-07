@@ -71,6 +71,10 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "androidx.viewpager2:viewpager2:$viewPager2Version"
     implementation "com.tencent:mmkv:$mmkvVersion"
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    implementation "org.koin:koin-androidx-fragment:$koinVersion"
+    implementation "org.koin:koin-androidx-ext:$koinVersion"
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation 'androidx.test:runner:1.2.0'

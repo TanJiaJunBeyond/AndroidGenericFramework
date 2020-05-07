@@ -2,7 +2,7 @@ package com.tanjiajun.androidgenericframework.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.tanjiajun.androidgenericframework.data.repository.RepositoryOfGitHubRepository
+import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
 import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
@@ -16,7 +16,7 @@ import com.tanjiajun.androidgenericframework.ui.user.viewmodel.PersonalCenterVie
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
         private val userRepository: UserInfoRepository,
-        private val repositoryOfGitHubRepository: RepositoryOfGitHubRepository
+        private val repositoryOfGitHubRepository: GitHubRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
