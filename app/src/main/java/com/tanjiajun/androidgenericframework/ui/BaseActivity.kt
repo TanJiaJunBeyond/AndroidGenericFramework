@@ -221,9 +221,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : DaggerApp
                         .otherwise { onFinishActivity() }
             }
 
-    protected fun getFragmentCountToFinish() = 1
+    private fun getFragmentCountToFinish() = 1
 
-    protected fun onFinishActivity() {
+    private fun onFinishActivity() {
         finish()
         overridePendingTransition(0, 0)
     }
