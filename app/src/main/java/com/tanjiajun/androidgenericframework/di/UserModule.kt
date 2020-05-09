@@ -19,13 +19,13 @@ import dagger.multibindings.IntoMap
 abstract class UserModule {
 
     @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
-    internal abstract fun contributePersonalCenterActivity(): PersonalCenterActivity
-
-    @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
     internal abstract fun contributeRegisterAndLoginActivity(): RegisterAndLoginActivity
 
     @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
     internal abstract fun contributeLoginFragment(): LoginFragment
+
+    @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
+    internal abstract fun contributePersonalCenterActivity(): PersonalCenterActivity
 
     @Binds
     @IntoMap
