@@ -238,8 +238,10 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
         overridePendingTransition(0, 0)
     }
 
-}
+    private companion object {
+        const val ACTION_ADD = 0
+        const val ACTION_REPLACE = 1
+        const val ACTION_ADD_AND_HIDE_OTHERS = 2
+    }
 
-const val ACTION_ADD = 0
-const val ACTION_REPLACE = 1
-const val ACTION_ADD_AND_HIDE_OTHERS = 2
+}
