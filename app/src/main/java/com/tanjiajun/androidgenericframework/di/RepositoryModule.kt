@@ -1,8 +1,8 @@
 package com.tanjiajun.androidgenericframework.di
 
-import com.tanjiajun.androidgenericframework.data.apiclient.repository.RepositoryApiClient
-import com.tanjiajun.androidgenericframework.data.apiclient.user.UserApiClient
-import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
+import com.tanjiajun.androidgenericframework.data.local.user.UserLocalDataSource
+import com.tanjiajun.androidgenericframework.data.remote.repository.RepositoryRemoteDataSource
+import com.tanjiajun.androidgenericframework.data.remote.user.UserRemoteDataSource
 import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import dagger.Module
@@ -18,13 +18,13 @@ open class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepositoryOfGitHubRepository(apiClient: RepositoryApiClient): GitHubRepository =
-            GitHubRepository(apiClient)
+    fun provideRepositoryOfGitHubRepository(remoteDataSource: RepositoryRemoteDataSource): GitHubRepository =
+            GitHubRepository(remoteDataSource)
 
     @Provides
     @Singleton
-    fun provideUserInfoRepository(apiClient: UserApiClient,
-                                  dao: UserDao): UserInfoRepository =
-            UserInfoRepository(apiClient, dao)
+    fun provideUserInfoRepository(remoteDataSource: UserRemoteDataSource,
+                                  localDataSource: UserLocalDataSource): UserInfoRepository =
+            UserInfoRepository(remoteDataSource, localDataSource)
 
 }

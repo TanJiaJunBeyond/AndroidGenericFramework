@@ -1,50 +1,50 @@
 package com.tanjiajun.androidgenericframework.data.repository
 
-import com.tanjiajun.androidgenericframework.data.apiclient.user.UserApiClient
-import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
+import com.tanjiajun.androidgenericframework.data.local.user.UserLocalDataSource
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserAccessTokenData
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserInfoData
+import com.tanjiajun.androidgenericframework.data.remote.user.UserRemoteDataSource
 import javax.inject.Inject
 
 /**
  * Created by TanJiaJun on 2019-07-31.
  */
 class UserInfoRepository @Inject constructor(
-        private val apiClient: UserApiClient,
-        private val dao: UserDao
+        private val remoteDataSource: UserRemoteDataSource,
+        private val localDataSource: UserLocalDataSource
 ) {
 
     fun isLogin(): Boolean =
-            dao.userId != -1
+            localDataSource.userId != -1
 
     fun cacheUsername(username: String) =
-            dao.cacheUsername(username)
+            localDataSource.cacheUsername(username)
 
     fun cachePassword(password: String) =
-            dao.cachePassword(password)
+            localDataSource.cachePassword(password)
 
     suspend fun authorizations(): UserAccessTokenData =
-            apiClient.authorizations()
+            remoteDataSource.authorizations()
 
     suspend fun getUserInfo(): UserInfoData =
-            apiClient.fetchUserInfo()
+            remoteDataSource.fetchUserInfo()
 
     fun cacheUserId(userId: Int) =
-            dao.cacheUserId(userId)
+            localDataSource.cacheUserId(userId)
 
     fun getName(): String =
-            dao.name
+            localDataSource.name
 
     fun cacheName(name: String) =
-            dao.cacheName(name)
+            localDataSource.cacheName(name)
 
     fun getAvatarUrl(): String =
-            dao.avatarUrl
+            localDataSource.avatarUrl
 
     fun cacheAvatarUrl(avatarUrl: String) =
-            dao.cacheAvatarUrl(avatarUrl)
+            localDataSource.cacheAvatarUrl(avatarUrl)
 
     fun logout() =
-            dao.clearUserInfoCache()
+            localDataSource.clearUserInfoCache()
 
 }

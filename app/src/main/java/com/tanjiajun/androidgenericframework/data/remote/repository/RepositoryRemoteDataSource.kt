@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.apiclient.repository
+package com.tanjiajun.androidgenericframework.data.remote.repository
 
 import com.tanjiajun.androidgenericframework.data.model.ListData
 import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryData
@@ -14,7 +14,7 @@ import javax.inject.Inject
 /**
  * Created by TanJiaJun on 2020/4/4.
  */
-class RepositoryApiClient @Inject constructor(
+class RepositoryRemoteDataSource @Inject constructor(
         retrofit: Retrofit
 ) {
 

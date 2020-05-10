@@ -1,10 +1,10 @@
 package com.tanjiajun.androidgenericframework.di
 
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration
-import com.tanjiajun.androidgenericframework.data.apiclient.BasicAuthInterceptor
-import com.tanjiajun.androidgenericframework.data.apiclient.repository.RepositoryApiClient
-import com.tanjiajun.androidgenericframework.data.apiclient.user.UserApiClient
-import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
+import com.tanjiajun.androidgenericframework.data.local.user.UserLocalDataSource
+import com.tanjiajun.androidgenericframework.data.remote.BasicAuthInterceptor
+import com.tanjiajun.androidgenericframework.data.remote.repository.RepositoryRemoteDataSource
+import com.tanjiajun.androidgenericframework.data.remote.user.UserRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -23,11 +23,11 @@ open class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(userDao: UserDao): OkHttpClient =
+    fun provideOkHttpClient(localDataSource: UserLocalDataSource): OkHttpClient =
             OkHttpClient.Builder()
                     .connectTimeout(AndroidGenericFrameworkConfiguration.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
                     .readTimeout(AndroidGenericFrameworkConfiguration.READ_TIMEOUT, TimeUnit.MILLISECONDS)
-                    .addInterceptor(BasicAuthInterceptor(userDao))
+                    .addInterceptor(BasicAuthInterceptor(localDataSource))
                     .build()
 
     @Provides
@@ -42,12 +42,12 @@ open class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideUserApiClient(retrofit: Retrofit): UserApiClient =
-            UserApiClient(retrofit)
+    fun provideUserRemoteDataSource(retrofit: Retrofit): UserRemoteDataSource =
+            UserRemoteDataSource(retrofit)
 
     @Provides
     @Singleton
-    fun provideRepositoryApiClient(retrofit: Retrofit): RepositoryApiClient =
-            RepositoryApiClient(retrofit)
+    fun provideRepositoryRemoteDataSource(retrofit: Retrofit): RepositoryRemoteDataSource =
+            RepositoryRemoteDataSource(retrofit)
 
 }

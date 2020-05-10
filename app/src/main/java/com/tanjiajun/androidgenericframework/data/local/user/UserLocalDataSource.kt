@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.dao.user
+package com.tanjiajun.androidgenericframework.data.local.user
 
 import android.content.SharedPreferences
 import com.tanjiajun.androidgenericframework.utils.int
@@ -9,7 +9,7 @@ import javax.inject.Inject
 /**
  * Created by TanJiaJun on 2019-08-08.
  */
-class UserDao @Inject constructor(
+class UserLocalDataSource @Inject constructor(
         private val mmkv: MMKV
 ) {
 

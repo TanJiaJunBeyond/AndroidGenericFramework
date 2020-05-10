@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.apiclient
+package com.tanjiajun.androidgenericframework.data.remote
 
 /**
  * Created by TanJiaJun on 2020-02-04.

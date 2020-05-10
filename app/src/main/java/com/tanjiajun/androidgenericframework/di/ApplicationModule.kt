@@ -1,7 +1,7 @@
 package com.tanjiajun.androidgenericframework.di
 
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration
-import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
+import com.tanjiajun.androidgenericframework.data.local.user.UserLocalDataSource
 import com.tencent.mmkv.MMKV
 import dagger.Module
 import dagger.Provides
@@ -16,8 +16,8 @@ open class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideUserDao(): UserDao =
-            UserDao(MMKV.mmkvWithID(
+    fun provideUserLocalDataSource(): UserLocalDataSource =
+            UserLocalDataSource(MMKV.mmkvWithID(
                     AndroidGenericFrameworkConfiguration.MMKV_ID,
                     MMKV.SINGLE_PROCESS_MODE,
                     AndroidGenericFrameworkConfiguration.MMKV_CRYPT_KEY
