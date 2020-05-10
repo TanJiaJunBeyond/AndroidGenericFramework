@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.apiclient.user
+package com.tanjiajun.androidgenericframework.data.remote.user
 
 import com.tanjiajun.androidgenericframework.data.model.user.request.LoginRequestData
 import com.tanjiajun.androidgenericframework.data.model.user.response.UserAccessTokenData
@@ -12,7 +12,7 @@ import retrofit2.http.POST
 /**
  * Created by TanJiaJun on 2020/5/6.
  */
-class UserApiClient(
+class UserRemoteDataSource(
         retrofit: Retrofit
 ) {
 

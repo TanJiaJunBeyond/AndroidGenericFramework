@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.data.apiclient.repository
+package com.tanjiajun.androidgenericframework.data.remote.repository
 
 import com.tanjiajun.androidgenericframework.data.model.ListData
 import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryData
@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 /**
  * Created by TanJiaJun on 2020/5/6.
  */
-class RepositoryApiClient(
+class RepositoryRemoteDataSource(
         retrofit: Retrofit
 ) {
 

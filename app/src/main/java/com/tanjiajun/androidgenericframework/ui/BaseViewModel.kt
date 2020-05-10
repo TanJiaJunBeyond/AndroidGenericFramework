@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tanjiajun.androidgenericframework.data.apiclient.ExceptionHandler
-import com.tanjiajun.androidgenericframework.data.apiclient.ResponseThrowable
+import com.tanjiajun.androidgenericframework.data.remote.ExceptionHandler
+import com.tanjiajun.androidgenericframework.data.remote.ResponseThrowable
 import com.tanjiajun.androidgenericframework.utils.SingleLiveEvent
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow

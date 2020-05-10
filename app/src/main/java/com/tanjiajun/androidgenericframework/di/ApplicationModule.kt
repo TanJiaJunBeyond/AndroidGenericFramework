@@ -1,10 +1,10 @@
 package com.tanjiajun.androidgenericframework.di
 
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration
-import com.tanjiajun.androidgenericframework.data.apiclient.BasicAuthInterceptor
-import com.tanjiajun.androidgenericframework.data.apiclient.repository.RepositoryApiClient
-import com.tanjiajun.androidgenericframework.data.apiclient.user.UserApiClient
-import com.tanjiajun.androidgenericframework.data.dao.user.UserDao
+import com.tanjiajun.androidgenericframework.data.local.user.UserLocalDataSource
+import com.tanjiajun.androidgenericframework.data.remote.BasicAuthInterceptor
+import com.tanjiajun.androidgenericframework.data.remote.repository.RepositoryRemoteDataSource
+import com.tanjiajun.androidgenericframework.data.remote.user.UserRemoteDataSource
 import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit
  */
 val applicationModule = module {
     single {
-        UserDao(MMKV.mmkvWithID(
+        UserLocalDataSource(MMKV.mmkvWithID(
                 AndroidGenericFrameworkConfiguration.MMKV_ID,
                 MMKV.SINGLE_PROCESS_MODE,
                 AndroidGenericFrameworkConfiguration.MMKV_CRYPT_KEY
@@ -57,9 +57,9 @@ val networkModule = module {
                 .build()
     }
 
-    single { UserApiClient(get()) }
+    single { UserRemoteDataSource(get()) }
 
-    single { RepositoryApiClient(get()) }
+    single { RepositoryRemoteDataSource(get()) }
 
 }
 
