@@ -18,13 +18,13 @@ open class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideGitHubRepository(remoteDataSource: RepositoryRemoteDataSource): GitHubRepository =
-            GitHubRepository(remoteDataSource)
-
-    @Provides
-    @Singleton
     fun provideUserInfoRepository(remoteDataSource: UserRemoteDataSource,
                                   localDataSource: UserLocalDataSource): UserInfoRepository =
             UserInfoRepository(remoteDataSource, localDataSource)
+
+    @Provides
+    @Singleton
+    fun provideGitHubRepository(remoteDataSource: RepositoryRemoteDataSource): GitHubRepository =
+            GitHubRepository(remoteDataSource)
 
 }
