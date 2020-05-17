@@ -37,6 +37,10 @@ val applicationModule = module {
                 AndroidGenericFrameworkConfiguration.MMKV_CRYPT_KEY
         ))
     }
+
+    single { UserRemoteDataSource(get()) }
+
+    single { RepositoryRemoteDataSource(get()) }
 }
 
 val networkModule = module {
@@ -56,11 +60,6 @@ val networkModule = module {
                 .baseUrl(String.format("%1\$s://%2\$s/", SCHEMA_HTTPS, AndroidGenericFrameworkConfiguration.HOST))
                 .build()
     }
-
-    single { UserRemoteDataSource(get()) }
-
-    single { RepositoryRemoteDataSource(get()) }
-
 }
 
 val repositoryModule = module {
