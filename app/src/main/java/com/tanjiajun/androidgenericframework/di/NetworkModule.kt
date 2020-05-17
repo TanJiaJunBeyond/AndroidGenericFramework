@@ -3,8 +3,6 @@ package com.tanjiajun.androidgenericframework.di
 import com.tanjiajun.androidgenericframework.AndroidGenericFrameworkConfiguration
 import com.tanjiajun.androidgenericframework.data.local.user.UserLocalDataSource
 import com.tanjiajun.androidgenericframework.data.remote.BasicAuthInterceptor
-import com.tanjiajun.androidgenericframework.data.remote.repository.RepositoryRemoteDataSource
-import com.tanjiajun.androidgenericframework.data.remote.user.UserRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -39,15 +37,5 @@ open class NetworkModule {
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(String.format("%1\$s://%2\$s/", "https", AndroidGenericFrameworkConfiguration.HOST))
                     .build()
-
-    @Provides
-    @Singleton
-    fun provideUserRemoteDataSource(retrofit: Retrofit): UserRemoteDataSource =
-            UserRemoteDataSource(retrofit)
-
-    @Provides
-    @Singleton
-    fun provideRepositoryRemoteDataSource(retrofit: Retrofit): RepositoryRemoteDataSource =
-            RepositoryRemoteDataSource(retrofit)
 
 }
