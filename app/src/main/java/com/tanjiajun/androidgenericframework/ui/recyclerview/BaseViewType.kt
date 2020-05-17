@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui.recyclerView
+package com.tanjiajun.androidgenericframework.ui.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

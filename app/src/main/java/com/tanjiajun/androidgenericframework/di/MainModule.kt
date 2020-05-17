@@ -3,8 +3,8 @@ package com.tanjiajun.androidgenericframework.di
 import androidx.lifecycle.ViewModel
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
 import com.tanjiajun.androidgenericframework.ui.main.activity.SplashActivity
-import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
-import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
+import com.tanjiajun.androidgenericframework.ui.main.viewmodel.MainViewModel
+import com.tanjiajun.androidgenericframework.ui.main.viewmodel.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.ActivitySplashBinding
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
-import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
+import com.tanjiajun.androidgenericframework.ui.main.viewmodel.SplashViewModel
 import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity
 import com.tanjiajun.androidgenericframework.utils.startActivity
 import kotlinx.coroutines.GlobalScope

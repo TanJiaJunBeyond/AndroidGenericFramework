@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui.main.viewModel
+package com.tanjiajun.androidgenericframework.ui.main.viewmodel
 
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel

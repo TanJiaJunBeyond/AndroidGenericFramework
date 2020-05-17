@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui.recyclerView
+package com.tanjiajun.androidgenericframework.ui.recyclerview
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

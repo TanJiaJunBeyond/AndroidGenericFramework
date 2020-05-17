@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui.recyclerView
+package com.tanjiajun.androidgenericframework.ui.recyclerview
 
 /**
  * Created by TanJiaJun on 2019-08-31.
