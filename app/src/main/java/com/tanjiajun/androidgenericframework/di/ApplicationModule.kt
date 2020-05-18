@@ -9,8 +9,8 @@ import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.data.repository.UserInfoRepository
 import com.tanjiajun.androidgenericframework.ui.main.activity.MainActivity
 import com.tanjiajun.androidgenericframework.ui.main.activity.SplashActivity
-import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
-import com.tanjiajun.androidgenericframework.ui.main.viewModel.SplashViewModel
+import com.tanjiajun.androidgenericframework.ui.main.viewmodel.MainViewModel
+import com.tanjiajun.androidgenericframework.ui.main.viewmodel.SplashViewModel
 import com.tanjiajun.androidgenericframework.ui.repository.fragment.RepositoryFragment
 import com.tanjiajun.androidgenericframework.ui.repository.viewmodel.RepositoryViewModel
 import com.tanjiajun.androidgenericframework.ui.user.activity.PersonalCenterActivity

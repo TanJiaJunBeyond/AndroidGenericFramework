@@ -1,4 +1,4 @@
-package com.tanjiajun.androidgenericframework.ui.recyclerView
+package com.tanjiajun.androidgenericframework.ui.recyclerview
 
 import android.util.SparseArray
 import android.view.ViewGroup

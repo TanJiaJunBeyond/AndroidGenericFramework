@@ -13,7 +13,7 @@ import com.tanjiajun.androidgenericframework.EXTRA_LOGOUT
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.ActivityMainBinding
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
-import com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel
+import com.tanjiajun.androidgenericframework.ui.main.viewmodel.MainViewModel
 import com.tanjiajun.androidgenericframework.ui.repository.fragment.RepositoryFragment
 import com.tanjiajun.androidgenericframework.ui.user.activity.PersonalCenterActivity
 import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity

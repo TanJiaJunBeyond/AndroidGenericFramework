@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel" />
+            type="com.tanjiajun.androidgenericframework.ui.main.viewmodel.MainViewModel" />
 
         <variable
             name="handlers"
-            type="com.tanjiajun.androidgenericframework.ui.main.viewModel.MainViewModel.Handlers" />
+            type="com.tanjiajun.androidgenericframework.ui.main.viewmodel.MainViewModel.Handlers" />
 
     </data>
 

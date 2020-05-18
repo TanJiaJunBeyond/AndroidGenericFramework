@@ -3,9 +3,9 @@ package com.tanjiajun.androidgenericframework.ui.repository.adapter
 import com.tanjiajun.androidgenericframework.BR
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryData
-import com.tanjiajun.androidgenericframework.ui.recyclerView.BaseViewHolder
-import com.tanjiajun.androidgenericframework.ui.recyclerView.BaseViewType
-import com.tanjiajun.androidgenericframework.ui.recyclerView.MultiViewTypeDataBindingAdapter
+import com.tanjiajun.androidgenericframework.ui.recyclerview.BaseViewHolder
+import com.tanjiajun.androidgenericframework.ui.recyclerview.BaseViewType
+import com.tanjiajun.androidgenericframework.ui.recyclerview.MultiViewTypeDataBindingAdapter
 
 /**
  * Created by TanJiaJun on 2020-02-07.
