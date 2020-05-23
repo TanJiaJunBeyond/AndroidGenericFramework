@@ -214,9 +214,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : AppCompat
                     else -> Unit
                 }
 
-                if (isAddToBackStack) {
-                    transaction.addToBackStack(fragment.transactionTag)
-                }
+                if (isAddToBackStack) transaction.addToBackStack(fragment.transactionTag)
             }
 
     override fun onBackPressed() =
