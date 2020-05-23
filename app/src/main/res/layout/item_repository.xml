@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="项目名称" />
+            tools:text="仓库名称" />
 
         <TextView
             android:id="@+id/tv_description"
