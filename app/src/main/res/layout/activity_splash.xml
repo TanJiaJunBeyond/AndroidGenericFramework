@@ -8,9 +8,10 @@
         android:background="@color/background_color">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/ic_launcher"
+            android:layout_width="81dp"
+            android:layout_height="81dp"
+            android:background="@drawable/ic_github"
+            android:contentDescription="@string/github_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
