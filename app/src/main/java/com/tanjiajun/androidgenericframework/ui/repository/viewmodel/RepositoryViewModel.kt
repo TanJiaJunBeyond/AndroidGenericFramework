@@ -6,7 +6,6 @@ import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryDat
 import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
 import com.tanjiajun.androidgenericframework.ui.UIState
-import com.tanjiajun.androidgenericframework.utils.yes
 import javax.inject.Inject
 
 /**
@@ -27,7 +26,7 @@ class RepositoryViewModel @Inject constructor(
                     uiState = UIState(isShowLoadingView = true, isShowErrorView = true),
                     block = { repository.getRepositories(languageName) },
                     success = {
-                        it.isNotEmpty().yes {
+                        if (it.isNotEmpty()) {
                             _repositories.value = it
                             _isShowRepositoryView.value = true
                         }
