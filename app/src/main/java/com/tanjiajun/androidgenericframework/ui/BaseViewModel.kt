@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.flow
  * Created by TanJiaJun on 2019-08-02.
  */
 private typealias CommonCallback = suspend CoroutineScope.() -> Unit
-
 private typealias ErrorCallback = suspend CoroutineScope.(ResponseThrowable) -> Unit
 
 abstract class BaseViewModel : ViewModel() {
