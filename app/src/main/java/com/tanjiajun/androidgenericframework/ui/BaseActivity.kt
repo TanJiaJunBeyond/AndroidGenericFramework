@@ -204,9 +204,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : DaggerApp
                     else -> Unit
                 }
 
-                if (isAddToBackStack) {
-                    transaction.addToBackStack(fragment.transactionTag)
-                }
+                if (isAddToBackStack) transaction.addToBackStack(fragment.transactionTag)
             }
 
     override fun onBackPressed() =
