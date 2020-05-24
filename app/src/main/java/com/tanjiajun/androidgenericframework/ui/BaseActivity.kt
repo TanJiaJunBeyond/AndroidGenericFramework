@@ -83,7 +83,6 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : DaggerApp
     fun getFragmentList(): List<Fragment?> =
             mutableListOf<Fragment?>().apply {
                 val count = manager.backStackEntryCount
-
                 for (i in 0 until count) {
                     add(manager.findFragmentByTag(manager.getBackStackEntryAt(i).name))
                 }
@@ -162,14 +161,12 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : DaggerApp
                                           isExecutePending: Boolean) =
             with(manager) {
                 beginTransaction().let {
-                    if (fragment.enableAnimation) {
-                        it.setCustomAnimations(
-                                fragment.enterAnimation,
-                                fragment.exitAnimation,
-                                fragment.popEnterAnimation,
-                                fragment.popExitAnimation
-                        )
-                    }
+                    if (fragment.enableAnimation) it.setCustomAnimations(
+                            fragment.enterAnimation,
+                            fragment.exitAnimation,
+                            fragment.popEnterAnimation,
+                            fragment.popExitAnimation
+                    )
 
                     handleFragment(action, containId, fragment, manager, it, isAddToBackStack)
                     it.commitAllowingStateLoss()
@@ -198,12 +195,10 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> : DaggerApp
                         fragments
                                 .filter { it.isVisible }
                                 .forEach { transaction.hide(it) }
-
                         transaction.add(containId, fragment, fragment.transactionTag)
                     }
                     else -> Unit
                 }
-
                 if (isAddToBackStack) transaction.addToBackStack(fragment.transactionTag)
             }
 
