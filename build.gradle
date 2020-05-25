@@ -58,5 +58,6 @@ ext {
     mmkvVersion = '1.0.23'
     daggerVersion = '2.27'
     junitVersion = '4.12'
-    testRunnerVersion = '1.2.1'
+    okhttpVersion = "4.2.0"
+    mockkVersion = '1.9.3'
 }
