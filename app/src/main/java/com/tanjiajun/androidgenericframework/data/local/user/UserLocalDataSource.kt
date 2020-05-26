@@ -20,16 +20,14 @@ class UserLocalDataSource @Inject constructor(
     var avatarUrl by mmkv.string("avatar_url", "")
 
     fun clearUserInfoCache() =
-            with(mmkv) {
-                removeValuesForKeys(arrayOf(
-                        "user_access_token",
-                        "user_id",
-                        "username",
-                        "password",
-                        "name",
-                        "avatar_url"
-                ))
-            }
+            mmkv.removeValuesForKeys(arrayOf(
+                    "user_access_token",
+                    "user_id",
+                    "username",
+                    "password",
+                    "name",
+                    "avatar_url"
+            ))
 
     fun cacheUserId(userId: Int) {
         this.userId = userId
