@@ -23,7 +23,7 @@ class MainViewModel(
     private var _isShowAdd = MutableLiveData<Boolean>().apply { value = true }
     val isShowAdd: LiveData<Boolean> = _isShowAdd
 
-    private var index = 0
+    var index = 0
 
     fun getDefaultLanguageNames(): List<String> =
             repository.getDefaultLanguageNames()
