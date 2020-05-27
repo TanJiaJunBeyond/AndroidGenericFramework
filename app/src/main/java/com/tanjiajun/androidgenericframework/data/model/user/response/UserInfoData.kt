@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
  * Created by TanJiaJun on 2019-07-31.
  */
 data class UserInfoData(
-        val login: String,
         val id: Int,
+        val login: String,
         @SerializedName("node_id") val nodeId: String,
         @SerializedName("avatar_url") val avatarUrl: String,
         @SerializedName("gravatar_id") val gravatarId: String,
@@ -23,7 +23,7 @@ data class UserInfoData(
         @SerializedName("events_url") val eventsUrl: String,
         @SerializedName("received_events_url") val receivedEventsUrl: String,
         val type: String,
-        @SerializedName("site_admin") val siteAdmin: String,
+        @SerializedName("site_admin") val siteAdmin: Boolean,
         val name: String,
         val company: String,
         val blog: String,
