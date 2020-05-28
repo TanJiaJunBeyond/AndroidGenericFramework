@@ -40,21 +40,7 @@ class RepositoryRemoteDataSourceTest {
     @Test
     fun fetchRepositories() {
         runBlocking {
-            val json = "{\n" +
-                    "\"total_count\": 1,\n" +
-                    "\"incomplete_results\": false,\n" +
-                    "\"items\": [\n" +
-                    "{\n" +
-                    "\"id\": 0,\n" +
-                    "\"name\": \"谭嘉俊\",\n" +
-                    "\"description\": \"描述\",\n" +
-                    "\"language\": \"Kotlin\",\n" +
-                    "\"starCount\": 0,\n" +
-                    "\"forkCount\": 0\n" +
-                    "}\n" +
-                    "]\n" +
-                    "}"
-            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(json))
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(repositoryDataJson))
             remoteDataSource.fetchRepositories(
                     languageName = "Kotlin",
                     fromDateTime = LocalDateTime.now().minusMonths(1)
