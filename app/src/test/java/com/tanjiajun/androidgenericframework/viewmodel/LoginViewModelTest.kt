@@ -96,7 +96,7 @@ class LoginViewModelTest {
             viewModel.username.value = "1120571286@qq.com"
             viewModel.password.value = "password"
             coEvery { repository.authorizations() } returns userAccessTokenData
-            coEvery { repository.getUserInfo() } throws Throwable(message = "UnknownError")
+            coEvery { repository.getUserInfo() } throws Throwable("UnknownError")
             viewModel.login()
             val observer = mockk<Observer<String>>(relaxed = true)
             viewModel.uiLiveEvent.showSnackbarEvent.observeForever(observer)
