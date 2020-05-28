@@ -1,9 +1,7 @@
 package com.tanjiajun.androidgenericframework.ui.repository.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.tanjiajun.androidgenericframework.data.model.repository.RepositoryData
 import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.ui.BaseViewModel
@@ -29,7 +27,6 @@ class RepositoryViewModel @Inject constructor(
                     block = { repository.getRepositories(languageName) },
                     success = {
                         if (it.isNotEmpty()) {
-                            Log.i("TanJiaJun", Gson().toJson(it))
                             _repositories.value = it
                             _isShowRepositoryView.value = true
                         }

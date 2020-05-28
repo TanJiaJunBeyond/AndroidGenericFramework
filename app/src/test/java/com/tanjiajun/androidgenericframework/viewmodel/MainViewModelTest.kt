@@ -1,12 +1,15 @@
 package com.tanjiajun.androidgenericframework.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import com.tanjiajun.androidgenericframework.data.repository.GitHubRepository
 import com.tanjiajun.androidgenericframework.ui.main.viewmodel.MainViewModel
 import com.tanjiajun.androidgenericframework.utils.Language
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Before
@@ -90,7 +93,9 @@ class MainViewModelTest {
         ))
         viewModel.index = 3
         viewModel.addLanguageName()
-        assertEquals(true, viewModel.isShowAdd.value)
+        val observer = mockk<Observer<Boolean>>(relaxed = true)
+        viewModel.isShowAdd.observeForever(observer)
+        verify { observer.onChanged(match { it }) }
     }
 
     @Test
@@ -103,7 +108,9 @@ class MainViewModelTest {
         ))
         viewModel.index = 4
         viewModel.addLanguageName()
-        assertEquals(false, viewModel.isShowAdd.value)
+        val observer = mockk<Observer<Boolean>>(relaxed = true)
+        viewModel.isShowAdd.observeForever(observer)
+        verify { observer.onChanged(match { !it }) }
     }
 
 }

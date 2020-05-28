@@ -17,7 +17,6 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -27,7 +26,6 @@ import org.junit.runners.JUnit4
 /**
  * Created by TanJiaJun on 2020/5/27.
  */
-@ObsoleteCoroutinesApi
 @RunWith(JUnit4::class)
 class LoginViewModelTest {
 
@@ -58,7 +56,9 @@ class LoginViewModelTest {
         viewModel.username.value = "1120571286@qq.com"
         viewModel.password.value = "password"
         viewModel.checkLoginEnable()
-        assertEquals(true, viewModel.isLoginEnable.value)
+        val observer = mockk<Observer<Boolean>>(relaxed = true)
+        viewModel.isLoginEnable.observeForever(observer)
+        verify { observer.onChanged(match { it }) }
     }
 
     @Test
@@ -66,7 +66,9 @@ class LoginViewModelTest {
         viewModel.username.value = null
         viewModel.password.value = null
         viewModel.checkLoginEnable()
-        assertEquals(false, viewModel.isLoginEnable.value)
+        val observer = mockk<Observer<Boolean>>(relaxed = true)
+        viewModel.isLoginEnable.observeForever(observer)
+        verify { observer.onChanged(match { !it }) }
     }
 
     @ExperimentalCoroutinesApi
