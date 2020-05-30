@@ -1,4 +1,3 @@
-# Android通用框架
 本篇文章讲解的内容是**MVC**、**MVP**、**MVVM**以及使用**MVVM**搭建**GitHub客户端**，以下是**框架**的**GitHub地址**：
 
 **Dagger2**版本：[Dagger2](https://github.com/TanJiaJunBeyond/AndroidGenericFramework)
@@ -78,9 +77,15 @@ interface AddEditTaskContract {
 
 我使用**GitHub**的**API**开发了一个简单的客户端，用**MVVM**来搭建，使用**Kotlin**编写，界面如下图所示：
 
+**登录**：
+
 ![LoginPage.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/LoginPage.png)
 
+**首页**：
+
 ![MainPage.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/MainPage.png)
+
+**个人中心**：
 
 ![PersonalCenterPage.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/PersonalCenterPage.png)
 
