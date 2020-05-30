@@ -112,7 +112,7 @@ interface AddEditTaskContract {
 
 **Dagger2**版本，如图所示：
 
-![di.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/di.png)
+![diDagger2.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/diDagger2.png)
 
 * **ApplicationComponent**：**Application组件**，将**AndroidSupportInjectionModule**、**ApplicationModule**、**NetworkModule**、**RepositoryModule**、**MainModule**、**UserModule**和**GitHubRepositoryModule**注入到**Application**。
 * **ApplicationModule**：提供**跟随Application生命周期**的业务**模块**，例如：**LocalDataSource（本地数据源）**和**RemoteDataSource（远程数据源）**。
@@ -124,6 +124,8 @@ interface AddEditTaskContract {
 * **ViewModelFactory**：**ViewModel工厂**，创建不同业务的**ViewModel**。
 
 **Koin**版本：如图所示：
+
+![diKoin.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/diKoin.png)
 
 * **ApplicationModule**：存放**ApplicationModule**、**NetworkModule**、**RepositoryModule**、**MainModule**、**UserModule**和**GitHubRepositoryModule**，并且生成**ApplicationModules**的**List**提供**Koin**使用。
 
