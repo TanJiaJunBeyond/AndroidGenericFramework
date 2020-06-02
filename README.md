@@ -110,7 +110,9 @@ interface AddEditTaskContract {
 
 **di**存放**依赖注入**相关的代码。
 
-**Dagger2**版本，如图所示：
+**Dagger2**版本：
+
+如图所示：
 
 ![diDagger2.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/diDagger2.png)
 
@@ -123,7 +125,9 @@ interface AddEditTaskContract {
 * **UserModule**：**业务模块**，提供**用户业务**的**模块**。
 * **ViewModelFactory**：**ViewModel工厂**，创建不同业务的**ViewModel**。
 
-**Koin**版本：如图所示：
+**Koin**版本：
+
+如图所示：
 
 ![diKoin.png](https://github.com/TanJiaJunBeyond/AndroidGenericFramework/raw/master/screenshot/diKoin.png)
 
@@ -418,8 +422,8 @@ class RepositoryViewModel @Inject constructor(
 
 在**Android**平台上，**协程**有助于解决**两个**主要问题：
 
-* 管理长时间运行的任务，如果管理不当，这些任务可能会阻塞**主线程**并导致你的应用**界面冻结**。
-* 提供**主线程**安全性，或者从**主线程**安全地调用网络或者磁盘操作。
+* 管理长时间运行的任务，如果管理不当，这些任务可能会**阻塞主线程**并导致你的应用**界面冻结**。
+* 提供**主线程**安全性，或者从**主线程**安全地**调用网络**或者**磁盘操作**。
 
 #### 管理长时间运行的任务
 
@@ -800,8 +804,9 @@ testImplementation "android.arch.core:core-testing:$coreTestingVersion"
 ```
 
 * **com.squareup.okhttp3:mockwebserver**：用来**模拟Web服务器**的。
-
 * **com.google.truth:truth**：可以使**测试断言**和**失败消息**更具有**可读性**，与**AssertJ**相似，它支持很多**JDK**和**Guava**类型，并且可以扩展到其他类型。
+
+我这边是对**数据源**、**ViewModel**和**工具文件**进行**单元测试**。
 
 框架部分代码如下：
 
