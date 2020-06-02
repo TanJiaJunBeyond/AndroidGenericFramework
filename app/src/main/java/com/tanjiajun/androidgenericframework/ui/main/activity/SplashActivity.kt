@@ -2,15 +2,15 @@ package com.tanjiajun.androidgenericframework.ui.main.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.tanjiajun.androidgenericframework.R
 import com.tanjiajun.androidgenericframework.databinding.ActivitySplashBinding
 import com.tanjiajun.androidgenericframework.ui.BaseActivity
 import com.tanjiajun.androidgenericframework.ui.main.viewmodel.SplashViewModel
 import com.tanjiajun.androidgenericframework.ui.user.activity.RegisterAndLoginActivity
+import com.tanjiajun.androidgenericframework.utils.otherwise
 import com.tanjiajun.androidgenericframework.utils.startActivity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.tanjiajun.androidgenericframework.utils.yes
 
 /**
  * Created by TanJiaJun on 2019-08-09.
@@ -23,17 +23,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
-        GlobalScope.launch {
-            delay(1000)
-            viewModel
-                    .isLogin()
-                    .takeIf { it }
-                    ?.let {
-                        startActivity<MainActivity>()
-                    }
-                    ?: startActivity<RegisterAndLoginActivity>()
-
-            finish()
+        with(viewModel) {
+            navigateToPage()
+            isNavigateToMainActivity.observe(this@SplashActivity, Observer {
+                it
+                        .yes { startActivity<MainActivity>() }
+                        .otherwise { startActivity<RegisterAndLoginActivity>() }
+                finish()
+            })
         }
     }
 
