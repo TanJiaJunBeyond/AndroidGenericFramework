@@ -452,7 +452,7 @@ class RepositoryViewModel @Inject constructor(
 
 #### 指定CoroutineScope
 
-在定义**协程**时，必须指定其**CoroutineScope**，**CoroutineScope**可以管理**一个**或者**多个**相关的**协程**，可以使用它在指定范围内启动**新协程**。
+在定义**协程**时，必须指定其**CoroutineScope**，**CoroutineScope**可以管理**一个**或者**多个**相关的**协程**，可以使用它在**指定范围**内启动**新协程**。
 
 **与调度程序不同，CoroutineScope不运行协程。**
 
