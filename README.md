@@ -1,6 +1,6 @@
 **本文章已授权微信公众号郭霖（guolin_blog）转载。**
 
-本篇文章讲解的内容是**MVC**、**MVP**、**MVVM**以及使用**MVVM**搭建**GitHub客户端**，以下是**框架**的**GitHub地址**：
+本文章讲解的内容是**MVC**、**MVP**、**MVVM**以及使用**MVVM**搭建**GitHub客户端**，以下是**框架**的**GitHub地址**：
 
 **Dagger2**版本：[Dagger2](https://github.com/TanJiaJunBeyond/AndroidGenericFramework)
 
