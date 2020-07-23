@@ -20,8 +20,7 @@ import kotlinx.coroutines.FlowPreview
  * Created by TanJiaJun on 2019-07-29.
  */
 class LoginFragment private constructor()
-    : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
-        LoginViewModel.Handlers {
+    : BaseFragment<FragmentLoginBinding, LoginViewModel>(), LoginViewModel.Handlers {
 
     override val layoutRes: Int = R.layout.fragment_login
     override val viewModel by viewModels<LoginViewModel> { viewModelFactory }
