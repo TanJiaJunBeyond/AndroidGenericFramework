@@ -52,7 +52,7 @@ ext {
     retrofitConverterScalarsVersion = '2.5.0'
     glideVersion = '4.10.0'
     lifecycleExtensionsVersion = '2.2.0'
-    navigationVersion = '2.3.0'
+    navigationVersion = '2.3.1'
     viewPager2Version = '1.1.0-alpha01'
     mmkvVersion = '1.0.23'
     daggerVersion = '2.27'
