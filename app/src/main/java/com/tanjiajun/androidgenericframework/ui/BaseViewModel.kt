@@ -38,7 +38,6 @@ abstract class BaseViewModel : ViewModel() {
     fun launchUI(block: suspend CoroutineScope.() -> Unit) =
             viewModelScope.launch { block() }
 
-    @FlowPreview
     fun <T> launchFlow(block: suspend () -> T): Flow<T> =
             flow { emit(block()) }
 
