@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
         applicationId "com.tanjiajun.androidgenericframework"
@@ -54,32 +54,66 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // AppCompat
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+
+    // MultiDex
     implementation "com.android.support:multidex:$multidexVersion"
+
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    // Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxCoroutinesVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewmodelKtxVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+
+    // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitConverterGsonVersion"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofitConverterScalarsVersion"
+
+    // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // Lifecycle Extensions
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
+
+    // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    // ViewPager2
     implementation "androidx.viewpager2:viewpager2:$viewPager2Version"
+
+    // MMKV
     implementation "com.tencent:mmkv:$mmkvVersion"
+
+    // Koin
     implementation "org.koin:koin-androidx-scope:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
     implementation "org.koin:koin-androidx-fragment:$koinVersion"
     implementation "org.koin:koin-androidx-ext:$koinVersion"
 
+    // JUnit(test)
     testImplementation "junit:junit:$junitVersion"
+
+    // OkHttp(test)
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+
+    // MockK(test)
     testImplementation "io.mockk:mockk:$mockkVersion"
+
+    // Truth(test)
     testImplementation "com.google.truth:truth:$truthVersion"
+
+    // Kotlin Coroutines(test)
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinxCoroutinesVersion"
+
+    // Core Testing(test)
     testImplementation "android.arch.core:core-testing:$coreTestingVersion"
 }
