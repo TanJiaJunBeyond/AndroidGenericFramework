@@ -5,7 +5,7 @@ package com.tanjiajun.androidgenericframework.utils
  */
 sealed class BooleanExt<out T>
 
-class TransferData<T>(val data: T) : BooleanExt<T>()
+class TransferData<out T>(val data: T) : BooleanExt<T>()
 object Otherwise : BooleanExt<Nothing>()
 
 inline fun <T> Boolean.yes(block: () -> T): BooleanExt<T> =

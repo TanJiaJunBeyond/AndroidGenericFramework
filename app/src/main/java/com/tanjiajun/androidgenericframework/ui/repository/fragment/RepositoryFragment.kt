@@ -57,7 +57,7 @@ class RepositoryFragment private constructor()
                         handlers = this@RepositoryFragment
                     }
                 }
-                this@RepositoryFragment.viewModel.isShowErrorView.observe(this@RepositoryFragment, Observer { isShowErrorView ->
+                this@RepositoryFragment.viewModel.isShowErrorView.observe(viewLifecycleOwner, Observer { isShowErrorView ->
                     if (isShowErrorView) {
                         if (!vsError.isInflated) {
                             vsError.viewStub?.inflate()?.also { errorView = it }
@@ -73,7 +73,7 @@ class RepositoryFragment private constructor()
     private fun initData() =
             with(viewModel) {
                 getRepositories(language)
-                repositories.observe(this@RepositoryFragment, Observer {
+                repositories.observe(viewLifecycleOwner, Observer {
                     adapter.setItems(it)
                 })
             }
