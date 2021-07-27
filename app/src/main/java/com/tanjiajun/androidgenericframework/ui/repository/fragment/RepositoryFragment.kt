@@ -33,41 +33,63 @@ class RepositoryFragment private constructor()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        arguments?.run { language = getString(EXTRA_LANGUAGE, "") }
+        language = getLanguageFromArgs()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initUI()
+        initObservers()
         initData()
     }
 
-    private fun initUI() =
-            with(binding) {
+    override fun onRetryClick(view: View) {
+        viewModel.getRepositories(language)
+    }
+
+    private fun getLanguageFromArgs(): String =
+            arguments?.run { getString(EXTRA_LANGUAGE, "") } ?: ""
+
+    private fun initUI() {
+        with(binding) {
+            lifecycleOwner = this@RepositoryFragment
+            viewModel = this@RepositoryFragment.viewModel
+        }
+        initRecyclerView()
+        initErrorView()
+    }
+
+    private fun initRecyclerView() {
+        with(binding.rvRepository) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@RepositoryFragment.adapter
+        }
+    }
+
+    private fun initErrorView() {
+        binding.vsError.setOnInflateListener { _, inflated ->
+            DataBindingUtil.bind<LayoutErrorBinding>(inflated)?.run {
                 lifecycleOwner = this@RepositoryFragment
                 viewModel = this@RepositoryFragment.viewModel
-
-                rvRepository.layoutManager = LinearLayoutManager(context)
-                rvRepository.adapter = this@RepositoryFragment.adapter
-
-                vsError.setOnInflateListener { _, inflated ->
-                    DataBindingUtil.bind<LayoutErrorBinding>(inflated)?.run {
-                        lifecycleOwner = this@RepositoryFragment
-                        viewModel = this@RepositoryFragment.viewModel
-                        handlers = this@RepositoryFragment
-                    }
-                }
-                this@RepositoryFragment.viewModel.isShowErrorView.observe(viewLifecycleOwner, Observer { isShowErrorView ->
-                    if (isShowErrorView) {
-                        if (!vsError.isInflated) {
-                            vsError.viewStub?.inflate()?.also { errorView = it }
-                        } else {
-                            errorView?.visibility = View.VISIBLE
-                        }
-                    } else {
-                        errorView?.visibility = View.GONE
-                    }
-                })
+                handlers = this@RepositoryFragment
             }
+        }
+    }
+
+    private fun initObservers() {
+        viewModel.isShowErrorView.observe(viewLifecycleOwner, Observer {
+            handleErrorView(it)
+        })
+    }
+
+    private fun handleErrorView(isShowErrorView: Boolean) {
+        if (isShowErrorView) {
+            errorView
+                    ?.run { visibility = View.VISIBLE }
+                    ?: binding.vsError.viewStub?.inflate()?.also { errorView = it }
+        } else {
+            errorView?.visibility = View.GONE
+        }
+    }
 
     private fun initData() =
             with(viewModel) {
@@ -76,10 +98,6 @@ class RepositoryFragment private constructor()
                     adapter.setItems(it)
                 })
             }
-
-    override fun onRetryClick(view: View) {
-        viewModel.getRepositories(language)
-    }
 
     companion object {
         fun newInstance(language: String): RepositoryFragment =
