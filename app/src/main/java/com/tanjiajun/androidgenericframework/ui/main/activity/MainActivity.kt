@@ -30,11 +30,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
     override val layoutRes: Int = R.layout.activity_main
     override val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
-    private val tlRepository: TabLayout
-        get() = binding.tlRepository
-
-    private val vpRepository: ViewPager2
-        get() = binding.vpRepository
+    private lateinit var tlRepository: TabLayout
+    private lateinit var vpRepository: ViewPager2
 
     private lateinit var repositoryFragments: MutableList<RepositoryFragment>
     private lateinit var adapter: OrderFragmentStateAdapter
@@ -47,11 +44,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
             handlers = this@MainActivity
         }
 
-        initUI()
+        initView()
         initData()
     }
 
-    private fun initUI() {
+    private fun initView() {
+        tlRepository = binding.tlRepository
+        vpRepository = binding.vpRepository
+
         repositoryFragments = mutableListOf<RepositoryFragment>().apply {
             viewModel.getDefaultLanguageNames().forEach { add(RepositoryFragment.newInstance(it)) }
         }
@@ -59,11 +59,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
         viewModel.getDefaultLanguageNames().forEach {
             tlRepository.addTab(tlRepository.newTab().setText(it))
         }
-
         tlRepository.addOnTabSelectedListener(registerOnTabSelectedListener {
             onTabSelected { vpRepository.currentItem = it?.position ?: 0 }
         })
-
         vpRepository.adapter = adapter
         vpRepository.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) =

@@ -24,7 +24,8 @@ class RepositoryRemoteDataSource @Inject constructor(
                                   fromDateTime: LocalDateTime): List<RepositoryData> =
             service
                     .fetchRepositories(
-                            query = "language:${languageName} created:>${fromDateTime.format(dateFormatForRepository())}"
+                            query = "language:${languageName} created:>${fromDateTime.format(dateFormatForRepository())}",
+                            sort = "stars"
                     )
                     .items
                     ?.map { RepositoryMapper.toRepositoryData(it) }
@@ -34,7 +35,7 @@ class RepositoryRemoteDataSource @Inject constructor(
 
         @GET("search/repositories")
         suspend fun fetchRepositories(@Query("q") query: String,
-                                      @Query("sort") sort: String = "stars"): ListData<RepositoryResponseData>
+                                      @Query("sort") sort: String): ListData<RepositoryResponseData>
 
     }
 
