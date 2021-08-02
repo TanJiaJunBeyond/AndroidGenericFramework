@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -30,11 +29,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
     override val layoutRes: Int = R.layout.activity_main
     override val viewModel by lifecycleScope.viewModel<MainViewModel>(this)
 
-    private val tlRepository: TabLayout
-        get() = binding.tlRepository
-
-    private val vpRepository: ViewPager2
-        get() = binding.vpRepository
+    private lateinit var tlRepository: TabLayout
+    private lateinit var vpRepository: ViewPager2
 
     private lateinit var repositoryFragments: MutableList<RepositoryFragment>
     private lateinit var adapter: OrderFragmentStateAdapter
@@ -47,11 +43,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainVie
             handlers = this@MainActivity
         }
 
-        initUI()
+        initView()
         initData()
     }
 
-    private fun initUI() {
+    private fun initView() {
+        tlRepository = binding.tlRepository
+        vpRepository = binding.vpRepository
+
         repositoryFragments = mutableListOf<RepositoryFragment>().apply {
             viewModel.getDefaultLanguageNames().forEach { add(RepositoryFragment.newInstance(it)) }
         }
